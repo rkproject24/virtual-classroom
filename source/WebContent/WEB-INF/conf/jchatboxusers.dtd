@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- jChaBox Users DTD - JavaZOOM -->
+<!ELEMENT jChatBoxUsers (MODERATORS+)>
+<!ELEMENT MODERATORS (MODERATOR)*>
+<!ATTLIST MODERATOR
+	name CDATA #REQUIRED
+	email CDATA #IMPLIED
+	password CDATA #REQUIRED
+>
+<!ELEMENT MODERATOR EMPTY>

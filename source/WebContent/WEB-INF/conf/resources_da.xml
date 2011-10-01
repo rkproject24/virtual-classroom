@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- <!DOCTYPE resources SYSTEM "jchatboxresources.dtd"> -->
+<resources>
+    <!-- Resources matching to login.jsp -->
+    <element>
+        <name>login.date.format</name>
+        <value>yyyy/MM/dd HH:mm</value>
+    </element>
+    <element>
+        <name>login.title</name>
+        <value>Chat Login</value>
+    </element>
+    <element>
+        <name>login.username.label</name>
+        <value>Chatnavn : </value>
+    </element>
+    <element>
+        <name>login.join.link</name>
+        <value>Indtast</value>
+    </element>
+    <element>
+        <name>login.join.label</name>
+        <value> Chatrum : </value>
+    </element>
+    <element>
+        <name>login.list.label</name>
+        <value>Vælg et chatrum</value>
+    </element>
+    <element>
+        <name>login.chatroom.label</name>
+        <value>Chatrum : </value>
+    </element>
+    <element>
+        <name>login.open.label</name>
+        <value>Åben : </value>
+    </element>
+    <element>
+        <name>login.subject.label</name>
+        <value>Emne : </value>
+    </element>
+    <element>
+        <name>login.useramount.label</name>
+        <value>Tilsluttede brugere : </value>
+    </element>
+    <element>
+        <name>login.userlimit.label</name>
+        <value>Tilladte brugere : </value>
+    </element>
+    <element>
+        <name>login.chatroomnotfound.error</name>
+        <value>CHATRUM IKKE FUNDET.</value>
+    </element>
+    <element>
+        <name>login.closed.error</name>
+        <value>CHATRUM ER LUKKET.</value>
+    </element>
+    <element>
+        <name>login.novacancies.error</name>
+        <value>IKKE PLADS PÅ CHATRUM.</value>
+    </element>
+    <element>
+        <name>login.namenotavailable.error</name>
+        <value>NAVNET ER IKKE LEDIGT.</value>
+    </element>
+    <element>
+        <name>login.banned.error</name>
+        <value>DU ER BORTVIST.</value>
+    </element>
+    <!-- Resources matching to chatroom.jsp -->
+    <element>
+        <name>chatroom.date.format</name>
+        <value>yyyy/MM/dd HH:mm</value>
+    </element>
+    <element>
+        <name>chatroom.title</name>
+        <value>Chat indhold</value>
+    </element>
+    <element>
+        <name>chatroom.join.label</name>
+        <value> er med i chatten.</value>
+    </element>
+    <element>
+        <name>chatroom.quit.label</name>
+        <value> har forladt chatten.</value>
+    </element>
+    <element>
+        <name>chatroom.userlist.label</name>
+        <value>Brugere : </value>
+    </element>
+    <!-- Resources matching to text.jsp -->
+    <element>
+        <name>board.date.format</name>
+        <value>yyyy/MM/dd HH:mm</value>
+    </element>
+    <element>
+        <name>board.title</name>
+        <value>Chat Opslagstavle</value>
+    </element>
+    <element>
+        <name>board.chatroom.label</name>
+        <value>Chatrum : </value>
+    </element>
+    <element>
+        <name>board.date.label</name>
+        <value>Åben siden : </value>
+    </element>
+    <element>
+        <name>board.subject.label</name>
+        <value>Emne : </value>
+    </element>
+    <element>
+        <name>board.message.label</name>
+        <value>Besked : </value>
+    </element>
+    <element>
+        <name>board.send.link</name>
+        <value>Send</value>
+    </element>
+    <element>
+        <name>board.send.label</name>
+        <value> til alle brugere</value>
+    </element>
+    <element>
+        <name>board.refresh.link</name>
+        <value>opdater</value>
+    </element>
+    <element>
+        <name>board.logout.link</name>
+        <value>log af</value>
+    </element>
+    <!-- Resources matching to private.jsp -->
+    <element>
+        <name>privateboard.date.format</name>
+        <value>yyyy/MM/dd</value>
+    </element>
+    <element>
+        <name>privateboard.title</name>
+        <value>Privat Chatopslagstavle</value>
+    </element>
+    <element>
+        <name>privateboard.chatroom.label</name>
+        <value>Chatrum : </value>
+    </element>
+    <element>
+        <name>privateboard.date.label</name>
+        <value>Åben siden : </value>
+    </element>
+    <element>
+        <name>privateboard.subject.label</name>
+        <value>Emne : </value>
+    </element>
+    <element>
+        <name>privateboard.message.label</name>
+        <value>Besked : </value>
+    </element>
+    <element>
+        <name>privateboard.send.link</name>
+        <value>Send</value>
+    </element>
+    <element>
+        <name>privateboard.send.label</name>
+        <value> til : </value>
+    </element>
+    <element>
+        <name>privateboard.close.label</name>
+        <value>luk dette vindue</value>
+    </element>
+    <element>
+        <name>privateboard.comment.label</name>
+        <value>Beskeder sendt fra dette vindue er private.</value>
+    </element>
+    <!-- Resources commands -->
+    <element>
+        <name>user.command.time.format</name>
+        <value>yyyy/MM/dd HH:mm:ss</value>
+    </element>
+    <element>
+        <name>user.command.time.help</name>
+        <value>Angiver server tid</value>
+    </element>
+    <element>
+        <name>user.command.chat.help</name>
+        <value>Sender privatbesked til modtageren</value>
+    </element>
+    <element>
+        <name>user.command.refresh.help</name>
+        <value>Genopfrisker chatrummets indhold</value>
+    </element>
+    <element>
+        <name>user.command.quit.help</name>
+        <value>Forlader nuværende chatrum</value>
+    </element>
+    <element>
+        <name>user.command.logout.help</name>
+        <value>Forlader det nuværende chatrum</value>
+    </element>
+    <element>
+        <name>moderator.command.generatetranscript.help</name>
+        <value>Kopier nuværende chatrums indhold til fil</value>
+    </element>
+    <element>
+        <name>moderator.command.openchatroom.help</name>
+        <value>Åbner et nyt chatrum</value>
+    </element>
+    <element>
+        <name>moderator.command.clearchatroom.help</name>
+        <value>Renser det nuværende chatrum</value>
+    </element>
+    <element>
+        <name>moderator.command.closechatroom.help</name>
+        <value>Lukker det nuværende chatrum</value>
+    </element>
+    <element>
+        <name>moderator.command.kickoff.help</name>
+        <value>Bortviser brugernavn fra chatrummet</value>
+    </element>
+    <element>
+        <name>moderator.command.ban.help</name>
+        <value>Banlyser brugernavn fra chatrummet</value>
+    </element>
+    <element>
+        <name>moderator.command.clear.help</name>
+        <value>Ophæver nuværende chatrums sorte liste</value>
+    </element>
+    <element>
+        <name>system.command.backup.help</name>
+        <value>Sikkerhedskopirer alle chatrumene</value>
+    </element>
+    <element>
+        <name>system.command.addmoderator.help</name>
+        <value>Tilføjer ny moderator</value>
+    </element>
+    <element>
+        <name>system.command.updatemoderator.help</name>
+        <value>Opdaterer en moderator</value>
+    </element>
+    <element>
+        <name>system.command.removemoderator.help</name>
+        <value>Fjerner en moderator</value>
+    </element>
+    <element>
+        <name>system.command.updatesystem.help</name>
+        <value>Opdaterer system parametre</value>
+    </element>
+    <!-- Global resources -->
+    <element>
+        <name>global.encoding</name>
+        <value>iso-8859-1</value>
+    </element>
+</resources>

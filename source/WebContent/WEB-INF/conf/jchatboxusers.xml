@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jChatBoxUsers SYSTEM "jchatboxusers.dtd">
+<!-- jChatBox Users - JavaZOOM -->
+<jChatBoxUsers>
+	<MODERATORS><MODERATOR email="moderator@javazoom.net" name="moderator" password="5f4dcc3b5aa765d61d8327deb882cf99"/></MODERATORS>
+</jChatBoxUsers>

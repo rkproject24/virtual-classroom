@@ -1,0 +1,23 @@
+BODY	{color:#000000;margin-top: 1px;margin-left: 3px;margin-right: 3px;  margin-bottom : 1px;  background-color : White;  }
+A, BODY, INPUT, OPTION, SELECT, TABLE, TD, TR {font-family:verdana,sans-serif; font-size:12px}
+A		{COLOR: #000099;TEXT-DECORATION:none}
+A:hover	{TEXT-DECORATION:underline}
+A.urlfilter	{COLOR: #0000FF;TEXT-DECORATION:underline}
+A.urlfilter:hover	{COLOR: #FF0000;TEXT-DECORATION:underline}
+.dropdown	{color:#000066;background-color:#D6E7EF;font-weight:BOLD}
+.b	{font-weight:BOLD}
+.s	{font-size:10px;color:#FF0000}
+.si	{font-size:10px;  font-style : italic; }
+.sb	{font-weight:BOLD;font-size:10px}
+.sbb	{font-weight:BOLD;color:#003366}
+.sg	{color:#999999}
+.xsg	{font-size:10px;color:#999999}
+.xsr	{font-size:10px;color:#CC0000}
+TR.private, TD.private {color : #AA0000;}
+TR.join, TD.join {color : #006600;}
+TR.quit, TD.quit {color : #000066;}
+TR.system, TD.system {color : #FF0000;}
+TR.head,TD.head	{BACKGROUND-COLOR: #C3D6E6}
+TABLE.border{border-bottom: 1px solid #AAAACC;border-left: 1px solid #AAAACC;border-right: 1px solid #AAAACC;border-top: 1px solid #AAAACC;  background-color : #F0F8FF; }
+TABLE.borderin{border-bottom: 1px solid #9999DD;border-left: 1px solid #9999DD;border-right: 1px solid #9999DD;border-top: 1px solid #9999DD;  background-color : #FFFFF0;}
+TABLE.borderdeco{border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid;border-top: 1px solid;  border-color : #669999;  background-color : #DBEAF5; }
