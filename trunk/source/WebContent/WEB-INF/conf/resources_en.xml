@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- <!DOCTYPE resources SYSTEM "jchatboxresources.dtd">  -->
+<resources>
+    <!-- Resources matching to login.jsp -->
+    <element>
+        <name>login.date.format</name>
+        <value>yyyy/MM/dd HH:mm</value>
+    </element>
+    <element>
+        <name>login.title</name>
+        <value>Chat Login</value>
+    </element>
+    <element>
+        <name>login.username.label</name>
+        <value>NickName : </value>
+    </element>
+    <element>
+        <name>login.join.link</name>
+        <value>Enter</value>
+    </element>
+    <element>
+        <name>login.join.label</name>
+        <value> chatroom : </value>
+    </element>
+    <element>
+        <name>login.list.label</name>
+        <value>Select a chatroom</value>
+    </element>
+    <element>
+        <name>login.chatroom.label</name>
+        <value>Chatroom : </value>
+    </element>
+    <element>
+        <name>login.open.label</name>
+        <value>Opened : </value>
+    </element>
+    <element>
+        <name>login.subject.label</name>
+        <value>Subject : </value>
+    </element>
+    <element>
+        <name>login.useramount.label</name>
+        <value>Connected users : </value>
+    </element>
+    <element>
+        <name>login.userlimit.label</name>
+        <value>Users allowed : </value>
+    </element>
+    <element>
+        <name>login.chatroomnotfound.error</name>
+        <value>CHATROOM NOT FOUND.</value>
+    </element>
+    <element>
+        <name>login.closed.error</name>
+        <value>CHATROOM IS CLOSED.</value>
+    </element>
+    <element>
+        <name>login.novacancies.error</name>
+        <value>CHATROOM IS FULL.</value>
+    </element>
+    <element>
+        <name>login.namenotavailable.error</name>
+        <value>NAME NOT AVAILABLE.</value>
+    </element>
+    <element>
+        <name>login.banned.error</name>
+        <value>YOU'RE BANNED.</value>
+    </element>
+    <!-- Resources matching to chatroom.jsp -->
+    <element>
+        <name>chatroom.date.format</name>
+        <value>yyyy/MM/dd HH:mm</value>
+    </element>
+    <element>
+        <name>chatroom.title</name>
+        <value>Chat Content</value>
+    </element>
+    <element>
+        <name>chatroom.join.label</name>
+        <value> has joined chatroom.</value>
+    </element>
+    <element>
+        <name>chatroom.quit.label</name>
+        <value> has left chatroom.</value>
+    </element>
+    <element>
+        <name>chatroom.userlist.label</name>
+        <value>Users : </value>
+    </element>
+    <!-- Resources matching to text.jsp -->
+    <element>
+        <name>board.date.format</name>
+        <value>yyyy/MM/dd HH:mm</value>
+    </element>
+    <element>
+        <name>board.title</name>
+        <value>Chat Board</value>
+    </element>
+    <element>
+        <name>board.chatroom.label</name>
+        <value>Chatroom : </value>
+    </element>
+    <element>
+        <name>board.date.label</name>
+        <value>Opened since : </value>
+    </element>
+    <element>
+        <name>board.subject.label</name>
+        <value>Subject : </value>
+    </element>
+    <element>
+        <name>board.message.label</name>
+        <value>Message : </value>
+    </element>
+    <element>
+        <name>board.send.link</name>
+        <value>Send</value>
+    </element>
+    <element>
+        <name>board.send.label</name>
+        <value> to All Users</value>
+    </element>
+    <element>
+        <name>board.refresh.link</name>
+        <value>refresh</value>
+    </element>
+    <element>
+        <name>board.logout.link</name>
+        <value>Leave Chat Room</value>
+    </element>
+    <!-- Resources matching to private.jsp -->
+    <element>
+        <name>privateboard.date.format</name>
+        <value>yyyy/MM/dd</value>
+    </element>
+    <element>
+        <name>privateboard.title</name>
+        <value>Private Chat Board</value>
+    </element>
+    <element>
+        <name>privateboard.chatroom.label</name>
+        <value>Chatroom : </value>
+    </element>
+    <element>
+        <name>privateboard.date.label</name>
+        <value>Opened since : </value>
+    </element>
+    <element>
+        <name>privateboard.subject.label</name>
+        <value>Subject : </value>
+    </element>
+    <element>
+        <name>privateboard.message.label</name>
+        <value>Message : </value>
+    </element>
+    <element>
+        <name>privateboard.send.link</name>
+        <value>Send</value>
+    </element>
+    <element>
+        <name>privateboard.send.label</name>
+        <value> to : </value>
+    </element>
+    <element>
+        <name>privateboard.close.label</name>
+        <value>close this window</value>
+    </element>
+    <element>
+        <name>privateboard.comment.label</name>
+        <value>Messages sent from this window are private.</value>
+    </element>
+    <!-- Resources commands -->
+    <element>
+        <name>user.command.time.format</name>
+        <value>yyyy/MM/dd HH:mm:ss</value>
+    </element>
+    <element>
+        <name>user.command.time.help</name>
+        <value>Returns server time</value>
+    </element>
+    <element>
+        <name>user.command.chat.help</name>
+        <value>Sends message to recipient</value>
+    </element>
+    <element>
+        <name>user.command.refresh.help</name>
+        <value>Refreshes chatroom's content</value>
+    </element>
+    <element>
+        <name>user.command.quit.help</name>
+        <value>Leaves the current chatroom</value>
+    </element>
+    <element>
+        <name>user.command.logout.help</name>
+        <value>Exits the current chatroom</value>
+    </element>
+    <element>
+        <name>moderator.command.generatetranscript.help</name>
+        <value>Dumps current room content to file</value>
+    </element>
+    <element>
+        <name>moderator.command.openchatroom.help</name>
+        <value>Opens a new chatroom</value>
+    </element>
+    <element>
+        <name>moderator.command.clearchatroom.help</name>
+        <value>Cleans the current chatroom</value>
+    </element>
+    <element>
+        <name>moderator.command.closechatroom.help</name>
+        <value>Closes the current chatroom</value>
+    </element>
+    <element>
+        <name>moderator.command.kickoff.help</name>
+        <value>Kicks off username from chatroom</value>
+    </element>
+    <element>
+        <name>moderator.command.ban.help</name>
+        <value>Bans username from chatroom</value>
+    </element>
+    <element>
+        <name>moderator.command.clear.help</name>
+        <value>Clears blacklist of the current chatroom</value>
+    </element>
+    <element>
+        <name>system.command.backup.help</name>
+        <value>Backups all chatrooms</value>
+    </element>
+    <element>
+        <name>system.command.addmoderator.help</name>
+        <value>Adds a new moderator</value>
+    </element>
+    <element>
+        <name>system.command.updatemoderator.help</name>
+        <value>Updates a moderator</value>
+    </element>
+    <element>
+        <name>system.command.removemoderator.help</name>
+        <value>Removes a moderator</value>
+    </element>
+    <element>
+        <name>system.command.updatesystem.help</name>
+        <value>Updates system parameters</value>
+    </element>
+    <!-- Global resources -->
+    <element>
+        <name>global.encoding</name>
+        <value>iso-8859-1</value>
+    </element>
+</resources>
