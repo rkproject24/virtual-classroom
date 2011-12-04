@@ -33,15 +33,8 @@
 	String total_marks = (String)request.getSession().getAttribute("total_marks");
 	int marks1 = Integer.parseInt(marks);
 	int total_marks1 = Integer.parseInt(total_marks);
-	
-	
 	total_marks1 = total_marks1 + marks1;
 	
-	
-	
-	
-	
 	db_obj.updateTest(total_marks1,testid,studentid);
-	
 	response.sendRedirect("http://localhost:8080/VCS/Success.jsp");
 %>

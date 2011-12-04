@@ -62,35 +62,8 @@ function loadCss() {
 		<div class="left">
 			<div class="left_articles">
 				<div class="buttons">
-				<%-- tpl:put name="buttons_blue_green" --%>
-				<%-- /tpl:put --%>
 				</div>
-				<% 
-						Date date = new Date();
-						DateFormat formatterMonth = new SimpleDateFormat("MMM");
-						DateFormat formatterDay = new SimpleDateFormat("dd");
-						
-						String month = formatterMonth.format(date);
-						String day = formatterDay.format(date);
-						month = month.toUpperCase();
-						
-						if(day.equals("1") || day.equals("21") || day.equals("31")) {
-							day = day + "st";
-						} else if(day.equals("2") || day.equals("22")) {
-							day = day + "nd";						
-						} else if(day.equals("3") || day.equals("23")) {
-							day = day + "rd";						
-						} else {
-							day = day + "th";						
-						} 
-						
-					%>
-				<%-- tpl:put name="calendar" --%>
-				<div class="calendar">
-					<p>NOV<br />13th</p>
-				</div>
-				<%-- /tpl:put --%>
-				<%-- tpl:put name="centre_heading" --%>
+			<%@include file="../DisplayCalendar.jsp"%>
 				<h3><u>Faculty Appointment Requests</u></h3>			
 				<%-- /tpl:put --%>
 				<%-- tpl:put name="centre_content" --%>

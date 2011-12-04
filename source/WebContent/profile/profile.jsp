@@ -63,122 +63,13 @@ function loadCss() {
 <%-- tpl:put name="headarea" --%><title>Virtual Classroom System</title><%-- /tpl:put --%>
 </head>
 <body onLoad="javascript:loadCss()">
-<%
-	String userIDForName = (String) request.getSession().getAttribute("userId");
-	System.out.println("UserId: " + userIDForName);
-	String userName = "";
-	String userLevel = "";
-	CommonsDatabaseActivities dbObjectForName = new CommonsDatabaseActivities();
-	if (userIDForName != null ) {
-		
-		UserBean userBeanForName = (UserBean)dbObjectForName.getUserInfo(userIDForName) ;
-		userName = userIDForName;
-		userLevel = userBeanForName.getLevel();
-		System.out.println("UserNAME: " + userName);
-		System.out.println("UserLEVEL: " + userLevel);
-	}
- %>
-	<div id="content">
-		<div id="header">
-			<%
-				if(userIDForName == null) {
-			 %>
-				<%@ include file="/theme/right_links/default.jsp" %>
-				
-			<%
-				} else { 
-					String link = "/theme/right_links/logged_in.jsp?userName=" + userName;
-			%>
-				<jsp:include page="<%= link %>" />
-			<%
-				}
-			 %>
-			<%-- tpl:put name="top_menu_right" --%>
-			
-			<%-- /tpl:put --%>	
-			<div id="logo">
-			<%-- tpl:put name="logo_image" --%>
-				<img src="${pageContext.request.contextPath}/theme/images/vcs.jpg" height="71" width="190">
-			<%-- /tpl:put --%>
-			</div>
-		</div>
-					
-		<div id="tabs">
-			<%
-				if(userLevel.equals("0")) {
-			 %>
-				<%@ include file="/theme/main_menu/student_menu.jsp" %>
-			<%
-				} else if (userLevel.equals("1")){ 
-			%>
-				<%@ include file="/theme/main_menu/faculty_menu.jsp" %>
-			<%
-				} else if (userLevel.equals("2")){ 
-			%>
-				<%@ include file="/theme/main_menu/management_menu.jsp" %>
-			<%
-				} else if (userLevel.equals("3")){ 
-			%>
-				<%@ include file="/theme/main_menu/admin_menu.jsp" %>
-			<%
-				} else if (userLevel.equals("")){ 
-			%>
-				<%@ include file="/theme/main_menu/default.jsp" %>
-			<%
-				} 
-			 %>
-			 			
-			<%-- tpl:put name="top_menu_middle" --%>
-			
-			<%-- /tpl:put --%>
-			
-			<div id="search">
-				<form method="post" action = "${pageContext.request.contextPath}/search/search.jsp" onsubmit = "return formValidator()" name = "searchForm">
-				<p>
-					<input type="text" name="search" class="search"/> 
-					<input type="submit" value="Search" class="button" />
-					
-				</p>
-				</form>
-			</div>
-		</div>
-								
+		<%@include file="../header.jsp"%>						
 		
 		<div class="left">
 			<div class="left_articles">
 				<div class="buttons">
-				<%-- tpl:put name="buttons_blue_green" --%>
-					
-				<%-- /tpl:put --%>
 				</div>
-				<% 
-						Date date = new Date();
-						DateFormat formatterMonth = new SimpleDateFormat("MMM");
-						DateFormat formatterDay = new SimpleDateFormat("dd");
-						
-						String month = formatterMonth.format(date);
-						String day = formatterDay.format(date);
-						month = month.toUpperCase();
-						
-						if(day.equals("1") || day.equals("21") || day.equals("31")) {
-							day = day + "st";
-						} else if(day.equals("2") || day.equals("22")) {
-							day = day + "nd";						
-						} else if(day.equals("3") || day.equals("23")) {
-							day = day + "rd";						
-						} else {
-							day = day + "th";						
-						} 
-						
-					%>
-				<%-- tpl:put name="calendar" --%>
-				
-				<div class="calendar">
-					
-					<p><%=month %><br /><%=day %></p>
-				</div>
-				<%-- /tpl:put --%>
-				<%-- tpl:put name="centre_heading" --%>
+<%@include file="../DisplayCalendar.jsp"%>
 				<h2><a href="#"><u><%=userName %>'s Profile</u></a></h2>
 				<p class="description"></p>
 				<%-- /tpl:put --%>

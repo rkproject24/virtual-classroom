@@ -6,14 +6,15 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
+
+<%@page import="com.ignou.vcs.registration.database.RegistrationDatabaseActivities"%>
 <%@page import="com.ignou.vcs.commons.beans.UserBean"%>
-<%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
-<html:html>
+<%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%><html:html>
 <head>
 <script type="text/javascript" language="javascript" >
+
 function loadCss() {
 	var browser = navigator.appName.toLowerCase();
-	// document.write(browser);
 	var stylesheet = document.getElementById("pagestyle");
 	var menusheet = document.getElementById("menustyle");
 	if(browser.indexOf("microsoft internet explorer") != -1) {
@@ -38,13 +39,9 @@ function loadCss() {
  	<link rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/lightbox_vid.css" media="screen,projection" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/theme/js/prototype.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/theme/js/lightbox.js"></script>
- 	
- 
  <%
  }
- 
   %>
-
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="GENERATOR" content="Rational Application Developer">
@@ -124,50 +121,18 @@ if (validate_required(father_name,"Father Name must be filled out!")==false)
 <title>Virtual Classroom System</title><%-- /tpl:put --%>
 </head>
 <body onLoad="javascript:loadCss()">
-<%@include file="../header.jsp" %>								
+<%@include file="../../header.jsp"%>									
 		
 		<div class="left">
 			<div class="left_articles">
 				<div class="buttons">
-				<%-- tpl:put name="buttons_blue_green" --%>
-					
-				<%-- /tpl:put --%>
 				</div>
-				<% 
-						Date date = new Date();
-						DateFormat formatterMonth = new SimpleDateFormat("MMM");
-						DateFormat formatterDay = new SimpleDateFormat("dd");
-						
-						String month = formatterMonth.format(date);
-						String day = formatterDay.format(date);
-						month = month.toUpperCase();
-						
-						if(day.equals("1") || day.equals("21") || day.equals("31")) {
-							day = day + "st";
-						} else if(day.equals("2") || day.equals("22")) {
-							day = day + "nd";						
-						} else if(day.equals("3") || day.equals("23")) {
-							day = day + "rd";						
-						} else {
-							day = day + "th";						
-						} 
-						
-					%>
-				<%-- tpl:put name="calendar" --%>
-				
-				<div class="calendar">
-					
-					<p><%=month %><br /><%=day %></p>
-				</div>
-				<%-- /tpl:put --%>
-				<%-- tpl:put name="centre_heading" --%>
-				<a href="http://localhost:8080/VCS/player3_vid.jsp?filePath=http://localhost:8080/VCS/DATA/lectures/reg2.flv"  class=lbOn><img src="${pageContext.request.contextPath}/theme/images/qn1.jpeg" align="bottom" class="question"></a>
+				<%@include file="../../DisplayCalendar.jsp"%>
+				<a href="http://localhost:9080/VCS/player3_vid.jsp?filePath=http://localhost:9080/VCS/DATA/lectures/reg2.flv"  class=lbOn><img src="${pageContext.request.contextPath}/theme/images/qn1.jpeg" align="bottom" class="question"></a>
 				<h2><a href="#"><u>Student Registration Form</u></a></h2>
 				
 				<p class="description">Please enter following details:</p>
  				
-				<%-- /tpl:put --%>
-				<%-- tpl:put name="centre_content" --%>
 				<div id="insert_response" >        
 				</div> 
 				<div id="forms">
@@ -268,38 +233,23 @@ if (validate_required(father_name,"Father Name must be filled out!")==false)
 		*Indicating fields are mandatory
 		</form>
 	</div>
-				<%-- /tpl:put --%>
 			</div>
-			
-			
-			<%-- tpl:put name="bottom_box" --%>
-			
-			
-			<%-- /tpl:put --%>
 		</div>	
 		
 		
 		<div id="right">
-			<%-- tpl:put name="right_boxes" --%>
 			<div class="boxtop"></div>
-			<%@include file="../latest_news.jsp" %>
+			<div class="box">
+				<div id="id1">
+			</div>
+			</div>
 			
 			<div class="boxtop"></div>
 			<div class="box">
 				<div id="id2">
-				<p>
-					<b><u>Collaborate</u></b><br />
-					<a href="#" accesskey="m"><span class="key">I</span>nteractive White Boards</a><br />
-					<a href="#" accesskey="m"><span class="key">C</span>hat with friends, Faculties</a><br />
-					<a href="#" accesskey="m"><span class="key">V</span>oice Mailboxes</a><br />
-				</p>
-				<div class="buttons"><p><a href="#" class="bluebtn"><span>More</span></a></p></div>
 			</div>
 			</div>
-			<%-- /tpl:put --%>
 		</div>	
-		<%@include file="../footer.jsp" %>
-	</div>
+		<%@include file="../../footer.jsp" %>
 </body>
 </html:html>
-<%-- /tpl:insert --%>

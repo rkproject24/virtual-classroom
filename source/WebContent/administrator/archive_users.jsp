@@ -1,4 +1,4 @@
-<%-- tpl:insert page="/theme/VCSTemplate.jtpl" --%><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
@@ -13,7 +13,6 @@
 <script type="text/javascript" language="javascript" >
 function loadCss() {
 	var browser = navigator.appName.toLowerCase();
-	// document.write(browser);
 	var stylesheet = document.getElementById("pagestyle");
 	var menusheet = document.getElementById("menustyle");
 	if(browser.indexOf("microsoft internet explorer") != -1) {
@@ -53,7 +52,6 @@ function loadCss() {
 <script>
 var i = 0;
 </script>
-<%-- /tpl:put --%>
 </head>
 <body onLoad="javascript:loadCss()">
 <%@include file="../header.jsp"%>								
@@ -61,42 +59,10 @@ var i = 0;
 		<div class="left">
 			<div class="left_articles">
 				<div class="buttons">
-				<%-- tpl:put name="buttons_blue_green" --%>
-					
-				<%-- /tpl:put --%>
 				</div>
-				<% 
-						Date date = new Date();
-						DateFormat formatterMonth = new SimpleDateFormat("MMM");
-						DateFormat formatterDay = new SimpleDateFormat("dd");
-						
-						String month = formatterMonth.format(date);
-						String day = formatterDay.format(date);
-						month = month.toUpperCase();
-						
-						if(day.equals("1") || day.equals("21") || day.equals("31")) {
-							day = day + "st";
-						} else if(day.equals("2") || day.equals("22")) {
-							day = day + "nd";						
-						} else if(day.equals("3") || day.equals("23")) {
-							day = day + "rd";						
-						} else {
-							day = day + "th";						
-						} 
-						
-					%>
-				<%-- tpl:put name="calendar" --%>
-				
-				<div class="calendar">
-					
-					<p><%=month %><br /><%=day %></p>
-				</div>
-				<%-- /tpl:put --%>
-				<%-- tpl:put name="centre_heading" --%>
+				<%@include file="../DisplayCalendar.jsp"%>
 				<h2><a href="#"><u>Archive Users</u></a></h2>
 				<p class="description">Following Students will be Archived.</p>
-				<%-- /tpl:put --%>
-				<%-- tpl:put name="centre_content" --%>
 				<table>
 					<tr>
 						<td width = "150"><b><u>Name</u></b></td>
@@ -127,20 +93,12 @@ var i = 0;
 				<div class = "buttons">
 					<a href = "javascript:jah('<%= url %>','id_box');" class="greenbtn"><span> Archive </span></a>
 				</div>
-				
-				<%-- /tpl:put --%>
 			</div>
 			
-			
-			<%-- tpl:put name="bottom_box" --%>
-			
-			
-			<%-- /tpl:put --%>
 		</div>	
 		
 		
 		<div id="right">
-			<%-- tpl:put name="right_boxes" --%>
 			<div class="boxtop"></div>
 			<div class="box">
 				<p>
@@ -163,10 +121,8 @@ var i = 0;
 				</p>
 				<div class="buttons"><p><a href="#" class="bluebtn"><span>More</span></a></p></div>
 			</div>
-			<%-- /tpl:put --%>
 		</div>	
 		<%@include file="../footer.jsp" %>
 	</div>
 </body>
 </html:html>
-<%-- /tpl:insert --%>
