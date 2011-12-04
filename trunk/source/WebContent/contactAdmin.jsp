@@ -61,35 +61,8 @@ function loadCss() {
 		<div class="left">
 			<div class="left_articles">
 				<div class="buttons">
-				<%-- tpl:put name="buttons_blue_green" --%>
-					
-				<%-- /tpl:put --%>
 				</div>
-				<% 
-						Date date = new Date();
-						DateFormat formatterMonth = new SimpleDateFormat("MMM");
-						DateFormat formatterDay = new SimpleDateFormat("dd");
-						
-						String month = formatterMonth.format(date);
-						String day = formatterDay.format(date);
-						month = month.toUpperCase();
-						
-						if(day.equals("1") || day.equals("21") || day.equals("31")) {
-							day = day + "st";
-						} else if(day.equals("2") || day.equals("22")) {
-							day = day + "nd";						
-						} else if(day.equals("3") || day.equals("23")) {
-							day = day + "rd";						
-						} else {
-							day = day + "th";						
-						} 
-						
-					%>
-				
-				<div class="calendar">
-					
-					<p><%=month %><br /><%=day %></p>
-				</div>
+				<%@include file="../DisplayCalendar.jsp" %>
 				<h2><a href="#"><u>Contact Administrator</u></a></h2>
 				<p class="description">Easiest way to contact VCS Administrator </p>
 				<p>
