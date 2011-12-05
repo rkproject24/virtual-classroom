@@ -90,6 +90,7 @@ function loadCss() {
 			<div class="boxtop"></div>
 			<div class="box">
 			<%@ page import="com.ignou.vcs.registration.beans.*;" %>
+<br>
 				<p><b><u>Courses</u></b><br /></p>
 				<%RegistrationBean regBean = (RegistrationBean)request.getSession().getAttribute("regBean");
 				//System.out.println("Day Birth:" + request.getParameter("dayBirth"));
