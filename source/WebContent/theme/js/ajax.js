@@ -51,7 +51,7 @@ function jahDone(target) {
 }
 
 function fetchData(urlPattern,j,id) {
-	var elementName = urlPattern + j;							
+	var elementName = urlPattern + j;			
 	var links = document.getElementById(elementName).value;
 	jah(links,id);
 }

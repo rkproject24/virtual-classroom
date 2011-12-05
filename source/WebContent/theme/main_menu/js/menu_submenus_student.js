@@ -1,43 +1,29 @@
 if (TransMenu.isSupported()) {
 		var ms = new TransMenuSet(TransMenu.direction.down, 0,0, TransMenu.reference.bottomLeft);
-		/*
-		var menu1 = ms.addMenu(document.getElementById("menu1"));
-		
-		menu1.addItem("","#", "0");
-		menu1.addItem("Sudoku", "#", "0");
-		menu1.addItem("Writing", "#", "0");
-		
-		
-		var serverAddress = document.getElementById("serverAddress").value;
 		var string =  "http://localhost:8080/VCS/files/view_files.jsp";
 		var string1 = string + "?fileType=0";
 		var string2 = string + "?fileType=2";
 		var string3 = string + "?fileType=1";
+		
+		var menu1 = ms.addMenu(document.getElementById("menu1"));
+		menu1.addItem("Lectures",string3, "0");
+		menu1.addItem("General Files", string1, "0");
+		
 		var menu2 = ms.addMenu(document.getElementById("menu2"));
-		menu2.addItem("Lectures",string3, "0");
 		menu2.addItem("Assignments", string2 , "0");
-		menu2.addItem("General Files", string1, "0");
-		*/
 		
-		/*
 		var menu3 = ms.addMenu(document.getElementById("menu3"));
-		menu3.addItem("Subject 1", "#", "0");
-		menu3.addItem("Subject 2", "#", "0");
-		menu3.addItem("Subject 3", "#", "0");
-		menu3.addItem("Subject 4", "#", "0");
-		*/
+		menu3.addItem("Discussions", "#", "0");
 		
-		/*
 		var menu4 = ms.addMenu(document.getElementById("menu4"));
 		menu4.addItem("Minor Test", "#", "0");
 		menu4.addItem("Major Test", "#", "0");
 		
 		
 		var menu5 = ms.addMenu(document.getElementById("menu5"));
-		menu5.addItem("Minor Tests", "#", "0");
-		menu5.addItem("Major Tests", "#", "0");
-		 */
-		var menu6 = ms.addMenu(document.getElementById("menu5"));
+		menu5.addItem("View Notices", "http://localhost:8080/VCS/notices/view_notices.jsp", "0");
+		
+		var menu6 = ms.addMenu(document.getElementById("menu6"));
 		menu6.addItem("Minor Test Reports", "http://localhost:8080/VCS/reports/student_minorReport.jsp", "0");
 		menu6.addItem("Major Test Reports", "http://localhost:8080/VCS/reports/student_majorReport.jsp", "0");
 		
