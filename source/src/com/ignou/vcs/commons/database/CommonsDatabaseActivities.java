@@ -50,7 +50,7 @@ public class CommonsDatabaseActivities {
 		} else {
 			sql = "SELECT B.SUBJECTID,B.SUBJECTNAME FROM VCS_SCHEMA.SYLLABUS A,VCS_SCHEMA.SUBJECTS B WHERE COURSEID = "+ courseId + " AND A.SUBJECTID=B.SUBJECTID";
 		}
-		//System.out.println("Subject Query:" + sql);
+		System.out.println("Subject Query:" + sql);
 		
 		try {
 			state=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -63,8 +63,7 @@ public class CommonsDatabaseActivities {
 				subjectBean.setSubjectId(res.getString("SUBJECTID"));
 				subjectBean.setSubjectName(res.getString("SUBJECTName"));
 				if(getSyllabus) {
-					subjectBean.setSyllabus(res.getString("syllabus"));
-					
+					subjectBean.setSyllabus(res.getString("syllabusfile"));
 				}
 				//System.out.println("Name of subject:" + subjectBean.getSubjectName());
 				allSubjects.add(subjectBean);

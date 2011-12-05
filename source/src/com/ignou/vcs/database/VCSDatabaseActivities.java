@@ -195,8 +195,8 @@ public class VCSDatabaseActivities {
 				studentBean.setOccupation(res.getString("occupation"));
 				System.out.println("course id : " + res.getString("courseid"));
 				studentBean.setCourseId(res.getString("courseid"));
-				studentBean.setStartDate(res.getString("startdate"));
-				studentBean.setEndDate(res.getString("completiondate"));
+				studentBean.setStartDate(res.getDate("startdate").toString());
+				studentBean.setEndDate(res.getDate("completiondate").toString());
 				studentBean.setPaymentId(res.getString("paymentID"));
 			}
 		} catch (SQLException e) {
