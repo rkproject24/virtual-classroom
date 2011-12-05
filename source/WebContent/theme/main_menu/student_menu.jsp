@@ -5,9 +5,6 @@
                 <tbody>
 						<tr> 
 							<td> 
-								<a class="" id="menu0" href="home.jsp">Home</a> 
-							</td>
-							<td> 
 								<a class="" id="menu1" href="#">Files</a> 
 							</td>
 							<td> 
