@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<syllabus>
+	<chapters>
+		<chapter>
+			<chapterId>1</chapterId>
+			<title>Language Basics</title>
+			<contents>
+				<content>jkdsaj</content>
+				<content>jkdsaj</content>
+				<content>jkdsaj</content>
+				<content>jkdsaj</content>
+				<content>jkdsaj</content>
+			</contents>
+		</chapter>
+		<chapter>
+			<chapterId>2</chapterId>
+			<title>Arrays</title>
+			<contents>
+				<content>sdfjfkljkdl</content>
+				<content>sdfjfkljkdl</content>
+				<content>sdfjfkljkdl</content>
+				<content>sdfjfkljkdl</content>
+				<content>sdfjfkljkdl</content>
+			</contents>
+		</chapter>
+		<chapter>
+			<chapterId>3</chapterId>
+			<title>File Systems</title>
+			<contents>
+				<content>skldjk kjk</content>
+				<content>skldjk kjk</content>
+				<content>skldjk kjk</content>
+				<content>skldjk kjk</content>
+				<content>skldjk kjk</content>
+			</contents>
+		</chapter>
+		<chapter>
+			<chapterId>4</chapterId>
+			<title>Collections</title>
+			<contents>
+				<content>fjkldsj fsdklgj jkldsj</content>
+				<content>fjkldsj fsdklgj jkldsj</content>
+				<content>fjkldsj fsdklgj jkldsj</content>
+				<content>fjkldsj fsdklgj jkldsj</content>
+				<content>fjkldsj fsdklgj jkldsj</content>
+			</contents>
+		</chapter>
+	</chapters>
+</syllabus>
