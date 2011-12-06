@@ -14,8 +14,13 @@
 <%
 	//String userID = "FAC1002";
 	String userID = (String)request.getSession().getAttribute("userID");
+	UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
+	
+	if(userBean==null)
+	{
+		response.sendRedirect("./NewLogin.jsp");
+	}
 	CommonsDatabaseActivities dbObject = new CommonsDatabaseActivities();
-	UserBean userBean = (UserBean)dbObject.getUserInfo(userID);
 	String courseID = userBean.getCourseID();
 	
 	Utilities util = new Utilities();

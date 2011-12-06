@@ -18,14 +18,17 @@ function formValidator()
 	System.out.println("UserId: " + userIDForName);
 	String userName = "";
 	String userLevel = "";
-	CommonsDatabaseActivities dbObjectForName = new CommonsDatabaseActivities();
-	if (userIDForName != null ) {
-		UserBean userBeanForName = (UserBean)dbObjectForName.getUserInfo(userIDForName) ;
-		userName = userBeanForName.getName();
-		userLevel = userBeanForName.getLevel();
-		System.out.println("UserNAME: " + userName);
-		System.out.println("UserLEVEL: " + userLevel);
+	UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
+	
+	if(userBean==null)
+	{
+		response.sendRedirect("./NewLogin.jsp");
 	}
+	
+	userName = userBean.getName();
+	userLevel = userBean.getLevel();
+	System.out.println("UserNAME: " + userName);
+	System.out.println("UserLEVEL: " + userLevel);
  %>
 
 <div id="content">

@@ -104,7 +104,12 @@ var i = 0;
 					<%
 						String userID = (String) request.getSession().getAttribute("userId");
 						CommonsDatabaseActivities dbObject = new CommonsDatabaseActivities();
-						com.ignou.vcs.commons.beans.UserBean userBean = dbObject.getUserInfo(userID);
+						UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
+						
+						if(userBean==null)
+						{
+							response.sendRedirect("./NewLogin.jsp");
+						}
 						System.out.println("USER ID:" + userIDForName);
 						String level = userBean.getLevel();
 						System.out.println("Level:" + level);

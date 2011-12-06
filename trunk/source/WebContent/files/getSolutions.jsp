@@ -19,6 +19,12 @@
 	<tr><th class="top"><u>Submitted By</u></th><th class="top" scope="col"><u>Submission Date</u></th><th class="top" scope="col"><u>Status</u></th></tr>
 	
 <%
+	UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
+	
+	if(userBean==null)
+	{
+		response.sendRedirect("./NewLogin.jsp");
+	}
 	int recordsPerPage = com.ignou.vcs.commons.Utilities.RECORDS_PER_PAGE;
 	String pageNoString = request.getParameter("pageNum");
 	System.out.println("Page Number:" + pageNoString);
@@ -50,8 +56,6 @@
 			for(int i =recordStart ; i < recordsEnd ; i++) {
 			SolutionBean solutionBean = (SolutionBean)allSolutions.get(i);
 			String studentUserId = solutionBean.getUserID();
-			CommonsDatabaseActivities obj = new CommonsDatabaseActivities();
-			UserBean userBean = obj.getUserInfo(studentUserId);
 			String studentName = userBean.getName();
 			String approved = solutionBean.getApproved();
 			String feedback = solutionBean.getFeedback();

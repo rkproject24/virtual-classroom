@@ -115,7 +115,12 @@ function loadCss() {
 					 	<%
 					 		String userIdFromSession = (String)request.getSession().getAttribute("userId");
 					 		CommonsDatabaseActivities dbObjectNew = new CommonsDatabaseActivities();
-					 		UserBean userBean = dbObjectNew.getUserInfo(userIdFromSession);
+					 		UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
+					 		
+					 		if(userBean==null)
+					 		{
+					 			response.sendRedirect("./NewLogin.jsp");
+					 		}
 					 		
 					 		if(userBean.getLevel().equals("0")) {
 					 			

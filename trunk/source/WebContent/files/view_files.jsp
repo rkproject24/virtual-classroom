@@ -103,12 +103,15 @@ var i = 0;
 				<p>
 					<%
 						String userID = (String)request.getSession().getAttribute("userId");
+						UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
 						
+						if(userBean==null)
+						{
+							response.sendRedirect("./NewLogin.jsp");
+						}
 						//String fileType = "2";
 						String fileType = request.getParameter("fileType");
 						//String userID = (String)request.getSession().getAttribute("userID");
-						CommonsDatabaseActivities dbObject = new CommonsDatabaseActivities();
-						com.ignou.vcs.commons.beans.UserBean userBean = dbObject.getUserInfo(userID);
 						
 						String level = userBean.getLevel();
 						System.out.println("Level:" + level);
