@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.ignou.vcs.commons.PasswordService;
+import com.ignou.vcs.commons.beans.UserBean;
 import com.ignou.vcs.commons.database.CommonsDatabaseActivities;
 import com.ignou.vcs.forms.LoginForm;
 
@@ -52,6 +53,9 @@ public class VerifyLoginAction extends Action
 				if (!archived) {
 					System.out.println("Equal");
 					request.getSession().setAttribute("userId", username);
+					UserBean userBean = new UserBean();
+					userBean = cbs.getUserInfo(username);
+					request.getSession().setAttribute("UserBean", userBean);
 				}
 
 			}
