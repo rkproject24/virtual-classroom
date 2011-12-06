@@ -27,7 +27,12 @@
 	String userId = (String) request.getSession().getAttribute("userId");
 	CommonsDatabaseActivities dbObj = new CommonsDatabaseActivities();
 	
-	UserBean userBean = (UserBean)dbObj.getUserInfo(userId);
+	UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
+	
+	if(userBean==null)
+	{
+		response.sendRedirect("./NewLogin.jsp");
+	}
 	
 	String title= "";
 	String subjectName = "";

@@ -4,7 +4,8 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 
-<%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%><html:html>
+<%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
+<%@page import="com.ignou.vcs.commons.beans.UserBean"%><html:html>
 <head>
 <title>student_description</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -19,8 +20,12 @@
 	String dob = request.getParameter("dob");
 	String url = "block_user.jsp?uid="+uid;
 	String userID = (String)request.getSession().getAttribute("userId");
-	CommonsDatabaseActivities dbObject = new CommonsDatabaseActivities();
-	com.ignou.vcs.commons.beans.UserBean userBean = dbObject.getUserInfo(userID);
+	UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
+	
+	if(userBean==null)
+	{
+		response.sendRedirect("./NewLogin.jsp");
+	}
 	
 	String level = userBean.getLevel();
 	System.out.println("Level:" + level);

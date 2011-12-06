@@ -195,7 +195,12 @@ function isNumeric(elem, helperMsg){
 					<%
 						String userID = (String)request.getSession().getAttribute("userId");
 						CommonsDatabaseActivities dbObject = new CommonsDatabaseActivities();
-						UserBean userBean = (UserBean)dbObject.getUserInfo(userID);
+						UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
+						
+						if(userBean==null)
+						{
+							response.sendRedirect("./NewLogin.jsp");
+						}
 						
 						if(userBean.getLevel().equals("0") || userBean.getLevel().equals("1")) {
 							System.out.println("It comes Here!!!!!");

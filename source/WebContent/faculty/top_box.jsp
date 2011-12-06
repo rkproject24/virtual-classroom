@@ -23,11 +23,13 @@
 <b style="text-align: center"><u>New Lectures</u></b><br>
 <table cellspacing = "2" border = "0" align="center" cellpadding="0" padding="2">
 <%
-	String userId = (String) request.getSession().getAttribute("userId");
-	CommonsDatabaseActivities dbObj = new CommonsDatabaseActivities();
+	UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
 	
-	UserBean userBean = (UserBean)dbObj.getUserInfo(userId);
-	
+	if(userBean==null)
+	{
+		response.sendRedirect("./NewLogin.jsp");
+	}
+	String userId = userBean.getName();
 	String title= "";
 	String subjectName = "";
 	String topics = "";

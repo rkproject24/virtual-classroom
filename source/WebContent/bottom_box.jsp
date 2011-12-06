@@ -26,6 +26,12 @@
 		<table cellspacing = "2" border = "0" align="center" cellpadding="0" padding="2">
 <%
 		String userId = (String) request.getSession().getAttribute("userId");
+		UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
+		
+		if(userBean==null)
+		{
+			response.sendRedirect("./NewLogin.jsp");
+		}
 		VCSDatabaseActivities dbObj = new VCSDatabaseActivities();
 		CommonsDatabaseActivities dbObj1 = new CommonsDatabaseActivities();
 		int level = dbObj.getLevel(userId);
@@ -69,7 +75,6 @@
 				String organizedby = scheduleForm.getOrganizedBy(); 
 				
 				CommonsDatabaseActivities dbObject = new CommonsDatabaseActivities();
-				UserBean userBean = (UserBean)dbObject.getUserInfo(userId);
 				
 				image = userBean.getImage();
 				if(level == 0)
@@ -119,9 +124,6 @@
 				String duration = scheduleForm.getDuration();
 				String description = scheduleForm.getDescription();
 				String organizedby = scheduleForm.getOrganizedBy(); 
-				
-				CommonsDatabaseActivities dbObject = new CommonsDatabaseActivities();
-				UserBean userBean = (UserBean)dbObject.getUserInfo(userId);
 				
 				image = userBean.getImage();
 				if(level == 0)
