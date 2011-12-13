@@ -29,7 +29,7 @@ public class FilesDatabaseActivities {
 	}
 
 	public void insertFile(ArrayList columnValues) {
-		String sql1	= "INSERT INTO VCS_SCHEMA.FILES(title,description,filepath,uploadedBy,topics,fileType,syllabus,solutionFile,uploadedTo,courseID,subjectID,uploadDate,Image) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql1	= "INSERT INTO FILES(title,description,filepath,uploadedBy,topics,fileType,syllabus,solutionFile,uploadedTo,courseID,subjectID,uploadDate,Image) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		//DebugLevel debug = DebugLevel.ON;
 		Utilities util = new Utilities();
 		String currDate = util.getCurrentDateInDB2Format();
@@ -43,11 +43,11 @@ public class FilesDatabaseActivities {
 					String value = (String)columnValues.get(i);
 					if(value == null) {
 						if(i == 7 ||i == 9 || i == 10 ) {
-							state1.setNull(i+1, java.sql.Types.VARCHAR);
+							state1.setString(i+1, "");
 						} else if(i == 4 || i == 6) {
-							state1.setNull(i+1, java.sql.Types.LONGVARCHAR);
+							state1.setString(i+1, "");
 						} else if ( i == 11) {
-							state1.setNull(13, java.sql.Types.VARCHAR);
+							state1.setString(13, "");
 						}
 					} else {
 						if( i == 11) {
@@ -70,7 +70,7 @@ public class FilesDatabaseActivities {
 		String fileID = "";
 		ResultSet res = null;
 		Statement state = null;
-		String sql2 = "SELECT MAX(FILEID) FROM VCS_SCHEMA.FILES";
+		String sql2 = "SELECT MAX(FILEID) FROM FILES";
 		System.out.println("quiry:" + sql2);
 		int fileIdNum = 0;
 		try {
@@ -103,36 +103,36 @@ public class FilesDatabaseActivities {
 		if(fileType.equals("0")) {
 
 			if(level.equals("1")) {
-				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,SUBJECTID,UPLOADDATE FROM VCS_SCHEMA.FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + fileType + " AND COURSEID='" + courseID + "' ORDER BY (UPLOADDATE) DESC";
+				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,SUBJECTID,UPLOADDATE FROM FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + fileType + " AND COURSEID='" + courseID + "' ORDER BY (UPLOADDATE) DESC";
 			} else if(level.equals("0")) {
-				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,COURSEID,UPLOADDATE FROM VCS_SCHEMA.FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + fileType + " AND SUBJECTID='" + subjectID + "' ORDER BY (UPLOADDATE) DESC";
+				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,COURSEID,UPLOADDATE FROM FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + fileType + " AND SUBJECTID='" + subjectID + "' ORDER BY (UPLOADDATE) DESC";
 			} else if(level.equals("2")) {
-				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,COURSEID,UPLOADDATE FROM VCS_SCHEMA.FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + fileType + " ORDER BY (UPLOADDATE) DESC";
+				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,COURSEID,UPLOADDATE FROM FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + fileType + " ORDER BY (UPLOADDATE) DESC";
 			} else if(level.equals("3")) {
-				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,COURSEID,UPLOADDATE FROM VCS_SCHEMA.FILES WHERE FILETYPE=" + fileType + " ORDER BY (UPLOADDATE)";
+				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,COURSEID,UPLOADDATE FROM FILES WHERE FILETYPE=" + fileType + " ORDER BY (UPLOADDATE)";
 			}
 			
 		} else if(fileType.equals("1")) {
 			
 			if(level.equals("1")) {
-				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,TOPICS,SUBJECTID,UPLOADDATE,IMAGE FROM VCS_SCHEMA.FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + fileType + " AND COURSEID='" + courseID + "' ORDER BY (UPLOADDATE) DESC";
+				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,TOPICS,SUBJECTID,UPLOADDATE,IMAGE FROM FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + fileType + " AND COURSEID='" + courseID + "' ORDER BY (UPLOADDATE) DESC";
 			} else if(level.equals("0")) {
-				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,TOPICS,COURSEID,UPLOADDATE,IMAGE FROM VCS_SCHEMA.FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + fileType + " AND SUBJECTID='" + subjectID + "' ORDER BY (UPLOADDATE) DESC";
+				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,TOPICS,COURSEID,UPLOADDATE,IMAGE FROM FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + fileType + " AND SUBJECTID='" + subjectID + "' ORDER BY (UPLOADDATE) DESC";
 			} else if(level.equals("2")) {
-				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,TOPICS,COURSEID,UPLOADDATE,IMAGE FROM VCS_SCHEMA.FILES WHERE FILETYPE=" + fileType + " ORDER BY (UPLOADDATE) DESC";
+				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,TOPICS,COURSEID,UPLOADDATE,IMAGE FROM FILES WHERE FILETYPE=" + fileType + " ORDER BY (UPLOADDATE) DESC";
 			} else if(level.equals("3")) {
-				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,TOPICS,COURSEID,UPLOADDATE,IMAGE FROM VCS_SCHEMA.FILES WHERE FILETYPE=" + fileType + " ORDER BY (UPLOADDATE) DESC";
+				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,TOPICS,COURSEID,UPLOADDATE,IMAGE FROM FILES WHERE FILETYPE=" + fileType + " ORDER BY (UPLOADDATE) DESC";
 			}
 		} else if(fileType.equals("2")) {
 			
 			if(level.equals("1")) {
-				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,SYLLABUS,SOLUTIONFILE,SUBJECTID,UPLOADDATE FROM VCS_SCHEMA.FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + fileType + " AND COURSEID='" + courseID + "' ORDER BY (UPLOADDATE) DESC";
+				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,SYLLABUS,SOLUTIONFILE,SUBJECTID,UPLOADDATE FROM FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + fileType + " AND COURSEID='" + courseID + "' ORDER BY (UPLOADDATE) DESC";
 			} else if(level.equals("0")) {
-				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,SYLLABUS,SOLUTIONFILE,COURSEID,UPLOADDATE FROM VCS_SCHEMA.FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + fileType + " AND SUBJECTID='" + subjectID + "' ORDER BY (UPLOADDATE) DESC";
+				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,SYLLABUS,SOLUTIONFILE,COURSEID,UPLOADDATE FROM FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + fileType + " AND SUBJECTID='" + subjectID + "' ORDER BY (UPLOADDATE) DESC";
 			} else if(level.equals("2")) {
-				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,SYLLABUS,SOLUTIONFILE,COURSEID,UPLOADDATE FROM VCS_SCHEMA.FILES WHERE FILETYPE=" + fileType + " ORDER BY (UPLOADDATE) DESC";
+				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,SYLLABUS,SOLUTIONFILE,COURSEID,UPLOADDATE FROM FILES WHERE FILETYPE=" + fileType + " ORDER BY (UPLOADDATE) DESC";
 			} else if(level.equals("3")) {
-				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,SYLLABUS,SOLUTIONFILE,COURSEID,UPLOADDATE FROM VCS_SCHEMA.FILES WHERE FILETYPE=" + fileType + " ORDER BY (UPLOADDATE) DESC";
+				sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,SYLLABUS,SOLUTIONFILE,COURSEID,UPLOADDATE FROM FILES WHERE FILETYPE=" + fileType + " ORDER BY (UPLOADDATE) DESC";
 			}
 		}
 		
@@ -254,7 +254,7 @@ public class FilesDatabaseActivities {
 		int count = 0;
 
 		boolean exists = false;
-		String sql = "SELECT APPROVED,FEEDBACK FROM VCS_SCHEMA.STUDENT_SOLUTIONS WHERE FILEID="+ fileId + " AND USERID='" + userId +"'";
+		String sql = "SELECT APPROVED,FEEDBACK FROM STUDENT_SOLUTIONS WHERE FILEID="+ fileId + " AND USERID='" + userId +"'";
 		System.out.println("query:" + sql);
 		SolutionBean solutionBean = new SolutionBean();
 		try {
@@ -280,7 +280,7 @@ public class FilesDatabaseActivities {
 		Statement state = null;
 		Utilities util = new Utilities();
 		
-		String sql = "INSERT INTO VCS_SCHEMA.STUDENT_SOLUTIONS(FILEID,USERID,APPROVED,ANSWERFILE,SUBMITDATE) VALUES ("+fileId+",'"+userId+"',0,'"+solutionFileName+"','"+util.getCurrentDateInDB2Format()+"')";
+		String sql = "INSERT INTO STUDENT_SOLUTIONS(FILEID,USERID,APPROVED,ANSWERFILE,SUBMITDATE) VALUES ("+fileId+",'"+userId+"',0,'"+solutionFileName+"','"+util.getCurrentDateInDB2Format()+"')";
 		System.out.println("SOLUTION INSERTION QUERY:" + sql);
 		try {
 			state=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -295,7 +295,7 @@ public class FilesDatabaseActivities {
 		String solutionID = "";
 		ResultSet res = null;
 		Statement state = null;
-		String sql2 = "SELECT MAX(SOLUTIONID) FROM VCS_SCHEMA.STUDENT_SOLUTIONS";
+		String sql2 = "SELECT MAX(SOLUTIONID) FROM STUDENT_SOLUTIONS";
 		System.out.println("quiry:" + sql2);
 		int solutionIdNum = 0;
 		try {
@@ -327,7 +327,7 @@ public class FilesDatabaseActivities {
 	public ArrayList<SolutionBean> getStudentSolutions (String fileId) {
 		ResultSet res = null;
 		Statement state = null;
-		String sql2 = "SELECT solutionID,UserId,submitDate,answerFile,approved,feedback FROM VCS_SCHEMA.STUDENT_SOLUTIONS Where fileId=" +fileId +" order by (submitDate)" ;
+		String sql2 = "SELECT solutionID,UserId,submitDate,answerFile,approved,feedback FROM STUDENT_SOLUTIONS Where fileId=" +fileId +" order by (submitDate)" ;
 		System.out.println("quiry:" + sql2);
 		ArrayList<SolutionBean> allSolutions = new ArrayList<SolutionBean>();
 		
@@ -356,7 +356,7 @@ public class FilesDatabaseActivities {
 	public void insertFeedback(String solutionId, String feedback, String status) {
 		Statement state = null;
 		
-		String sql = "Update vcs_schema.student_solutions set feedback='" + feedback + "' , approved=" + status + " where solutionid=" + solutionId ;
+		String sql = "Update student_solutions set feedback='" + feedback + "' , approved=" + status + " where solutionid=" + solutionId ;
 		System.out.println("SOLUTION INSERTION QUERY:" + sql);
 		try {
 			state=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -373,9 +373,9 @@ public class FilesDatabaseActivities {
 		String sql = "";
 		
 		if(level.equals("1")) {
-			sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,TOPICS,SUBJECTID,COURSEID,UPLOADDATE FROM VCS_SCHEMA.FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + 1 + " ORDER BY (UPLOADDATE) DESC";
+			sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,TOPICS,SUBJECTID,COURSEID,UPLOADDATE FROM FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + 1 + " ORDER BY (UPLOADDATE) DESC";
 		} else if(level.equals("0")) {
-			sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,TOPICS,COURSEID,SUBJECTID,UPLOADDATE FROM VCS_SCHEMA.FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + 1 + " ORDER BY (UPLOADDATE) DESC";
+			sql = "SELECT FILEID,TITLE,DESCRIPTION,FILEPATH,UPLOADEDBY,TOPICS,COURSEID,SUBJECTID,UPLOADDATE FROM FILES WHERE (UPLOADEDTO='" + level + "' OR UPLOADEDBY='" +userID + "') AND FILETYPE=" + 1 + " ORDER BY (UPLOADDATE) DESC";
 		}
 		
 		System.out.println("SQL Query in Files Selection:" + sql);

@@ -1,10 +1,12 @@
 package com.ignou.vcs.commons.beans;
 
+import java.util.Date;
+
 public class StudentBean {
 	String studentID;
 	String userID;
 	String name;
-	String dob;
+	Date dob;
 	String emailP;
 	String emailS;
 	String contactP;
@@ -13,8 +15,8 @@ public class StudentBean {
 	String fatherName;
 	String occupation;
 	String courseId;
-	String startDate;
-	String endDate;
+	Date startDate;
+	Date endDate;
 	String duration;
 	String paymentId;
 	String photograph;
@@ -64,10 +66,10 @@ public class StudentBean {
 	public void setEmailS(String emailS) {
 		this.emailS = emailS;
 	}
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 	public String getFatherName() {
@@ -95,10 +97,10 @@ public class StudentBean {
 	public void setPaymentId(String paymentId) {
 		this.paymentId = paymentId;
 	}
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 	public String getUserLevel() {
@@ -107,10 +109,10 @@ public class StudentBean {
 	public void setUserLevel(String userLevel) {
 		this.userLevel = userLevel;
 	}
-	public String getDob() {
+	public Date getDob() {
 		return dob;
 	}
-	public void setDob(String dob) {
+	public void setDob(Date dob) {
 		this.dob = dob;
 	}
 	public String getStudentID() {

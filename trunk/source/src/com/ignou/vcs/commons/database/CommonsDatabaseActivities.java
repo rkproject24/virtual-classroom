@@ -46,9 +46,9 @@ public class CommonsDatabaseActivities {
 		String sql = "";
 		
 		if(getSyllabus) {
-			sql = "SELECT * FROM VCS_SCHEMA.SYLLABUS A,VCS_SCHEMA.SUBJECTS B WHERE COURSEID = "+ courseId + " AND A.SUBJECTID=B.SUBJECTID"; 
+			sql = "SELECT * FROM SYLLABUS A,SUBJECTS B WHERE COURSEID = "+ courseId + " AND A.SUBJECTID=B.SUBJECTID"; 
 		} else {
-			sql = "SELECT B.SUBJECTID,B.SUBJECTNAME FROM VCS_SCHEMA.SYLLABUS A,VCS_SCHEMA.SUBJECTS B WHERE COURSEID = "+ courseId + " AND A.SUBJECTID=B.SUBJECTID";
+			sql = "SELECT B.SUBJECTID,B.SUBJECTNAME FROM SYLLABUS A,SUBJECTS B WHERE COURSEID = "+ courseId + " AND A.SUBJECTID=B.SUBJECTID";
 		}
 		System.out.println("Subject Query:" + sql);
 		
@@ -85,7 +85,7 @@ public class CommonsDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		StudentBean studentBean = new StudentBean();
-		String sql = "SELECT * FROM VCS_SCHEMA.STUDENT WHERE userid='" + userID + "'";
+		String sql = "SELECT * FROM STUDENT WHERE userid='" + userID + "'";
 		
 		try {
 			//DataSource ds = DataSourceFactory.getDataSource();
@@ -93,22 +93,23 @@ public class CommonsDatabaseActivities {
 			res=state.executeQuery(sql);
 			
 			while(res.next()) {
-				studentBean.setStudentID(res.getString("studentID"));
-				studentBean.setUserID(res.getString("userID"));
-				studentBean.setName(res.getString("name"));
-				studentBean.setDob(res.getString("dob"));
-				studentBean.setEmailP(res.getString("EMAILPRIMARY"));
-				studentBean.setEmailS(res.getString("EMAILSECONDARY"));
-				studentBean.setContactP(res.getString("CONTACTNOPRIMARY"));
-				studentBean.setContactS(res.getString("CONTATCNOSECONDARY"));
-				studentBean.setAddress(res.getString("address"));
-				studentBean.setFatherName(res.getString("FATHERNAME"));
-				studentBean.setOccupation(res.getString("occupation"));
-				//studentBean.setPhotograph(res.getString("photograph"));
-				studentBean.setCourseId(res.getString("courseid"));
-				studentBean.setStartDate(res.getString("startdate"));
-				studentBean.setEndDate(res.getString("COMPLETIONDATE"));
-				studentBean.setPaymentId(res.getString("paymentid"));
+				studentBean.setStudentID(res.getString(1));
+				studentBean.setUserID(res.getString(2));
+				studentBean.setName(res.getString(3));
+				//studentBean.setDob(res.getDate(4));
+				studentBean.setEmailP(res.getString(5));
+				studentBean.setEmailS(res.getString(6));
+				studentBean.setContactP(res.getString(7));
+				studentBean.setContactS(res.getString(8));
+				studentBean.setAddress(res.getString(9));
+				studentBean.setOccupation(res.getString(10));
+				studentBean.setCourseId(res.getString(11));
+				studentBean.setFatherName(res.getString(12));
+				studentBean.setEndDate(res.getDate(13));
+				studentBean.setPaymentId(res.getString(14));		
+				studentBean.setStartDate(res.getDate(15));
+				
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -128,7 +129,7 @@ public class CommonsDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		UserBean userBean = new UserBean();
-		String sql = "SELECT LEVEL,IMAGE FROM VCS_SCHEMA.USER WHERE userid='" + UserID + "'";
+		String sql = "SELECT LEVEL,IMAGE FROM USER WHERE userid='" + UserID + "'";
 		//System.out.println("QUERY:" + sql);
 		try {
 			state=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -145,7 +146,7 @@ public class CommonsDatabaseActivities {
 				String subjectID = "";
 				switch(Integer.parseInt(level)) {
 				case 0 : {
-					sqlQuery = "SELECT name, courseid FROM VCS_SCHEMA.STUDENT WHERE userID='" + UserID + "'";
+					sqlQuery = "SELECT name, courseid FROM STUDENT WHERE userID='" + UserID + "'";
 					//System.out.println("Student Query:" + sqlQuery);
 					Statement state1 = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 					ResultSet res1 = state1.executeQuery(sqlQuery);
@@ -160,7 +161,7 @@ public class CommonsDatabaseActivities {
 				}
 				case 1 : {
 					//System.out.println("It comes Here");
-					sqlQuery = "SELECT name, courseid, subjectid FROM VCS_SCHEMA.FACULTY WHERE userID='" + UserID + "'";
+					sqlQuery = "SELECT name, courseid, subjectid FROM FACULTY WHERE userID='" + UserID + "'";
 					Statement state1 = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 					ResultSet res1 = state1.executeQuery(sqlQuery);
 					while(res1.next()) {
@@ -172,7 +173,7 @@ public class CommonsDatabaseActivities {
 					break;
 				}
 				case 2 : {
-					sqlQuery = "SELECT name FROM VCS_SCHEMA.MANAGEMENT WHERE userID='" + UserID + "'";
+					sqlQuery = "SELECT name FROM MANAGEMENT WHERE userID='" + UserID + "'";
 					Statement state1 = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 					ResultSet res1 = state1.executeQuery(sqlQuery);
 					while(res1.next()) {
@@ -204,7 +205,7 @@ public class CommonsDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		String courseName = "";
-		String sql = "SELECT name FROM VCS_SCHEMA.COURSE WHERE courseID = " + courseID;
+		String sql = "SELECT name FROM COURSE WHERE courseID = " + courseID;
 				
 		try {
 			state=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -226,7 +227,7 @@ public class CommonsDatabaseActivities {
 		Statement state=null;
 		//ActionErrors errors = new ActionErrors();
 		
-		String sql = "SELECT password FROM VCS_SCHEMA.USER WHERE userid = '" + username + "' AND BLOCKED= 0";
+		String sql = "SELECT password FROM USER WHERE userid = '" + username + "' AND BLOCKED= 0";
 		String encryptedPassword = "";
 		try {
 			state=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -250,7 +251,7 @@ public class CommonsDatabaseActivities {
 		ArrayList<SubjectBean> subject_list = new ArrayList<SubjectBean>();
 		
 		try {
-			String sql = "SELECT SUBJECTNAME,SUBJECTID FROM VCS_SCHEMA.SUBJECTS";
+			String sql = "SELECT SUBJECTNAME,SUBJECTID FROM SUBJECTS";
 			state=con.createStatement();
 			rs = state.executeQuery(sql);
 		
@@ -273,7 +274,7 @@ public class CommonsDatabaseActivities {
 		Statement state=null;
 		
 		try {
-			String sql = "UPDATE VCS_SCHEMA.USER SET PASSWORD='" + newPassword + "' WHERE userID='" + userId + "'";
+			String sql = "UPDATE USER SET PASSWORD='" + newPassword + "' WHERE userID='" + userId + "'";
 			state=con.createStatement();
 			state.executeUpdate(sql);
 		} catch (SQLException e) {
@@ -294,15 +295,15 @@ public class CommonsDatabaseActivities {
 		Statement state1=null;
 		if(level==0)
 		{
-			sql="SELECT USERID FROM VCS_SCHEMA.USER WHERE USERID LIKE 'STU%'";
+			sql="SELECT USERID FROM USER WHERE USERID LIKE 'STU%'";
 		}
 		else if(level==1)
 		{
-			sql="SELECT USERID FROM VCS_SCHEMA.USER WHERE USERID LIKE 'FAC%'";
+			sql="SELECT USERID FROM USER WHERE USERID LIKE 'FAC%'";
 		}
 		else if(level==2)
 		{
-			sql="SELECT USERID FROM VCS_SCHEMA.USER WHERE USERID LIKE 'MGT%'";
+			sql="SELECT USERID FROM USER WHERE USERID LIKE 'MGT%'";
 		}
 		System.out.println(sql);
 		ArrayList userid=new ArrayList();
@@ -340,7 +341,7 @@ public class CommonsDatabaseActivities {
 		System.out.println("idLevel outside while block:"+idLevel);
 		id1=idLevel+max;	
 		System.out.println(id1);
-		String sql1="INSERT INTO VCS_SCHEMA.USER (USERID,PASSWORD,LEVEL) VALUES('"+id1+"','"+password+"',"+level+")";
+		String sql1="INSERT INTO USER (USERID,PASSWORD,LEVEL) VALUES('"+id1+"','"+password+"',"+level+")";
 		
 		try {
 			state1=con.createStatement();
@@ -367,7 +368,7 @@ public class CommonsDatabaseActivities {
 		String subjectname = "";
 		
 		try {
-			String sql = "SELECT SUBJECTNAME FROM VCS_SCHEMA.SUBJECTS WHERE SUBJECTID = " + isubjectid;
+			String sql = "SELECT SUBJECTNAME FROM SUBJECTS WHERE SUBJECTID = " + isubjectid;
 			System.out.println(sql);
 			state=con.createStatement();
 			ResultSet rs = state.executeQuery(sql);
@@ -400,7 +401,7 @@ public class CommonsDatabaseActivities {
 		Statement state=null;
 		ArrayList allStudents = new ArrayList<StudentBean>();
 		try {
-			String sql = "SELECT USERID,NAME,DOB,EMAILPRIMARY,CONTACTNOPRIMARY,STARTDATE,COMPLETIONDATE FROM VCS_SCHEMA.STUDENT WHERE COURSEID = " + courseId;
+			String sql = "SELECT USERID,NAME,DOB,EMAILPRIMARY,CONTACTNOPRIMARY,STARTDATE,COMPLETIONDATE FROM STUDENT WHERE COURSEID = " + courseId;
 			System.out.println(sql);
 			state=con.createStatement();
 			ResultSet rs = state.executeQuery(sql);
@@ -408,15 +409,15 @@ public class CommonsDatabaseActivities {
 			while(rs.next())
 			{
 				StudentBean studentBean = new StudentBean();
-				String userID = rs.getString("userID");
+				String userID = rs.getString(1);
 				System.out.println("From Db:" + userID);
-				studentBean.setUserID(rs.getString("userID"));
-				studentBean.setName(rs.getString("name"));
-				studentBean.setDob(rs.getString("dob"));
-				studentBean.setEmailP(rs.getString("emailPrimary"));
-				studentBean.setContactP(rs.getString("contactNoPrimary"));
-				studentBean.setStartDate(rs.getString("startDate"));
-				studentBean.setEndDate(rs.getString("CompletionDate"));
+				studentBean.setUserID(rs.getString(1));
+				studentBean.setName(rs.getString(2));
+				studentBean.setDob(rs.getDate(3));
+				studentBean.setEmailP(rs.getString(4));
+				studentBean.setContactP(rs.getString(5));
+				studentBean.setStartDate(rs.getDate(6));
+				studentBean.setEndDate(rs.getDate(7));
 				
 				allStudents.add(studentBean);
 			}
@@ -435,7 +436,7 @@ public class CommonsDatabaseActivities {
 		Statement state=null;
 		ArrayList allFaculties = new ArrayList<FacultyBean>();
 		try {
-			String sql = "SELECT USERID,NAME,DOB,EMAILPRIMARY,CONTACTNOPRIMARY,QUALIFICATION,COURSEID FROM VCS_SCHEMA.FACULTY WHERE SUBJECTID = " + subjectId;
+			String sql = "SELECT USERID,NAME,DOB,EMAILPRIMARY,CONTACTNOPRIMARY,QUALIFICATION,COURSEID FROM FACULTY WHERE SUBJECTID = " + subjectId;
 			System.out.println(sql);
 			state=con.createStatement();
 			ResultSet rs = state.executeQuery(sql);
@@ -480,7 +481,7 @@ public class CommonsDatabaseActivities {
 		Statement state=null;
 		
 		try {
-			String sql = "UPDATE VCS_SCHEMA.USER SET BLOCKED = 1 WHERE USERID = '" + userId + "'";
+			String sql = "UPDATE USER SET BLOCKED = 1 WHERE USERID = '" + userId + "'";
 			System.out.println(sql);
 			state=con.createStatement();
 			state.executeUpdate(sql);
@@ -502,7 +503,7 @@ public class CommonsDatabaseActivities {
 		ArrayList<StudentBean> allStudents = new ArrayList<StudentBean>();
 		
 		try {
-			String sql = "SELECT A.NAME,A.COMPLETIONDATE FROM VCS_SCHEMA.STUDENT A  WHERE A.COMPLETIONDATE < '" + currDate + "'  AND A.USERID IN( SELECT B.USERID FROM VCS_SCHEMA.USER B WHERE B.ARCHIVED = 0)";
+			String sql = "SELECT A.NAME,A.COMPLETIONDATE FROM STUDENT A  WHERE A.COMPLETIONDATE < '" + currDate + "'  AND A.USERID IN( SELECT B.USERID FROM USER B WHERE B.ARCHIVED = 0)";
 			System.out.println(sql);
 			state=con.createStatement();
 			res = state.executeQuery(sql);
@@ -510,7 +511,7 @@ public class CommonsDatabaseActivities {
 			while(res.next()) {
 				StudentBean studentBean = new StudentBean();
 				studentBean.setName(res.getString("name"));
-				studentBean.setEndDate(res.getString("completionDate"));
+				studentBean.setEndDate(res.getDate("completionDate"));
 				allStudents.add(studentBean);
 			}
 			
@@ -531,7 +532,7 @@ public class CommonsDatabaseActivities {
 		Utilities util = new Utilities();
 		String currDate = util.getCurrentDateInDB2Format();
 		try {
-			String sql = "UPDATE VCS_SCHEMA.USER SET ARCHIVED = 1 WHERE USERID IN (SELECT USERID FROM VCS_SCHEMA.STUDENT WHERE COMPLETIONDATE < '" + currDate + "')";
+			String sql = "UPDATE USER SET ARCHIVED = 1 WHERE USERID IN (SELECT USERID FROM STUDENT WHERE COMPLETIONDATE < '" + currDate + "')";
 			System.out.println(sql);
 			state=con.createStatement();
 			state.executeUpdate(sql);
@@ -546,7 +547,7 @@ public class CommonsDatabaseActivities {
 		ResultSet res = null;
 		boolean archived = false;
 		try {
-			String sql = "SELECT ARCHIVED FROM VCS_SCHEMA.USER WHERE USERID='" + userId + "'";
+			String sql = "SELECT ARCHIVED FROM USER WHERE USERID='" + userId + "'";
 			System.out.println(sql);
 			state=con.createStatement();
 			res = state.executeQuery(sql);
@@ -619,7 +620,7 @@ public class CommonsDatabaseActivities {
 	 String sql="";
 	 try{
 		 
-		 sql = "SELECT * FROM VCS_SCHEMA.NEWS";
+		 sql = "SELECT * FROM NEWS";
 		 state=con.createStatement();
 		 res=state.executeQuery(sql);
 		 while(res.next()){

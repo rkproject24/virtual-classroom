@@ -38,7 +38,7 @@ public class UploadFileForm extends ActionForm
 
     private String fileType = null;
 
-    private String syllabus = null;
+    private String syllabus = "";
 
     private FormFile solutionFile = null;
 

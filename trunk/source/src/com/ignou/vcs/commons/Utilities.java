@@ -27,7 +27,7 @@ public class Utilities {
 	
 	public static String GENERAL_FILES_UPLOAD_PATH = "C:\\Uploaded_files\\general";
 	
-	public static String LECTURE_FILES_UPLOAD_PATH = "C:\\Documents and Settings\\Anchal Agarwal\\IBM\\rationalsdp7.0\\vcs2\\VCS\\WebContent\\DATA\\lectures";
+	public static String LECTURE_FILES_UPLOAD_PATH = "C:\\Uploaded_files\\images\\lectures";
 	
 	public static String ASSIGNMENT_FILES_UPLOAD_PATH = "C:\\Uploaded_files\\assignments";
 	
@@ -35,9 +35,9 @@ public class Utilities {
 	
 	public static String STUDENT_SOLUTION_FILES_UPLOAD_PATH = "C:\\Uploaded_files\\student_solutions";
 	
-	public static String CHARTS_FILES_TEMP_PATH = "C:\\Charts";
+	public static String CHARTS_FILES_TEMP_PATH = "C:\\Uploaded_files\\Charts";
 	
-	public static int SERVER_PORT_NUMBER = 9081;
+	public static int SERVER_PORT_NUMBER = 8080;
 	
 	public static String RESUME_FILES_UPLOAD_PATH = "c:\\Uploaded_files\\resume";
 	
