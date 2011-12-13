@@ -32,13 +32,13 @@ public class ReportDatabaseActivities {
 		String query = "";
 		if(flag == 0)
 		{
-			query = "SELECT B.SUBJECTID,B.TESTNAME,C.EVALUATED,C.TESTID,D.SUBJECTNAME FROM VCS_SCHEMA.TEST B,VCS_SCHEMA.ANSWERSHEETS C,VCS_SCHEMA.SUBJECTS D WHERE C.STUDENTID = '" + userid + "' AND C.TESTID = B.TESTID AND B.TESTTYPE = 0 AND B.SUBJECTID = D.SUBJECTID";
+			query = "SELECT B.SUBJECTID,B.TESTNAME,C.EVALUATED,C.TESTID,D.SUBJECTNAME FROM TEST B,ANSWERSHEETS C,SUBJECTS D WHERE C.STUDENTID = '" + userid + "' AND C.TESTID = B.TESTID AND B.TESTTYPE = 0 AND B.SUBJECTID = D.SUBJECTID";
 		}
 		else
 		{
 			if(flag == 1)
 			{
-				query = "SELECT B.SUBJECTID,B.TESTNAME,C.EVALUATED,C.TESTID,D.SUBJECTNAME FROM VCS_SCHEMA.TEST B,VCS_SCHEMA.ANSWERSHEETS C,VCS_SCHEMA.SUBJECTS D WHERE C.STUDENTID = '" + userid + "' AND C.TESTID = B.TESTID AND B.TESTTYPE = 1 AND B.SUBJECTID = D.SUBJECTID";
+				query = "SELECT B.SUBJECTID,B.TESTNAME,C.EVALUATED,C.TESTID,D.SUBJECTNAME FROM TEST B,ANSWERSHEETS C,SUBJECTS D WHERE C.STUDENTID = '" + userid + "' AND C.TESTID = B.TESTID AND B.TESTTYPE = 1 AND B.SUBJECTID = D.SUBJECTID";
 			}
 		}
 		
@@ -79,7 +79,7 @@ public class ReportDatabaseActivities {
 		com.ignou.vcs.beans.getTests test_obj = new com.ignou.vcs.beans.getTests();
 		
 			try {
-				String sql = "select * from VCS_SCHEMA.TEST where testid = " + itestid;
+				String sql = "select * from TEST where testid = " + itestid;
 				System.out.println(sql);
 				state=con.createStatement();
 				res = state.executeQuery(sql);
@@ -118,7 +118,7 @@ public class ReportDatabaseActivities {
 		Statement state=null;
 		int itestid = Integer.parseInt(testid);
 		
-		String query = "update VCS_SCHEMA.ANSWERSHEETS set ANSWERS = '" + xmldoc + "' where testid = " +  itestid + " AND STUDENTID = '" + studentid +"'";	
+		String query = "update ANSWERSHEETS set ANSWERS = '" + xmldoc + "' where testid = " +  itestid + " AND STUDENTID = '" + studentid +"'";	
 		System.out.println(query);
 		try {
 			state=con.createStatement();
@@ -140,7 +140,7 @@ public class ReportDatabaseActivities {
 		int itestid = Integer.parseInt(testid);
 		System.out.println("asdasd:" + studentid);
 		try {
-			String sql = "SELECT ANSWERS FROM VCS_SCHEMA.ANSWERSHEETS WHERE testid=" + itestid + " and studentid = '" + studentid + "'";
+			String sql = "SELECT ANSWERS FROM ANSWERSHEETS WHERE testid=" + itestid + " and studentid = '" + studentid + "'";
 			state = con.createStatement();
 			res = state.executeQuery(sql);
 		
@@ -160,7 +160,7 @@ public class ReportDatabaseActivities {
 		
 		try {
 			Statement stmt = con.createStatement();
-			String sql = "\"SELECT ANSWERS FROM VCS_SCHEMA.ANSWERSHEETS WHERE TESTID = " + itestid + " AND STUDENTID = '" + studentid +"'\"";
+			String sql = "\"SELECT ANSWERS FROM ANSWERSHEETS WHERE TESTID = " + itestid + " AND STUDENTID = '" + studentid +"'\"";
 			String query = "XQUERY for $quesno in db2-fn:sqlquery(" + sql+")/answersheet return $quesno/quesno/text()";
 			
 			System.out.println();
@@ -184,7 +184,7 @@ public class ReportDatabaseActivities {
 		}
 		try {
 			Statement stmt1 = con.createStatement();
-			String sql = "\"SELECT ANSWERS FROM VCS_SCHEMA.ANSWERSHEETS WHERE TESTID = " + itestid + " AND STUDENTID = '" + studentid +"'\"";
+			String sql = "\"SELECT ANSWERS FROM ANSWERSHEETS WHERE TESTID = " + itestid + " AND STUDENTID = '" + studentid +"'\"";
 			String query1 = "XQUERY for $marks in db2-fn:sqlquery("+sql+")/answersheet return $marks/marks/text()";
 			
 			System.out.println();
@@ -223,7 +223,7 @@ public class ReportDatabaseActivities {
 	public String getTotalMarks(String studentId, String testId) {
 		ResultSet res=null;
 		Statement state=null;
-		String sql = "SELECT TOTALMARKS FROM VCS_SCHEMA.ANSWERSHEETS WHERE STUDENTID='" + studentId + "' AND TESTID=" + testId;
+		String sql = "SELECT TOTALMARKS FROM ANSWERSHEETS WHERE STUDENTID='" + studentId + "' AND TESTID=" + testId;
 		System.out.println(sql);
 		String totalMarks = "";
 		try {
@@ -245,7 +245,7 @@ public class ReportDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		
-		String query = "SELECT A.STUDENTID,B.NAME,A.TOTALMARKS FROM VCS_SCHEMA.ANSWERSHEETS A,VCS_SCHEMA.STUDENT B WHERE A.TESTID = " + testid + " AND A.STUDENTID = B.USERID";
+		String query = "SELECT A.STUDENTID,B.NAME,A.TOTALMARKS FROM ANSWERSHEETS A,STUDENT B WHERE A.TESTID = " + testid + " AND A.STUDENTID = B.USERID";
 		System.out.println("SQL Query:" + query);
 		try {
 			state = con.createStatement();
@@ -272,7 +272,7 @@ public class ReportDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		
-		String sql = "SELECT TESTID,MAXMARKS FROM VCS_SCHEMA.TEST WHERE COURSEID = " + courseid;
+		String sql = "SELECT TESTID,MAXMARKS FROM TEST WHERE COURSEID = " + courseid;
 		System.out.println("QUERY: " + sql);
 		
 		try {
@@ -300,7 +300,7 @@ public class ReportDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		
-		String sql = "SELECT A.STUDENTID,B.NAME,A.TOTALMARKS FROM VCS_SCHEMA.ANSWERSHEETS A,VCS_SCHEMA.STUDENT B WHERE TESTID = " + testid + " AND EVALUATED = 1 AND A.STUDENTID = B.USERID";
+		String sql = "SELECT A.STUDENTID,B.NAME,A.TOTALMARKS FROM ANSWERSHEETS A,STUDENT B WHERE TESTID = " + testid + " AND EVALUATED = 1 AND A.STUDENTID = B.USERID";
 		
 		try {
 			state = con.createStatement();
@@ -328,7 +328,7 @@ public class ReportDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		
-		String sql = "SELECT USERID,NAME,COURSEID,EMAILPRIMARY FROM VCS_SCHEMA.FACULTY WHERE SUBJECTID = " + subjectid;
+		String sql = "SELECT USERID,NAME,COURSEID,EMAILPRIMARY FROM FACULTY WHERE SUBJECTID = " + subjectid;
 		System.out.println("QUERY: " + sql);
 		
 		try {
@@ -357,7 +357,7 @@ public class ReportDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		
-		String sql = "SELECT TOTALMARKS FROM VCS_SCHEMA.ANSWERSHEETS WHERE TESTID = " + testid;
+		String sql = "SELECT TOTALMARKS FROM ANSWERSHEETS WHERE TESTID = " + testid;
 		System.out.println("QUERY: " + sql);
 		
 		try {
@@ -393,11 +393,11 @@ public class ReportDatabaseActivities {
 		
 		if((testType).equals("1")){
 			
-			sql = "SELECT A.*,B.* FROM VCS_SCHEMA.TEST A,VCS_SCHEMA.ANSWERSHEETS B WHERE A.TAKENBY = '" + facId + "' AND A.COURSEID= "+courseId+" AND A.TESTTYPE=1 AND A.TESTID = B.TESTID AND B.STUDENTID= '"+studId+"' AND B.EVALUATED= 1";
+			sql = "SELECT A.*,B.* FROM TEST A,ANSWERSHEETS B WHERE A.TAKENBY = '" + facId + "' AND A.COURSEID= "+courseId+" AND A.TESTTYPE=1 AND A.TESTID = B.TESTID AND B.STUDENTID= '"+studId+"' AND B.EVALUATED= 1";
 		}
 		else if((testType).equals("0")){
 			
-			sql = "SELECT A.*,B.* FROM VCS_SCHEMA.TEST A,VCS_SCHEMA.ANSWERSHEETS B WHERE A.TAKENBY = '" + facId + "' AND A.COURSEID= "+courseId+" AND A.TESTTYPE=0 AND A.TESTID = B.TESTID AND B.STUDENTID= '"+studId+"' AND B.EVALUATED= 1";
+			sql = "SELECT A.*,B.* FROM TEST A,ANSWERSHEETS B WHERE A.TAKENBY = '" + facId + "' AND A.COURSEID= "+courseId+" AND A.TESTTYPE=0 AND A.TESTID = B.TESTID AND B.STUDENTID= '"+studId+"' AND B.EVALUATED= 1";
 		}
 		
 		try {
@@ -430,7 +430,7 @@ public class ReportDatabaseActivities {
 				for (int i=0;i<list.size();i++)
 				{
 					com.ignou.vcs.beans.major_studentBase r= (com.ignou.vcs.beans.major_studentBase)list.get(i);
-					String sql1="select MAX(TOTALMARKS)from VCS_SCHEMA.ANSWERSHEETS where TESTID ="+r.getTestid()+"";
+					String sql1="select MAX(TOTALMARKS)from ANSWERSHEETS where TESTID ="+r.getTestid()+"";
 					state=con.createStatement();
 					res = state.executeQuery(sql1);
 					while(res.next())
@@ -453,7 +453,7 @@ public class ReportDatabaseActivities {
 		com.ignou.vcs.report.beans.testBean bean = new com.ignou.vcs.report.beans.testBean();
 		String sql1= "";
 		
-		String sql = "SELECT A.TESTID,A.MAXMARKS,A.PASSMARKS,A.TESTNAME,A.SYLLABUS FROM VCS_SCHEMA.TEST A, VCS_SCHEMA.ANSWERSHEETS B WHERE B.TESTID=A.TESTID AND A.TESTTYPE=0 AND A.COURSEID =" + courseid +" AND A.SUBJECTID = "+subId+" AND B.EVALUATED=1 ";
+		String sql = "SELECT A.TESTID,A.MAXMARKS,A.PASSMARKS,A.TESTNAME,A.SYLLABUS FROM TEST A, ANSWERSHEETS B WHERE B.TESTID=A.TESTID AND A.TESTTYPE=0 AND A.COURSEID =" + courseid +" AND A.SUBJECTID = "+subId+" AND B.EVALUATED=1 ";
 		System.out.println("test sql=" +sql);
 		try {
 			state = con.createStatement();
@@ -469,7 +469,7 @@ public class ReportDatabaseActivities {
 			e.printStackTrace();
 		}
 		
-		sql1 = "SELECT MAX(TOTALMARKS) FROM VCS_SCHEMA.ANSWERSHEETS WHERE TESTID ="+bean.getTestId()+"";
+		sql1 = "SELECT MAX(TOTALMARKS) FROM ANSWERSHEETS WHERE TESTID ="+bean.getTestId()+"";
 		System.out.println("highest marks sql=" +sql1);
 		try {
 				state = con.createStatement();
@@ -493,7 +493,7 @@ public class ReportDatabaseActivities {
 		com.ignou.vcs.report.beans.testBean bean = new com.ignou.vcs.report.beans.testBean();
 		String sql1= "";
 		
-		String sql = "SELECT A.TESTID,A.MAXMARKS,A.PASSMARKS,A.TESTNAME,A.SYLLABUS FROM VCS_SCHEMA.TEST A, VCS_SCHEMA.ANSWERSHEETS B WHERE B.TESTID=A.TESTID AND A.TESTTYPE=0 AND A.COURSEID =" + courseid +" AND A.SUBJECTID = "+subId+" AND B.EVALUATED=1 ";
+		String sql = "SELECT A.TESTID,A.MAXMARKS,A.PASSMARKS,A.TESTNAME,A.SYLLABUS FROM TEST A, ANSWERSHEETS B WHERE B.TESTID=A.TESTID AND A.TESTTYPE=0 AND A.COURSEID =" + courseid +" AND A.SUBJECTID = "+subId+" AND B.EVALUATED=1 ";
 		
 		try {
 			state = con.createStatement();
@@ -511,7 +511,7 @@ public class ReportDatabaseActivities {
 			e.printStackTrace();
 		}
 		
-		sql1 = "SELECT MAX(TOTALMARKS) FROM VCS_SCHEMA.ANSWERSHEETS WHERE TESTID ="+bean.getTestId()+"";
+		sql1 = "SELECT MAX(TOTALMARKS) FROM ANSWERSHEETS WHERE TESTID ="+bean.getTestId()+"";
 		
 		try {
 				state = con.createStatement();

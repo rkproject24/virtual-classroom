@@ -36,21 +36,21 @@ public class ProfileDatabaseOperations {
 		String query = "";
 		if(level.equals("0"))
 		{
-			query = "SELECT NAME,DOB,EMAILPRIMARY AS EMAILP,EMAILSECONDARY AS EMAILS,CONTACTNOPRIMARY AS CONTACTP,CONTACTNOSECONDARY AS CONTACTS,ADDRESS,COURSEID,COMPLETIONDATE FROM VCS_SCHEMA.STUDENT WHERE USERID = '" + userid +"'";
+			query = "SELECT NAME,DOB,EMAILPRIMARY AS EMAILP,EMAILSECONDARY AS EMAILS,CONTACTNOPRIMARY AS CONTACTP,CONTACTNOSECONDARY AS CONTACTS,ADDRESS,COURSEID,COMPLETIONDATE FROM STUDENT WHERE USERID = '" + userid +"'";
 		}
 		else
 		{
 			if(level.equals("1"))
 			{
-				query = "SELECT NAME,DOB,EMAILPRIMARY AS EMAILP,EMAILSECONDARY AS EMAILS,CONTACTNOPRIMARY AS CONTACTP,CONTACTNOSECONDARY AS CONTACTS,ADDRESS,SUBJECTID FROM VCS_SCHEMA.FACULTY WHERE USERID = '" + userid +"'";
+				query = "SELECT NAME,DOB,EMAILPRIMARY AS EMAILP,EMAILSECONDARY AS EMAILS,CONTACTNOPRIMARY AS CONTACTP,CONTACTNOSECONDARY AS CONTACTS,ADDRESS,SUBJECTID FROM FACULTY WHERE USERID = '" + userid +"'";
 			} 
 			else if(level.equals("2"))
 			{
-				query = "SELECT NAME,DOB,EMAILP,EMAILS,CONTACTP,CONTACTS,ADDRESS FROM VCS_SCHEMA.MANAGEMENT WHERE USERID = '" + userid +"'";
+				query = "SELECT NAME,DOB,EMAILP,EMAILS,CONTACTP,CONTACTS,ADDRESS FROM MANAGEMENT WHERE USERID = '" + userid +"'";
 			}
 			else
 			{
-				query = "SELECT NAME,DOB,EMAILP,EMAILS,CONTACTP,CONTACTS,ADDRESS FROM VCS_SCHEMA.admin WHERE USERID = '" + userid +"'";
+				query = "SELECT NAME,DOB,EMAILP,EMAILS,CONTACTP,CONTACTS,ADDRESS FROM admin WHERE USERID = '" + userid +"'";
 			}
 		}
 		System.out.println("SQL: " + query);
@@ -61,7 +61,7 @@ public class ProfileDatabaseOperations {
 			while(res.next())
 			{
 				bean.setName(res.getString("name"));
-				bean.setDob(res.getString("dob"));
+				//bean.setDob(res.getString("dob"));
 				bean.setAddress(res.getString("address"));
 				bean.setEmailp(res.getString("emailp"));
 				bean.setEmails(res.getString("emails"));
@@ -96,19 +96,19 @@ public class ProfileDatabaseOperations {
 		
 		if(level.equals("0"))
 		{
-			query = "UPDATE VCS_SCHEMA.STUDENT SET EMAILPRIMARY = '" + emailp + "' , CONTACTNOPRIMARY = " + contactp + " , ADDRESS = '" + address + "' WHERE USERID = '" + userid + "'";
+			query = "UPDATE STUDENT SET EMAILPRIMARY = '" + emailp + "' , CONTACTNOPRIMARY = " + contactp + " , ADDRESS = '" + address + "' WHERE USERID = '" + userid + "'";
 		}
 		else
 		{
 			if(level.equals("1"))
 			{
-				query = "UPDATE VCS_SCHEMA.FACULTY SET EMAILPRIMARY = '" + emailp + "' , CONTACTNOPRIMARY = " + contactp + " , ADDRESS = '" + address + "' WHERE USERID = '" + userid + "'";
+				query = "UPDATE FACULTY SET EMAILPRIMARY = '" + emailp + "' , CONTACTNOPRIMARY = " + contactp + " , ADDRESS = '" + address + "' WHERE USERID = '" + userid + "'";
 			}
 			else
 			{
 				if(level.equals("2"))
 				{
-					query = "UPDATE VCS_SCHEMA.MANAGEMENT SET EMAILP = '" + emailp + "' , CONTACTP = " + contactp + " , ADDRESS = '" + address + "' WHERE USERID = '" + userid + "'";
+					query = "UPDATE MANAGEMENT SET EMAILP = '" + emailp + "' , CONTACTP = " + contactp + " , ADDRESS = '" + address + "' WHERE USERID = '" + userid + "'";
 				}
 			}
 		}

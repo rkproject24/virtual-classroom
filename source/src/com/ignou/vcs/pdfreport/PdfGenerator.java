@@ -1,6 +1,7 @@
 package com.ignou.vcs.pdfreport;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.ignou.vcs.commons.*;
 import com.ignou.vcs.commons.beans.*;
@@ -25,7 +26,7 @@ public class PdfGenerator {
 			String studentName = bean.getName();
 			String fatherName = bean.getFatherName();
 			String Email = bean.getEmailP();
-			String StartDate = bean.getStartDate();
+			Date StartDate = bean.getStartDate();
 			String date = StartDate + "\t to\t" + currentDate;
 			String courseId = bean.getCourseId();	
 			System.out.println("courseId"+ courseId);

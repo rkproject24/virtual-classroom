@@ -44,12 +44,12 @@ public class NoticesDatabaseActivities {
 		UserBean userBean  = dbObject.getUserInfo(userID);
 		String userLevel = userBean.getLevel();
 		
-		String sql = "SELECT noticeid, Description, Title, PostedTo, PostedBy, PostingDate, Courseid from VCS_SCHEMA.NOTICES where subjectid=" + subjectID + " ORDER BY (postingDate) DESC"  ;
+		String sql = "SELECT noticeid, Description, Title, PostedTo, PostedBy, PostingDate, Courseid from NOTICES where subjectid=" + subjectID + " ORDER BY (postingDate) DESC"  ;
 		if(courseID.equals("0") && subjectID.equals("0")) {
-			sql = "SELECT noticeid, Description, Title, PostedTo, PostedBy, PostingDate, Courseid from VCS_SCHEMA.NOTICES WHERE courseid IS NULL and subjectid IS NULL  ORDER BY (postingDate) DESC";
+			sql = "SELECT noticeid, Description, Title, PostedTo, PostedBy, PostingDate, Courseid from NOTICES WHERE courseid IS NULL and subjectid IS NULL  ORDER BY (postingDate) DESC";
 		} 
 		if(userID.equals("admin")) {
-			sql = "SELECT noticeid, Description, Title, PostedTo, PostedBy, PostingDate, Courseid from VCS_SCHEMA.NOTICES ORDER BY (postingDate) DESC";
+			sql = "SELECT noticeid, Description, Title, PostedTo, PostedBy, PostingDate, Courseid from NOTICES ORDER BY (postingDate) DESC";
 			
 		}
 		
@@ -158,7 +158,7 @@ public class NoticesDatabaseActivities {
 		String postingDate = util.getCurrentDateInDB2Format();
 		String sql = "";
 		if(courseID.equals("null")) {
-			sql = "INSERT INTO VCS_SCHEMA.NOTICES (keyword , description , postedTo , postedBy , postingDate , expiresOn , title , courseID , subjectID,ARCHIVED) VALUES ('"
+			sql = "INSERT INTO NOTICES (keyword , description , postedTo , postedBy , postingDate , expiresOn , title , courseID , subjectID,ARCHIVED) VALUES ('"
 				+ keyword
 				+ "','"
 				+ description
@@ -174,7 +174,7 @@ public class NoticesDatabaseActivities {
 				+ title + "',NULL,NULL,0)";  
 		
 		} else {
-			sql = "INSERT INTO VCS_SCHEMA.NOTICES (keyword , description , postedTo , postedBy , postingDate , expiresOn , title , courseID , subjectID,ARCHIVED) VALUES ('"
+			sql = "INSERT INTO NOTICES (keyword , description , postedTo , postedBy , postingDate , expiresOn , title , courseID , subjectID,ARCHIVED) VALUES ('"
 				+ keyword
 				+ "','"
 				+ description
@@ -208,7 +208,7 @@ public class NoticesDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		com.ignou.vcs.commons.database.CommonsDatabaseActivities dbObject = new com.ignou.vcs.commons.database.CommonsDatabaseActivities();
-		String query = "SELECT * FROM VCS_SCHEMA.NOTICES ORDER BY POSTINGDATE DESC";
+		String query = "SELECT * FROM NOTICES ORDER BY POSTINGDATE DESC";
 		try {
 			state=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			res=state.executeQuery(query);
@@ -236,7 +236,7 @@ public class NoticesDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		
-		String query = "DELETE FROM VCS_SCHEMA.NOTICES WHERE NOTICEID = " + noticeid;
+		String query = "DELETE FROM NOTICES WHERE NOTICEID = " + noticeid;
 		System.out.println(query);
 		try {
 			state=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);

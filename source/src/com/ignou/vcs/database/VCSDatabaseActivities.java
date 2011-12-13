@@ -62,7 +62,7 @@ public class VCSDatabaseActivities {
 			else
 				test_type = 0;
 			
-			String sql2 = "select courseid from VCS_SCHEMA.COURSE where name LIKE '"
+			String sql2 = "select courseid from COURSE where name LIKE '"
 				+ course + "'";
 			System.out.println(sql2);
 			stmt1 = con.createStatement();
@@ -72,7 +72,7 @@ public class VCSDatabaseActivities {
 				course_id = res1.getString("courseid");
 			}
 			state = con.createStatement();
-			String sql = "insert into VCS_SCHEMA.TEST(testtype,testname,prerequisites,syllabus,testpaper,takenby,courseid,subjectid,maxmarks,passmarks,duration) values("+ test_type + ",'"
+			String sql = "insert into TEST(testtype,testname,prerequisites,syllabus,testpaper,takenby,courseid,subjectid,maxmarks,passmarks,duration) values("+ test_type + ",'"
 				+ test_name
 				+ "','"
 				+ prereq
@@ -87,7 +87,7 @@ public class VCSDatabaseActivities {
 				",' "+ time + "')";
 			System.out.println(sql);
 			int rowsAffected = state.executeUpdate(sql);
-			String sql1 = "select testid from VCS_SCHEMA.TEST where testname = '"
+			String sql1 = "select testid from TEST where testname = '"
 					+ test_name + "'";
 
 			stmt = con.createStatement();
@@ -110,7 +110,7 @@ public class VCSDatabaseActivities {
 		Statement state=null;
 		
 			try {
-				String sql = "update VCS_SCHEMA.TEST set testpaper = '" + xmlDoc + "' where testid = " +  testid1;
+				String sql = "update TEST set testpaper = '" + xmlDoc + "' where testid = " +  testid1;
 				System.out.println(sql);
 				state=con.createStatement();
 				int rowsAffected = state.executeUpdate(sql);
@@ -135,7 +135,7 @@ public class VCSDatabaseActivities {
 		String duration = "";
 		String testid;
 			try {
-				String sql = "select * from VCS_SCHEMA.TEST where courseid = " + courseid + " and subjectid = " + subjectid;
+				String sql = "select * from TEST where courseid = " + courseid + " and subjectid = " + subjectid;
 				System.out.println(sql);
 				state=con.createStatement();
 				res = state.executeQuery(sql);
@@ -175,7 +175,7 @@ public class VCSDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		com.ignou.vcs.beans.StudentBean studentBean = new com.ignou.vcs.beans.StudentBean();
-		String sql = "SELECT * FROM VCS_SCHEMA.STUDENT WHERE userid='" + userID + "'";
+		String sql = "SELECT * FROM STUDENT WHERE userid='" + userID + "'";
 		
 		try {
 			state=con.createStatement();
@@ -211,7 +211,7 @@ public class VCSDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		com.ignou.vcs.beans.FacultyBean facultyBean = new com.ignou.vcs.beans.FacultyBean();
-		String sql = "SELECT * FROM VCS_SCHEMA.FACULTY WHERE userid='" + userID + "'";
+		String sql = "SELECT * FROM FACULTY WHERE userid='" + userID + "'";
 		System.out.println("sql :" + sql);
 		try {
 			state=con.createStatement();
@@ -244,7 +244,7 @@ public class VCSDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		com.ignou.vcs.beans.MgmtBean managementbean = new com.ignou.vcs.beans.MgmtBean();
-		String sql = "SELECT * FROM VCS_SCHEMA.MANAGEMENT WHERE userid='" + userID + "'";
+		String sql = "SELECT * FROM MANAGEMENT WHERE userid='" + userID + "'";
 		System.out.println("sql :" + sql);
 		try {
 			state=con.createStatement();
@@ -275,9 +275,9 @@ public class VCSDatabaseActivities {
 		String sql = "";
 		
 		if(getSyllabus) {
-			sql = "SELECT * FROM VCS_SCHEMA.SYLLABUS A,VCS_SCHEMA.SUBJECTS B WHERE COURSEID = "+ courseId + " AND A.SUBJECTID=B.SUBJECTID"; 
+			sql = "SELECT * FROM SYLLABUS A,SUBJECTS B WHERE COURSEID = "+ courseId + " AND A.SUBJECTID=B.SUBJECTID"; 
 		} else {
-			sql = "SELECT B.SUBJECTID,B.SUBJECTNAME FROM VCS_SCHEMA.SYLLABUS A,VCS_SCHEMA.SUBJECTS B WHERE COURSEID = "+ courseId + " AND A.SUBJECTID=B.SUBJECTID";
+			sql = "SELECT B.SUBJECTID,B.SUBJECTNAME FROM SYLLABUS A,SUBJECTS B WHERE COURSEID = "+ courseId + " AND A.SUBJECTID=B.SUBJECTID";
 		}
 		System.out.println("Subject Query:" + sql);
 		
@@ -310,7 +310,7 @@ public class VCSDatabaseActivities {
 		int iTestid = Integer.parseInt(testid);
 		
 		try {
-			String sql = "SELECT TESTPAPER FROM VCS_SCHEMA.TEST WHERE testid=" + iTestid;
+			String sql = "SELECT TESTPAPER FROM TEST WHERE testid=" + iTestid;
 			state = con.createStatement();
 			res = state.executeQuery(sql);
 		
@@ -329,7 +329,7 @@ public class VCSDatabaseActivities {
 		
 		try {
 			Statement stmt = con.createStatement();
-			String query = "XQUERY for $ques in db2-fn:sqlquery('SELECT TESTPAPER FROM VCS_SCHEMA.TEST WHERE TESTID = " + iTestid + "')/questionpaper return $ques/ques/text()";
+			String query = "XQUERY for $ques in db2-fn:sqlquery('SELECT TESTPAPER FROM TEST WHERE TESTID = " + iTestid + "')/questionpaper return $ques/ques/text()";
 			
 			System.out.println();
 			System.out.println(query);
@@ -351,7 +351,7 @@ public class VCSDatabaseActivities {
 		}
 		try {
 			Statement stmt = con.createStatement();
-			String query = "XQUERY for $marks in db2-fn:sqlquery('SELECT TESTPAPER FROM VCS_SCHEMA.TEST WHERE TESTID = " + iTestid + "')/questionpaper return $marks/marks/text()";
+			String query = "XQUERY for $marks in db2-fn:sqlquery('SELECT TESTPAPER FROM TEST WHERE TESTID = " + iTestid + "')/questionpaper return $marks/marks/text()";
 			
 			System.out.println();
 			System.out.println(query);
@@ -390,7 +390,7 @@ public class VCSDatabaseActivities {
 		Statement state=null;
 		int itestid = Integer.parseInt(testid);
 			try {
-				String sql = "insert into VCS_SCHEMA.ANSWERSHEETS(testid,studentid,answers,evaluated,totalmarks) values("+
+				String sql = "insert into ANSWERSHEETS(testid,studentid,answers,evaluated,totalmarks) values("+
 				itestid + 
 				",'" + studentid + "','"
 				+ xmlDoc + "'," +
@@ -413,7 +413,7 @@ public class VCSDatabaseActivities {
 		Statement state=null;
 		int value = 0;
 		try {
-			String sql = "select * from VCS_SCHEMA.ANSWERSHEETS where testid = "
+			String sql = "select * from ANSWERSHEETS where testid = "
 				+ testid + " and studentid = '"
 				+  studentid + "'";
 			
@@ -446,7 +446,7 @@ public class VCSDatabaseActivities {
 			e1.printStackTrace();
 		}
 		
-		String sql = "SELECT name FROM VCS_SCHEMA.COURSE WHERE courseID = " + icourseid;
+		String sql = "SELECT name FROM COURSE WHERE courseID = " + icourseid;
 		
 		System.out.println(sql);		
 		try {
@@ -477,7 +477,7 @@ public class VCSDatabaseActivities {
 			e1.printStackTrace();
 		}
 		
-		String sql = "SELECT testid,testname,passmarks FROM VCS_SCHEMA.TEST WHERE courseid = " + icourseid +
+		String sql = "SELECT testid,testname,passmarks FROM TEST WHERE courseid = " + icourseid +
 		" and takenby = '" + facultyid + "'";
 		System.out.println("SQL: " + sql);
 		try {
@@ -515,7 +515,7 @@ public class VCSDatabaseActivities {
 			e1.printStackTrace();
 		}
 		
-		String sql = "SELECT testname FROM VCS_SCHEMA.TEST WHERE testid = " + itestid;
+		String sql = "SELECT testname FROM TEST WHERE testid = " + itestid;
 		System.out.println("SQL: " + sql);
 		try {
 			state=con.createStatement();
@@ -536,7 +536,7 @@ public class VCSDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		ArrayList stu_list = new ArrayList();
-		String sql = "SELECT studentid,evaluated FROM VCS_SCHEMA.ANSWERSHEETS WHERE testid = " + testid;
+		String sql = "SELECT studentid,evaluated FROM ANSWERSHEETS WHERE testid = " + testid;
 		String stuID;
 		try {
 			state=con.createStatement();
@@ -565,7 +565,7 @@ public class VCSDatabaseActivities {
 		ArrayList quesno_list = new ArrayList();
 		
 		try {
-			String sql = "SELECT ANSWERS FROM VCS_SCHEMA.ANSWERSHEETS WHERE testid=" + iTestid +
+			String sql = "SELECT ANSWERS FROM ANSWERSHEETS WHERE testid=" + iTestid +
 			" and studentid = '" + studentid+ "'";
 			state = con.createStatement();
 			res = state.executeQuery(sql);
@@ -585,7 +585,7 @@ public class VCSDatabaseActivities {
 		
 		try {
 			Statement stmt = con.createStatement();
-			String sql = "\"SELECT ANSWERS FROM VCS_SCHEMA.ANSWERSHEETS WHERE TESTID = " + iTestid + " AND STUDENTID = '" + studentid +"'\"";
+			String sql = "\"SELECT ANSWERS FROM ANSWERSHEETS WHERE TESTID = " + iTestid + " AND STUDENTID = '" + studentid +"'\"";
 			String query = "XQUERY for $ans in db2-fn:sqlquery("+sql+")/solution return $ans/ans/text()";
 
 			ResultSet rs = stmt.executeQuery(query);
@@ -604,7 +604,7 @@ public class VCSDatabaseActivities {
 		}
 		try {
 			Statement stmt = con.createStatement();
-			String sql = "\"SELECT ANSWERS FROM VCS_SCHEMA.ANSWERSHEETS WHERE TESTID = " + iTestid + " AND STUDENTID = '" + studentid +"'\"";
+			String sql = "\"SELECT ANSWERS FROM ANSWERSHEETS WHERE TESTID = " + iTestid + " AND STUDENTID = '" + studentid +"'\"";
 			String query = "XQUERY for $quesno in db2-fn:sqlquery("+sql+")/solution return $quesno/quesno/text()";
 			ResultSet rs = stmt.executeQuery(query);
 //		 retrieve and display the result from the query
@@ -638,7 +638,7 @@ public class VCSDatabaseActivities {
 		Statement state=null;
 		int itestid = Integer.parseInt(testid);
 		try {
-			String sql = "update VCS_SCHEMA.ANSWERSHEETS set totalmarks = " + totalMarks +
+			String sql = "update ANSWERSHEETS set totalmarks = " + totalMarks +
 			" , evaluated = " + 1 + " where testid = " +  itestid + 
 				" and studentid = '" + studentid + "'";
 			System.out.println(sql);
@@ -656,7 +656,7 @@ public class VCSDatabaseActivities {
 		Statement state=null;
 		int level = 0;
 		try {
-			String sql = "SELECT level FROM VCS_SCHEMA.USER WHERE userid = '" + userid +"'";
+			String sql = "SELECT level FROM USER WHERE userid = '" + userid +"'";
 			state=con.createStatement();
 			ResultSet rs = state.executeQuery(sql);
 		
@@ -679,7 +679,7 @@ public class VCSDatabaseActivities {
 		ArrayList course_list = new ArrayList();
 		
 		try {
-			String sql = "SELECT name,courseid FROM VCS_SCHEMA.COURSE";
+			String sql = "SELECT name,courseid FROM COURSE";
 			state=con.createStatement();
 			ResultSet rs = state.executeQuery(sql);
 		
@@ -706,7 +706,7 @@ public class VCSDatabaseActivities {
 		ArrayList subject_list = new ArrayList();
 		
 		try {
-			String sql = "SELECT SUBJECTNAME,SUBJECTID FROM VCS_SCHEMA.SUBJECTS";
+			String sql = "SELECT SUBJECTNAME,SUBJECTID FROM SUBJECTS";
 			state=con.createStatement();
 			ResultSet rs = state.executeQuery(sql);
 		
@@ -732,7 +732,7 @@ public class VCSDatabaseActivities {
 		String subjectid = "";
 		
 		try {
-			String sql = "SELECT SUBJECTID FROM VCS_SCHEMA.FACULTY WHERE USERID = '" + userid + "'";
+			String sql = "SELECT SUBJECTID FROM FACULTY WHERE USERID = '" + userid + "'";
 			System.out.println(sql);
 			state=con.createStatement();
 			ResultSet rs = state.executeQuery(sql);
@@ -763,7 +763,7 @@ public class VCSDatabaseActivities {
 		String title = form.getTitle();
 		String description = form.getDescription();
 		try {
-			String sql = "insert into VCS_SCHEMA.DISCUSSION(organizedby,organizedfor,courseid,subjectid,date,time,title,description,duration) values('" +
+			String sql = "insert into DISCUSSION(organizedby,organizedfor,courseid,subjectid,date,time,title,description,duration) values('" +
 							organizedBy + "','" 
 							+ organizedFor + "','"
 							+ course + "','" 
@@ -788,7 +788,7 @@ public class VCSDatabaseActivities {
 	{
 		Statement state=null;
 		ArrayList schedule = new ArrayList();
-		String sql = "SELECT * FROM VCS_SCHEMA.DISCUSSION WHERE COURSEID = '" + courseid +
+		String sql = "SELECT * FROM DISCUSSION WHERE COURSEID = '" + courseid +
 					"' and subjectid = '" + subjectid +
 					"' and organizedfor = '" + organizedfor +
 					"' ORDER BY DATE DESC";
@@ -821,7 +821,7 @@ public class VCSDatabaseActivities {
 	{
 		Statement state=null;
 		ArrayList schedule = new ArrayList();
-		String sql = "SELECT * FROM VCS_SCHEMA.DISCUSSION WHERE COURSEID = '" + courseid +
+		String sql = "SELECT * FROM DISCUSSION WHERE COURSEID = '" + courseid +
 					
 					"' and organizedfor = '" + organizedfor +
 					"' ORDER BY DATE DESC";
@@ -864,7 +864,7 @@ public class VCSDatabaseActivities {
 		String subjectname = "";
 		
 		try {
-			String sql = "SELECT SUBJECTNAME FROM VCS_SCHEMA.SUBJECTS WHERE SUBJECTID = " + isubjectid;
+			String sql = "SELECT SUBJECTNAME FROM SUBJECTS WHERE SUBJECTID = " + isubjectid;
 			System.out.println(sql);
 			state=con.createStatement();
 			ResultSet rs = state.executeQuery(sql);
@@ -888,21 +888,21 @@ public class VCSDatabaseActivities {
 		
 		if(type.equals("Courses"))
 		{
-		sql = "SELECT * FROM VCS_SCHEMA.DISCUSSION WHERE ORGANIZEDBY = '" + userid + 
+		sql = "SELECT * FROM DISCUSSION WHERE ORGANIZEDBY = '" + userid + 
 					"' and subjectid = '" + null + "' ORDER BY DATE DESC";
 		}
 		else
 		{
 			if(type.equals("Subjects"))
 			{	
-				sql = "SELECT * FROM VCS_SCHEMA.DISCUSSION WHERE ORGANIZEDBY = '" + userid + 
+				sql = "SELECT * FROM DISCUSSION WHERE ORGANIZEDBY = '" + userid + 
 				"' and courseid = '" + null + "' ORDER BY DATE DESC";
 			}
 			else
 			{
 				if(type.equals("All"))
 				{
-					sql = "SELECT * FROM VCS_SCHEMA.DISCUSSION WHERE ORGANIZEDBY = '" + userid + "' ORDER BY DATE DESC";
+					sql = "SELECT * FROM DISCUSSION WHERE ORGANIZEDBY = '" + userid + "' ORDER BY DATE DESC";
 				}
 			}
 		}
@@ -938,7 +938,7 @@ public class VCSDatabaseActivities {
 		
 		if(type.equals("Self"))
 		{
-		sql = "SELECT * FROM VCS_SCHEMA.DISCUSSION WHERE ORGANIZEDBY = '" + userid + "' ORDER BY DATE DESC";
+		sql = "SELECT * FROM DISCUSSION WHERE ORGANIZEDBY = '" + userid + "' ORDER BY DATE DESC";
 		try {
 			state=con.createStatement();
 			ResultSet rs = state.executeQuery(sql);
@@ -969,7 +969,7 @@ public class VCSDatabaseActivities {
 			com.ignou.vcs.commons.Utilities obj = new com.ignou.vcs.commons.Utilities();
 			ArrayList course_list = obj.getSeparateValue(courseid);
 			
-			sql = "SELECT * FROM VCS_SCHEMA.DISCUSSION WHERE ORGANIZEDFOR = '" + 1 + 
+			sql = "SELECT * FROM DISCUSSION WHERE ORGANIZEDFOR = '" + 1 + 
 			"' ORDER BY DATE DESC"; 
 			
 			try {
@@ -1034,7 +1034,7 @@ public class VCSDatabaseActivities {
 		com.ignou.vcs.database.VCSDatabaseActivities dbObj = new com.ignou.vcs.database.VCSDatabaseActivities();
 		
 		try {
-			String query = "SELECT * FROM VCS_SCHEMA.FACULTY A,VCS_SCHEMA.SUBJECTS B where A.SUBJECTID = B.SUBJECTID";
+			String query = "SELECT * FROM FACULTY A,SUBJECTS B where A.SUBJECTID = B.SUBJECTID";
 			state=con.createStatement();
 			res = state.executeQuery(query);
 		
@@ -1119,7 +1119,7 @@ public class VCSDatabaseActivities {
 		Statement state=null;
 		
 		try {
-			String query = "SELECT A.*,B.NAME AS COURSENAME,C.*,D.* FROM VCS_SCHEMA.TEST A,VCS_SCHEMA.COURSE B,VCS_SCHEMA.SUBJECTS C,VCS_SCHEMA.FACULTY D WHERE A.COURSEID = B.COURSEID AND A.SUBJECTID = C.SUBJECTID AND A.TAKENBY = D.USERID";
+			String query = "SELECT A.*,B.NAME AS COURSENAME,C.*,D.* FROM TEST A,COURSE B,SUBJECTS C,FACULTY D WHERE A.COURSEID = B.COURSEID AND A.SUBJECTID = C.SUBJECTID AND A.TAKENBY = D.USERID";
 			state=con.createStatement();
 			res = state.executeQuery(query);
 			System.out.println("QUery " + query);
@@ -1202,7 +1202,7 @@ public class VCSDatabaseActivities {
 		Statement state=null;
 		
 		try {
-			String query = "SELECT A.*,B.*,D.* FROM VCS_SCHEMA.NOTICES A,VCS_SCHEMA.FACULTY B,VCS_SCHEMA.SUBJECTS D WHERE  A.POSTEDBY = B.USERID AND B.SUBJECTID = D.SUBJECTID";
+			String query = "SELECT A.*,B.*,D.* FROM NOTICES A,FACULTY B,SUBJECTS D WHERE  A.POSTEDBY = B.USERID AND B.SUBJECTID = D.SUBJECTID";
 			state=con.createStatement();
 			res = state.executeQuery(query);
 			
@@ -1286,7 +1286,7 @@ public class VCSDatabaseActivities {
 		Statement state=null;
 		
 		try {
-			String query = "SELECT * FROM VCS_SCHEMA.COURSE";
+			String query = "SELECT * FROM COURSE";
 			state=con.createStatement();
 			res = state.executeQuery(query);
 		
@@ -1321,7 +1321,7 @@ public class VCSDatabaseActivities {
 		ArrayList list = new ArrayList();
 		
 		try {
-			String query = "SELECT A.*,B.NAME AS COURSENAME FROM VCS_SCHEMA.STUDENT A,VCS_SCHEMA.COURSE AS B WHERE A.COURSEID = B.COURSEID";
+			String query = "SELECT A.*,B.NAME AS COURSENAME FROM STUDENT A,COURSE AS B WHERE A.COURSEID = B.COURSEID";
 			state=con.createStatement();
 			res = state.executeQuery(query);
 			
@@ -1378,7 +1378,7 @@ public class VCSDatabaseActivities {
 		System.out.println("level" + level);
 		
 		try {
-			String query = "SELECT A.*,B.*,D.* FROM VCS_SCHEMA.FILES A,VCS_SCHEMA.FACULTY B,VCS_SCHEMA.SUBJECTS D WHERE  A.UPLOADEDBY = B.USERID AND B.SUBJECTID = D.SUBJECTID AND A.FILETYPE =" + filetype;
+			String query = "SELECT A.*,B.*,D.* FROM FILES A,FACULTY B,SUBJECTS D WHERE  A.UPLOADEDBY = B.USERID AND B.SUBJECTID = D.SUBJECTID AND A.FILETYPE =" + filetype;
 			state=con.createStatement();
 			res = state.executeQuery(query);
 		
@@ -1457,13 +1457,13 @@ public class VCSDatabaseActivities {
 		String query = "";
 		if(level == 1)
 		{
-			query = "SELECT NAME FROM VCS_SCHEMA.FACULTY WHERE USERID = '" + userid + "'";
+			query = "SELECT NAME FROM FACULTY WHERE USERID = '" + userid + "'";
 		}
 		else
 		{
 			if(level == 2)
 			{
-				query = "SELECT NAME FROM VCS_SCHEMA.MANAGEMENT WHERE USERID = '" + userid + "'";
+				query = "SELECT NAME FROM MANAGEMENT WHERE USERID = '" + userid + "'";
 			}
 			else
 			{
@@ -1494,7 +1494,7 @@ public class VCSDatabaseActivities {
 		ArrayList list = new ArrayList();
 		ResultSet res=null;
 		Statement state=null;
-		String query = "SELECT 	A.SUBJECTNAME,B.SUBJECTID,B.TESTNAME,C.TOTALMARKS FROM VCS_SCHEMA.SUBJECTS A,VCS_SCHEMA.TEST B,VCS_SCHEMA.ANSWERSHEETS C WHERE C.STUDENTID = '" + userid + "' AND C.TESTID = B.TESTID AND B.SUBJECTID = A.SUBJECTID";
+		String query = "SELECT 	A.SUBJECTNAME,B.SUBJECTID,B.TESTNAME,C.TOTALMARKS FROM SUBJECTS A,TEST B,ANSWERSHEETS C WHERE C.STUDENTID = '" + userid + "' AND C.TESTID = B.TESTID AND B.SUBJECTID = A.SUBJECTID";
 		
 		try {
 			state=con.createStatement();
@@ -1525,7 +1525,7 @@ public class VCSDatabaseActivities {
 		String date = form.getDate();
 		String subject = form.getSubject();
 		String description = form.getDescription();
-		String query = "insert into VCS_SCHEMA.NEWS(subject,date,description) values('"
+		String query = "insert into NEWS(subject,date,description) values('"
 			+ subject + "','"
 			+ date + "','"
 			+ description + "')";
@@ -1544,7 +1544,7 @@ public class VCSDatabaseActivities {
 		Statement state=null;
 		String syllabus = "";
 		String sql = "";
-		sql = "SELECT SYLLABUS FROM VCS_SCHEMA.SYLLABUS WHERE courseID = " + courseId + " and subjectID = " + subjectid; 
+		sql = "SELECT SYLLABUS FROM SYLLABUS WHERE courseID = " + courseId + " and subjectID = " + subjectid; 
 		
 		try {
 			state=con.createStatement();
@@ -1566,7 +1566,7 @@ public class VCSDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		ArrayList list = new ArrayList();
-		String query = "SELECT * FROM VCS_SCHEMA.STUDENT WHERE COURSEID = " + courseid;
+		String query = "SELECT * FROM STUDENT WHERE COURSEID = " + courseid;
 		
 		try {
 			state=con.createStatement();
@@ -1609,7 +1609,7 @@ public class VCSDatabaseActivities {
 		String name = form.getName();
 		String fees = form.getFees();
 		
-		String query = "insert into VCS_SCHEMA.COURSE(name,duration,fees) values('"
+		String query = "insert into COURSE(name,duration,fees) values('"
 			+ name + "',"
 			+ duration + ",'"
 			+ fees + "')";
@@ -1618,7 +1618,7 @@ public class VCSDatabaseActivities {
 			state=con.createStatement();
 			int rowsAffected = state.executeUpdate(query);
 			
-			String sql = "SELECT COURSEID FROM VCS_SCHEMA.COURSE WHERE NAME LIKE '" + name + "'";
+			String sql = "SELECT COURSEID FROM COURSE WHERE NAME LIKE '" + name + "'";
 			Statement stmt = con.createStatement();
 			res = stmt.executeQuery(sql);
 			while(res.next())
@@ -1642,7 +1642,7 @@ public class VCSDatabaseActivities {
 		int isubjectid = Integer.parseInt(subjectid);
 		
 			try {
-				String sql = "insert into VCS_SCHEMA.SYLLABUS(courseid,subjectid,syllabus) values("
+				String sql = "insert into SYLLABUS(courseid,subjectid,syllabus) values("
 					+ icourseid + ","
 					+ isubjectid + ",xmlparse(document '"
 					+ xmlDoc + "'))";
@@ -1666,7 +1666,7 @@ public class VCSDatabaseActivities {
 		int isubjectid = Integer.parseInt(subjectid);
 		
 		try {
-			String sql = "SELECT SYLLABUS FROM VCS_SCHEMA.SYLLABUS WHERE courseid=" + icourseid + " and subjectid = " + isubjectid;
+			String sql = "SELECT SYLLABUS FROM SYLLABUS WHERE courseid=" + icourseid + " and subjectid = " + isubjectid;
 			state = con.createStatement();
 			res = state.executeQuery(sql);
 		
@@ -1685,7 +1685,7 @@ public class VCSDatabaseActivities {
 		
 		try {
 			Statement stmt = con.createStatement();
-			String query = "XQUERY for $unitname in db2-fn:sqlquery('SELECT SYLLABUS FROM VCS_SCHEMA.SYLLABUS WHERE courseid=" + icourseid + " and subjectid = " + isubjectid +"')/syllabus return $unitname/unitname/text()";
+			String query = "XQUERY for $unitname in db2-fn:sqlquery('SELECT SYLLABUS FROM SYLLABUS WHERE courseid=" + icourseid + " and subjectid = " + isubjectid +"')/syllabus return $unitname/unitname/text()";
 			
 			System.out.println();
 			System.out.println(query);
@@ -1704,7 +1704,7 @@ public class VCSDatabaseActivities {
 		}
 		try {
 			Statement stmt1 = con.createStatement();
-			String query1 = "XQUERY for $topics in db2-fn:sqlquery('SELECT SYLLABUS FROM VCS_SCHEMA.SYLLABUS WHERE courseid=" + icourseid + " and subjectid = " + isubjectid +"')/syllabus return $topics/topics/text()";
+			String query1 = "XQUERY for $topics in db2-fn:sqlquery('SELECT SYLLABUS FROM SYLLABUS WHERE courseid=" + icourseid + " and subjectid = " + isubjectid +"')/syllabus return $topics/topics/text()";
 			
 			System.out.println();
 			
@@ -1746,7 +1746,7 @@ public class VCSDatabaseActivities {
 		ResultSet res1=null;
 		Statement state=null;
 		
-		String query = "SELECT * FROM VCS_SCHEMA.DISCUSSION WHERE DATE = '" + date + "' AND TIME = '" + time + "'  AND ORGANIZEDBY = '" + userid + "'";
+		String query = "SELECT * FROM DISCUSSION WHERE DATE = '" + date + "' AND TIME = '" + time + "'  AND ORGANIZEDBY = '" + userid + "'";
 		try {
 			state = con.createStatement();
 			res = state.executeQuery(query);
@@ -1755,7 +1755,7 @@ public class VCSDatabaseActivities {
 				flag = 1;
 			else
 			{
-				String query1 = "SELECT * FROM VCS_SCHEMA.DISCUSSION WHERE DATE = '" + date + "' AND TIME = '" + time + "'  AND COURSEID = '" + courseid + "'";
+				String query1 = "SELECT * FROM DISCUSSION WHERE DATE = '" + date + "' AND TIME = '" + time + "'  AND COURSEID = '" + courseid + "'";
 				res1 = state.executeQuery(query1);
 				if(res1.next())
 					flag = 1;
@@ -1778,7 +1778,7 @@ public class VCSDatabaseActivities {
 		Statement state1=null;
 		String query = "";
 		String query1 = "";
-		query = "SELECT *  FROM VCS_SCHEMA.DISCUSSION WHERE DATE = '" + date + "' AND TIME = '" + time + "' AND ORGANIZEDBY = '" + userid + "'";
+		query = "SELECT *  FROM DISCUSSION WHERE DATE = '" + date + "' AND TIME = '" + time + "' AND ORGANIZEDBY = '" + userid + "'";
 		
 		try {
 			state = con.createStatement();
@@ -1792,11 +1792,11 @@ public class VCSDatabaseActivities {
 			{
 				if(type == 1)
 				{
-					query1 = "SELECT COURSEID AS ID FROM VCS_SCHEMA.DISCUSSION WHERE DATE = '" + date + "' AND TIME = '" + time + "'";
+					query1 = "SELECT COURSEID AS ID FROM DISCUSSION WHERE DATE = '" + date + "' AND TIME = '" + time + "'";
 				}
 				else
 				{
-					query1 = "SELECT SUBJECTID AS ID FROM VCS_SCHEMA.DISCUSSION WHERE DATE = '" + date + "' AND TIME = '" + time + "'";
+					query1 = "SELECT SUBJECTID AS ID FROM DISCUSSION WHERE DATE = '" + date + "' AND TIME = '" + time + "'";
 				}
 				System.out.println(query1);
 				
@@ -1832,7 +1832,7 @@ public class VCSDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		
-		String query = "SELECT A.TESTID,A.TESTNAME,B.NAME,A.MAXMARKS,A.PASSMARKS,A.DURATION  FROM VCS_SCHEMA.TEST A,VCS_SCHEMA.COURSE B WHERE TAKENBY = '" + facultyid + "' AND TESTTYPE =" + testType + " AND A.COURSEID = B.COURSEID";
+		String query = "SELECT A.TESTID,A.TESTNAME,B.NAME,A.MAXMARKS,A.PASSMARKS,A.DURATION  FROM TEST A,COURSE B WHERE TAKENBY = '" + facultyid + "' AND TESTTYPE =" + testType + " AND A.COURSEID = B.COURSEID";
 		System.out.println("SQL " + query);
 		
 		try {
@@ -1863,7 +1863,7 @@ public class VCSDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		
-		String query = "SELECT TESTID FROM VCS_SCHEMA.TEST WHERE COURSEID = " + courseid + " AND SUBJECTID = " + subjectid + " AND TESTTYPE = 0";
+		String query = "SELECT TESTID FROM TEST WHERE COURSEID = " + courseid + " AND SUBJECTID = " + subjectid + " AND TESTTYPE = 0";
 		System.out.println("Query " + query);
 		
 		try {
@@ -1887,7 +1887,7 @@ public class VCSDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		
-		String query = "SELECT MAXMARKS FROM VCS_SCHEMA.TEST WHERE TESTID = " + testid;
+		String query = "SELECT MAXMARKS FROM TEST WHERE TESTID = " + testid;
 		System.out.println("Query " + query);
 		
 		try {
@@ -1912,7 +1912,7 @@ public class VCSDatabaseActivities {
 		Statement state=null;
 		
 			try {
-				String sql = "update VCS_SCHEMA.TEST set testpaper = '" + xmlDoc + "',takenby = '" + facultyid + "' where testid = " +  testid1;
+				String sql = "update TEST set testpaper = '" + xmlDoc + "',takenby = '" + facultyid + "' where testid = " +  testid1;
 				System.out.println(sql);
 				state=con.createStatement();
 				int rowsAffected = state.executeUpdate(sql);
@@ -1928,7 +1928,7 @@ public class VCSDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		
-		String query = "SELECT TESTID,TESTNAME FROM VCS_SCHEMA.TEST WHERE TAKENBY = '" + facultyid + "' AND COURSEID = " + courseid + " AND TESTTYPE = 1";
+		String query = "SELECT TESTID,TESTNAME FROM TEST WHERE TAKENBY = '" + facultyid + "' AND COURSEID = " + courseid + " AND TESTTYPE = 1";
 		System.out.println(query);
 		try {
 			state=con.createStatement();
@@ -1954,7 +1954,7 @@ public class VCSDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		
-		String query = "SELECT prerequisites FROM VCS_SCHEMA.TEST WHERE TESTID = " + testid;
+		String query = "SELECT prerequisites FROM TEST WHERE TESTID = " + testid;
 		System.out.println("Query " + query);
 		
 		try {
@@ -1979,7 +1979,7 @@ public class VCSDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		int itestid = Integer.parseInt(testid);
-		String query = "SELECT * FROM VCS_SCHEMA.ANSWERSHEETS WHERE TESTID = " + itestid + " AND STUDENTID = '" + studentid + "'";
+		String query = "SELECT * FROM ANSWERSHEETS WHERE TESTID = " + itestid + " AND STUDENTID = '" + studentid + "'";
 		System.out.println("Query " + query);
 		
 		try {
@@ -2004,7 +2004,7 @@ public class VCSDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		
-		String query = "SELECT distinct(title) as suggest FROM VCS_SCHEMA.SEARCH WHERE title like('" + 
+		String query = "SELECT distinct(title) as suggest FROM SEARCH WHERE title like('" + 
 				queryString + "%') ORDER BY title";
 		System.out.println(query);
 		try {

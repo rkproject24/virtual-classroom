@@ -34,7 +34,7 @@ public class RegistrationDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		ArrayList<CourseBean> allCourses= new ArrayList<CourseBean>();
-		String sqlQuery ="SELECT COURSEID,NAME,DURATION,FEES FROM VCS_SCHEMA.COURSE";
+		String sqlQuery ="SELECT COURSEID,NAME,DURATION,FEES FROM COURSE";
 		try {
 			state=con.createStatement();
 			res=state.executeQuery(sqlQuery);
@@ -67,7 +67,7 @@ public class RegistrationDatabaseActivities {
 		ResultSet res1=null;
 		Statement state1=null;
 		ArrayList<SubjectBean> allSubjects= new ArrayList<SubjectBean>();
-		String sqlQuery1 ="SELECT A.SUBJECTNAME FROM VCS_SCHEMA.SUBJECTS A, VCS_SCHEMA.SYLLABUS B WHERE B.SUBJECTID=A.SUBJECTID AND B.COURSEID="+cId;
+		String sqlQuery1 ="SELECT A.SUBJECTNAME FROM SUBJECTS A, SYLLABUS B WHERE B.SUBJECTID=A.SUBJECTID AND B.COURSEID="+cId;
 		try {
 			state1=con.createStatement();
 			res1=state1.executeQuery(sqlQuery1);
@@ -93,7 +93,7 @@ public class RegistrationDatabaseActivities {
 		Statement state=null;
 		Statement state1=null;	
 		Statement state2=null;
-		String sql="INSERT INTO VCS_SCHEMA.PAYMENT(AMOUNT,TIME,DETAILS) VALUES('"+fees+"','"+duration+"','"+details+"')";
+		String sql="INSERT INTO PAYMENT(AMOUNT,TIME,DETAILS) VALUES('"+fees+"','"+duration+"','"+details+"')";
 		System.out.println(sql);
 		try
 		{
@@ -105,7 +105,7 @@ public class RegistrationDatabaseActivities {
 		e.printStackTrace();
 	}
 		
-		String sql1="SELECT MAX(PAYMENTID) FROM VCS_SCHEMA.PAYMENT";
+		String sql1="SELECT MAX(PAYMENTID) FROM PAYMENT";
 		System.out.println(sql1);
 		try
 		{
@@ -134,7 +134,7 @@ public class RegistrationDatabaseActivities {
 		if(contact_no_secondary.equals(null)) {
 			contact_no_secondary = "NULL";
 		}
-		String sql2="INSERT INTO VCS_SCHEMA.STUDENT(USERID,NAME,DOB,EMAILPRIMARY,EMAILSECONDARY,CONTACTNOPRIMARY,CONTATCNOSECONDARY,ADDRESS,FATHERNAME,OCCUPATION,COURSEID,STARTDATE,COMPLETIONDATE,PAYMENTID) VALUES('"+userId+"','"+name+"','"+dob+"','"+email_id_primary+"','"+email_id_secondary+"',"+contact_no_primary+","+contact_no_secondary+",'"+address+"','"+father_name+"','"+occupation+"',"+courseId+",'"+date+"','"+newDate+"',"+paymentid+")";
+		String sql2="INSERT INTO STUDENT(USERID,NAME,DOB,EMAILPRIMARY,EMAILSECONDARY,CONTACTNOPRIMARY,CONTATCNOSECONDARY,ADDRESS,FATHERNAME,OCCUPATION,COURSEID,STARTDATE,COMPLETIONDATE,PAYMENTID) VALUES('"+userId+"','"+name+"','"+dob+"','"+email_id_primary+"','"+email_id_secondary+"',"+contact_no_primary+","+contact_no_secondary+",'"+address+"','"+father_name+"','"+occupation+"',"+courseId+",'"+date+"','"+newDate+"',"+paymentid+")";
 		System.out.println(sql2);
 		try
 		{
@@ -152,7 +152,7 @@ public class RegistrationDatabaseActivities {
 		String appointmentid="0";
 		ResultSet res=null;
 		Statement state=null;
-		String sql = "SELECT MAX(APPOINTMENTID) FROM VCS_SCHEMA.APPOINTMENT";
+		String sql = "SELECT MAX(APPOINTMENTID) FROM APPOINTMENT";
 		System.out.println(sql);
 		try
 		{
@@ -179,7 +179,7 @@ public class RegistrationDatabaseActivities {
 	{
 		ResultSet res=null;
 		Statement state=null;
-		String sql="INSERT INTO VCS_SCHEMA.APPOINTMENT(NAME,PASSWORD,SUBJECTID,RESUME,EMAILPRIMARY,EMAILSECONDARY,CONTACTNOPRIMARY,ADDRESS,QUALIFICATION,PASSYEAR,DOB)VALUES('"+name+"','"+password+"',"+specializationId+",'"+uploadedFileName+"','"+emailP+"','"+emailS+"',"+contactP+",'"+address+"','"+qualification+"',"+passyear+",'"+birthDate+"')";
+		String sql="INSERT INTO APPOINTMENT(NAME,PASSWORD,SUBJECTID,RESUME,EMAILPRIMARY,EMAILSECONDARY,CONTACTNOPRIMARY,ADDRESS,QUALIFICATION,PASSYEAR,DOB)VALUES('"+name+"','"+password+"',"+specializationId+",'"+uploadedFileName+"','"+emailP+"','"+emailS+"',"+contactP+",'"+address+"','"+qualification+"',"+passyear+",'"+birthDate+"')";
 		System.out.println(sql);
 		try
 		{
@@ -196,7 +196,7 @@ public class RegistrationDatabaseActivities {
 		ResultSet res=null;
 		Statement state=null;
 		String subjectName = "";
-		String sql = "SELECT SUBJECTNAME FROM VCS_SCHEMA.SUBJECTS WHERE SUBJECTID = " + subjectID;
+		String sql = "SELECT SUBJECTNAME FROM SUBJECTS WHERE SUBJECTID = " + subjectID;
 		try {
 			state=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			res=state.executeQuery(sql);
@@ -219,7 +219,7 @@ public class RegistrationDatabaseActivities {
 		Statement state=null;
 		ArrayList<FacultyBean> allRequest = new ArrayList<FacultyBean>();
 		String sql = "";
-		sql = "SELECT APPOINTMENTID,NAME,SUBJECTID,QUALIFICATION,RESUME FROM VCS_SCHEMA.APPOINTMENT WHERE APPROVED="+0; 
+		sql = "SELECT APPOINTMENTID,NAME,SUBJECTID,QUALIFICATION,RESUME FROM APPOINTMENT WHERE APPROVED="+0; 
 		
 		System.out.println("Subject Query:" + sql);
 		
@@ -266,7 +266,7 @@ public class RegistrationDatabaseActivities {
 		Connection con2 = null;
 		ResultSet res2=null;
 		Statement state2=null;
-		String sql="SELECT NAME,DOB,PASSWORD,EMAILPRIMARY,EMAILSECONDARY,CONTACTNOPRIMARY,ADDRESS,QUALIFICATION FROM VCS_SCHEMA.APPOINTMENT WHERE APPOINTMENTID="+appointmentId;
+		String sql="SELECT NAME,DOB,PASSWORD,EMAILPRIMARY,EMAILSECONDARY,CONTACTNOPRIMARY,ADDRESS,QUALIFICATION FROM APPOINTMENT WHERE APPOINTMENTID="+appointmentId;
 		System.out.println(sql);
 		try {
 			state=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -289,7 +289,7 @@ public class RegistrationDatabaseActivities {
 		String encryptedPassword = PasswordService.getInstance().encrypt(password);
 		com.ignou.vcs.commons.database.CommonsDatabaseActivities db = new com.ignou.vcs.commons.database.CommonsDatabaseActivities();
 		String id=db.generateId(encryptedPassword,level);
-		String sql1="INSERT INTO VCS_SCHEMA.FACULTY(USERID,DOB,EMAILPRIMARY,EMAILSECONDARY,CONTACTNOPRIMARY,ADDRESS,QUALIFICATION,APPOINTEDBY,COURSEID,SUBJECTID,NAME) VALUES('"+id+"','"+dob+"','"+emailP+"','"+emailS+"',"+contact+",'"+address+"','"+qualification+"','"+userId+"','"+courses+"',"+subjectId+",'"+name+"')";
+		String sql1="INSERT INTO FACULTY(USERID,DOB,EMAILPRIMARY,EMAILSECONDARY,CONTACTNOPRIMARY,ADDRESS,QUALIFICATION,APPOINTEDBY,COURSEID,SUBJECTID,NAME) VALUES('"+id+"','"+dob+"','"+emailP+"','"+emailS+"',"+contact+",'"+address+"','"+qualification+"','"+userId+"','"+courses+"',"+subjectId+",'"+name+"')";
 		System.out.println("Sql query:" + sql1);
 		try
 		{
@@ -301,7 +301,7 @@ public class RegistrationDatabaseActivities {
 		e1.printStackTrace();
 	 }
 		int s=1;
-		String sql2="UPDATE VCS_SCHEMA.APPOINTMENT SET APPROVED= "+s+" WHERE APPOINTMENTID="+appointmentId;
+		String sql2="UPDATE APPOINTMENT SET APPROVED= "+s+" WHERE APPOINTMENTID="+appointmentId;
 		System.out.println(sql2);
 		try
 		{
@@ -331,7 +331,7 @@ public class RegistrationDatabaseActivities {
 	{
 		ResultSet res=null;
 		Statement state=null;
-		String sql="DELETE FROM VCS_SCHEMA.APPOINTMENT WHERE APPOINTMENTID="+appointmentId;
+		String sql="DELETE FROM APPOINTMENT WHERE APPOINTMENTID="+appointmentId;
 		System.out.println(sql);
 		try
 		{

@@ -47,9 +47,12 @@ import java.util.*;
 public class SendMailUsingAuthentication
 {
 
-  private static final String SMTP_HOST_NAME = "smtp.gmail.com";
-  private static final String SMTP_AUTH_USER = "info.virtualclassroomsystems@gmail.com";
-  private static final String SMTP_AUTH_PWD  = "Info@vcs";
+	private static final String SMTP_HOST_NAME = "smtp.gmail.com";
+	private static final String SMTP_PORT = "465";
+	private static final String emailFromAddress = "info.onlineexam@gmail.com";
+	private static final String emailFromPassword = "OES@Java";
+	private static final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+
 
   public static void main(String args[]) throws Exception
   {
@@ -77,20 +80,16 @@ public class SendMailUsingAuthentication
                             String message , String from) throws MessagingException
   {
     boolean debug = false;
-    Security.setProperty("ssl.SocketFactory.provider", "com.ibm.jsse2.SSLSocketFactoryImpl");
-    Security.setProperty("ssl.ServerSocketFactory.provider", "com.ibm.jsse2.SSLServerSocketFactoryImpl");
 
-    //java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-     //Set the host smtp address
-     Properties props = new Properties();
-     props.setProperty("mail.transport.protocol", "smtp");
-     props.setProperty("mail.host", SMTP_HOST_NAME);
-     props.put("mail.smtp.auth", "true");
-     props.put("mail.smtp.port", "465");
-     props.put("mail.smtp.socketFactory.port", "465");
-     props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-     props.put("mail.smtp.socketFactory.fallback", "false");
-     props.setProperty("mail.smtp.quitwait", "false");
+	Properties props = new Properties();
+	props.put("mail.smtp.host", SMTP_HOST_NAME);
+	props.put("mail.smtp.auth", "true");
+	props.put("mail.debug", "true");
+	props.put("mail.smtp.port", SMTP_PORT);
+	props.put("mail.smtp.socketFactory.port", SMTP_PORT);
+	props.put("mail.smtp.socketFactory.class", SSL_FACTORY);
+	props.put("mail.smtp.socketFactory.fallback", "false");
+
 
     Authenticator auth = new SMTPAuthenticator();
     Session session = Session.getInstance(props, auth);
@@ -101,7 +100,7 @@ public class SendMailUsingAuthentication
     Message msg = new MimeMessage(session);
 
     // set the from and to address
-    InternetAddress addressFrom = new InternetAddress(from);
+    InternetAddress addressFrom = new InternetAddress(emailFromAddress);
     msg.setFrom(addressFrom);
 
     InternetAddress[] addressTo = new InternetAddress[recipients.length];
@@ -128,8 +127,8 @@ private class SMTPAuthenticator extends javax.mail.Authenticator
 
     public PasswordAuthentication getPasswordAuthentication()
     {
-        String username = SMTP_AUTH_USER;
-        String password = SMTP_AUTH_PWD;
+        String username = emailFromAddress;
+        String password = emailFromPassword;
         return new PasswordAuthentication(username, password);
     }
 }
