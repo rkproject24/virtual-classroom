@@ -11,20 +11,38 @@
 <html:html>
 <head>
 <script type="text/javascript" language="javascript" >
-function loadCss() {
-	var browser = navigator.appName.toLowerCase();
-	// document.write(browser);
-	var stylesheet = document.getElementById("pagestyle");
-	var menusheet = document.getElementById("menustyle");
-	if(browser.indexOf("microsoft internet explorer") != -1) {
-		stylesheet.href="${pageContext.request.contextPath}/theme/css/style_ie.css";
-		menusheet.href="${pageContext.request.contextPath}/theme/css/menu_ie.css";
+	function loadCss() {
+		var browser = navigator.appName.toLowerCase();
+		// document.write(browser);
+		var stylesheet = document.getElementById("pagestyle");
+		var menusheet = document.getElementById("menustyle");
+		if(browser.indexOf("microsoft internet explorer") != -1) {
+			stylesheet.href="${pageContext.request.contextPath}/theme/css/style_ie.css";
+			menusheet.href="${pageContext.request.contextPath}/theme/css/menu_ie.css";
+		}
+		else {
+			stylesheet.href="${pageContext.request.contextPath}/theme/css/style1.css";
+			menusheet.href="${pageContext.request.contextPath}/theme/css/menu.css";		
+		}
 	}
-	else {
-		stylesheet.href="${pageContext.request.contextPath}/theme/css/style1.css";
-		menusheet.href="${pageContext.request.contextPath}/theme/css/menu.css";		
+	
+	function bookmarkVCS() 
+	{ 
+		var urlAddress = "http//localhost:8080"+document.getElementById("appUrl").value; 
+		var pageName = "Virtual Classroom Systems"; 
+		if (window.sidebar) // firefox
+			window.sidebar.addPanel(pageName, urlAddress, "");
+		else if(window.opera && window.print)
+		{ // opera
+			var elem = document.createElement('a');
+			elem.setAttribute('href',urlAddress);
+			elem.setAttribute('title',pageName);
+			elem.setAttribute('rel','sidebar');
+			elem.click();
+		} 
+		else if(document.all)// ie
+			window.external.AddFavorite(urlAddress, pageName);
 	}
-}
 </script> 
 <link id="pagestyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/style1.css" />
 <link id="menustyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/menu.css" />
@@ -68,6 +86,7 @@ function loadCss() {
 			<%@include file="../DisplayCalendar.jsp"%>
 				<h2><a href="index.jsp"><u>Virtual Classroom System</u></a></h2>
 				<p class="description">Studying the e-way.</p>
+				<input type="hidden" id="appUrl" value="${pageContext.request.contextPath}"/>
 				<%-- /tpl:put --%>
 				<%-- tpl:put name="centre_content" --%>
 				<p>
@@ -104,7 +123,7 @@ function loadCss() {
 					<p><u><b>Important Links</b></u><br>
 						<a href = "${pageContext.request.contextPath}/faculty_registration.jsp">Become a Faculty.</a><br>
 						<a href ="${pageContext.request.contextPath}/faculty_registration.jsp">Become a Manager</a> <br>
-						<a href = "#">Bookmark Virtual Classroom Systems.</a><br>
+						<a href = "javaScript: bookmarkVCS()">Bookmark Virtual Classroom Systems.</a><br>
 						<a href = "http://localhost:8080/VCS/player3_vid.jsp?filePath=http://localhost:8080/VCS/DATA/lectures/48.flv"  class=lbOn>Demo Course.</a>
 					
 					</p>
@@ -127,21 +146,8 @@ function loadCss() {
 		
 		
 		<div id="right">
-			<%-- tpl:put name="right_boxes" --%>
 			<div class="boxtop"></div>
 			<%@include file="latest_news.jsp" %>
-			
-			<!--  <div class="boxtop"></div>
-			<div class="box">
-				<p>
-					<b><u>Coming Soon...</u></b><br />
-					<a href="#" accesskey="m"><span class="key">I</span>nteractive White Boards</a><br />
-					<a href="#" accesskey="m"><span class="key">C</span>hat with friends, Faculties</a><br />
-					<a href="#" accesskey="m"><span class="key">V</span>oice Mailboxes</a><br />
-				</p>
-				<div class="buttons"><p><a href="http://localhost:8080/login.jsp" class="bluebtn"><span>Enter..</span></a></p></div>
-			</div>-->
-			<%-- /tpl:put --%>
 		</div>	
 		<%@include file="footer.jsp" %>
 	</div>

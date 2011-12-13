@@ -26,7 +26,7 @@
 	
 	String courseId=request.getParameter("cid");
 	String subjectId=request.getParameter("sid");
-	String duration=request.getParameter("duration");
+
 	CommonsDatabaseActivities dbObj= new CommonsDatabaseActivities();
 	ArrayList subjects= dbObj.getSubjects(courseId,true);
 	String file = "";
@@ -78,7 +78,7 @@
 	  	}
 	}else
 	{
-		out.println("<center><font color='red'>We are Sorry. we are unable to fine syllabus for <b>"+subjectName+"</b></font></center>");
+		out.println("<center><font color='red'>We are Sorry. we are unable to fine syllabus for <b>"+subjectName+"</b> subject.</font></center>");
 	}
 	
  %>

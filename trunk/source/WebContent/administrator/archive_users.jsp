@@ -77,7 +77,7 @@ var i = 0;
 					for(int i = 0; i < allStudents.size(); i++ ) {
 						com.ignou.vcs.commons.beans.StudentBean studentBean = (com.ignou.vcs.commons.beans.StudentBean)allStudents.get(i);
 						String name = studentBean.getName();
-						String endDate = studentBean.getEndDate();
+						Date endDate = studentBean.getEndDate();
 						%>
 						<tr>
 							<td width = "150"><%= name %></td>

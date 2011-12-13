@@ -12,10 +12,9 @@ function jah_switch(url,target)
     }
 
 }
-function jah(url,target,str) {
+function jah(url,target) {
     // native XMLHttpRequest object
-        document.getElementById(target).innerHTML = '<span class="ajah_waiting"><a href="java script:jah(\''+url+'\',\''+target+'\');">sending...</a></span>';
-    	url = url + "?q=" + str;
+        document.getElementById(target).innerHTML = '<span class="ajah_waiting">Loading data.. Please wait....</span>';
     	
     if (window.XMLHttpRequest) {
         req = new XMLHttpRequest();

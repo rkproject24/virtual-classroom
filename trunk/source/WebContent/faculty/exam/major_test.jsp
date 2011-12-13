@@ -117,7 +117,7 @@ function loadCss() {
 		
 	}	
 %>
-<html:form action="/test" onsubmit = "javascript:getSelectValues();" method = "post" name = "Testform1" type = "vcs.forms.Test">
+<html:form action="/test" onsubmit = "javascript:getSelectValues();" method = "post" name = "Testform1" type = "com.ignou.vcs.forms.Test">
 <table border="0">
 	<input type="hidden" name = "course" id = "course" value = "<%=course %>">
 	<input type="hidden" name = "testValues" id = "testValues" value = "null">

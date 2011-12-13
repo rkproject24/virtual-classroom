@@ -128,7 +128,7 @@ if (validate_required(father_name,"Father Name must be filled out!")==false)
 				<div class="buttons">
 				</div>
 				<%@include file="../../DisplayCalendar.jsp"%>
-				<a href="http://localhost:9080/VCS/player3_vid.jsp?filePath=http://localhost:9080/VCS/DATA/lectures/reg2.flv"  class=lbOn><img src="${pageContext.request.contextPath}/theme/images/qn1.jpeg" align="bottom" class="question"></a>
+				<a href="http://localhost:8080/VCS/player3_vid.jsp?filePath=http://localhost:9080/VCS/DATA/lectures/reg2.flv"  class=lbOn><img src="${pageContext.request.contextPath}/theme/images/qn1.jpeg" align="bottom" class="question"></a>
 				<h2><a href="#"><u>Student Registration Form</u></a></h2>
 				
 				<p class="description">Please enter following details:</p>

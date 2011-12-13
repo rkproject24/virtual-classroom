@@ -61,18 +61,17 @@ function loadCss() {
 				<div class="buttons">
 				</div>
 				<%@include file="../../DisplayCalendar.jsp"%>
+				<br><br>
 				<h2><a href="#"><u>Courses</u></a></h2>
 				<p class="description">Select Course to view syllabus and students</p>
-				<%-- /tpl:put --%>
-				<%-- tpl:put name="centre_content" --%>
-				
 					<%
 						String userid = (String)request.getSession().getAttribute("userId");
 						VCSDatabaseActivities db_obj = new VCSDatabaseActivities();
 	
-						FacultyBean faculty_bean = db_obj
-								.getFacultyDetails(userid);
+						FacultyBean faculty_bean = db_obj.getFacultyDetails(userid);
 						String courseid = faculty_bean.getCourseID();
+						String subjectId = faculty_bean.getSubjectID();
+						
 	
 						com.ignou.vcs.commons.Utilities pipe = new com.ignou.vcs.commons.Utilities();
 	
@@ -93,19 +92,10 @@ function loadCss() {
 					 
 				
 				<script src = "${pageContext.request.contextPath}/faculty/course/ajax.js"></script>
-				<%-- /tpl:put --%>
 			</div>
-			
-			
-			<%-- tpl:put name="bottom_box" --%>
-			
-			
-			<%-- /tpl:put --%>
 		</div>	
 		
-		
 		<div id="right">
-			<%-- tpl:put name="right_boxes" --%>
 			<div class="boxtop"></div>
 			<div class="box">
 				<p>
@@ -114,9 +104,10 @@ function loadCss() {
 						for (int i = 0; i < course_name.size(); i++) {
 						String name = (String) course_name.get(i);
 						String courseid1 = (String)course_list.get(i);
-						String url = "course_syllabus.jsp";
-					 %>
-						<a href="#" accesskey="m" onclick = "jah('<%=url %>','id1',<%=courseid1%>)"><%=name %></a><br />
+						String url = "course_syllabus.jsp?courseId="+courseid1+"&sid="+subjectId;
+						System.out.println("link "+url);
+						%>
+						<a href="#" accesskey="m" onclick = "jah('<%=url %>','id1')"><%=name %></a><br />
 					<%}
 					 %>
 				</p>
@@ -124,7 +115,6 @@ function loadCss() {
 			</div>
 			<div id = "student">
 			</div>
-			<%-- /tpl:put --%>
 		</div>	
 		<%@include file="../../footer.jsp" %>
 	</div>

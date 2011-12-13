@@ -2,7 +2,8 @@
 <%@page import="com.ignou.vcs.commons.beans.StudentBean"%>
 
 <%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
-<html>
+
+<%@page import="java.util.Date"%><html>
 <body>
 <table>
 	<tr><th class="top"><u>Name</u></th><th class="top" scope="col"><u>Course Start Date</u></th><th class="top" scope="col"><u>Course Completion Date</u></th></tr>
@@ -38,11 +39,11 @@
 			for(int i =recordStart ; i < recordsEnd ; i++) {
 			com.ignou.vcs.commons.beans.StudentBean studentBean = (com.ignou.vcs.commons.beans.StudentBean)allStudents.get(i);
 			String name = studentBean.getName();
-			String startDate = studentBean.getStartDate();
-			String endDate = studentBean.getEndDate();
+			Date startDate = studentBean.getStartDate();
+			Date endDate = studentBean.getEndDate();
 			String emailP = studentBean.getEmailP();
 			String contactP = studentBean.getContactP();
-			String dob = studentBean.getDob();
+			Date dob = studentBean.getDob();
 			
 			
 			String links = "student_description.jsp?email="+emailP+"&endDate="+endDate+"&startdate="+startDate+"&contact="+contactP+"&dob="+dob+"&uid="+studentBean.getUserID();

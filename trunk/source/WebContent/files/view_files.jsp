@@ -85,14 +85,7 @@ var i = 0;
 							Administrator and Management can view or upload or download general files containing information related to some circular or the rules list of VCS etc.
 
 				</div>
-				<%-- /tpl:put --%>
 			</div>
-			
-			
-			<%-- tpl:put name="bottom_box" --%>
-			
-			
-			<%-- /tpl:put --%>
 		</div>	
 		
 		

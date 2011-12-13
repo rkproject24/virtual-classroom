@@ -13,11 +13,10 @@ if (TransMenu.isSupported()) {
 		menu2.addItem("Assignments", string2 , "0");
 		
 		var menu3 = ms.addMenu(document.getElementById("menu3"));
-		menu3.addItem("Discussions", "#", "0");
+		menu3.addItem("Discussions", "http://localhost:8080/VCS/faculty/discussion/view_discussion.jsp", "0");
 		
 		var menu4 = ms.addMenu(document.getElementById("menu4"));
-		menu4.addItem("Minor Test", "#", "0");
-		menu4.addItem("Major Test", "#", "0");
+		menu4.addItem("Exams", "http://localhost:8080/VCS/faculty/exam/giveTest.jsp", "0");
 		
 		
 		var menu5 = ms.addMenu(document.getElementById("menu5"));

@@ -86,8 +86,8 @@
 				<TD><html:textarea property="description" rows="10" cols="45"></html:textarea></TD>
 			</TR>
 			<TR>
-				<TD width="200"><html:submit property="Submit" value="Submit" onclick = "return formValidation()"></html:submit></TD>
-				<TD><html:reset /></TD>
+				<TD width="200"></TD>
+				<TD><html:submit property="Submit" value="Submit" onclick = "return formValidation()"></html:submit><html:reset /></TD>
 			</TR>
 </TBODY>
 </TABLE>
