@@ -57,7 +57,6 @@ function loadCss() {
 <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/lightbox.css" media="screen,projection" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/theme/js/prototype.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/theme/js/lightbox.js"></script>
-<%-- /tpl:put --%>
 </head>
 <body onLoad="javascript:loadCss()">
 <%@include file="../header.jsp" %>								
@@ -73,13 +72,33 @@ function loadCss() {
 					<b>Forgot Password</b><br>
 
 					
+					<html:form action="/forgotPassword">
+					
+						<b><u><font style='font-family: "Times New Roman"; font-weight: bold'>Please enter your Login Details.</u></b>
+						<br /><br />
+						<TABLE>
+							<TBODY>
+								<TR>
+									<TD style='font-family: "Times New Roman"; font-weight: bold'>User name</TD>
+									<TD><html:text property="userName"></html:text></TD>
+								</TR>
+								<TR>
+									<TD style='font-family: "Times New Roman"; font-weight: bold'>Email</TD>
+									<TD><html:text property="email"></html:text></TD>
+								</TR>
+								<TR>
+									<td></td>
+									<TD align="center"><html:submit property="Submit" value="Submit"></html:submit>
+									<a href="#" class="lbAction" rel="deactivate"><button>Cancel</button></a>
+									</TD>
+								</TR>
+							</TBODY>
+						</TABLE>
+					
+					</html:form>
 				</p>
-				
-				<%-- /tpl:put --%>
+				<html:errors></html:errors>
 			</div>
-			
-			
-			<%-- tpl:put name="bottom_box" --%>
 			
 			<div class="thirds">
 				<div class="smallboxtop"></div>
@@ -117,7 +136,6 @@ function loadCss() {
 					 </p>
 				</div>
 			</div>
-			<%-- /tpl:put --%>
 		</div>	
 		
 		
@@ -125,18 +143,6 @@ function loadCss() {
 			<%-- tpl:put name="right_boxes" --%>
 			<div class="boxtop"></div>
 			<%@include file="../latest_news.jsp" %>
-			
-			<!--  <div class="boxtop"></div>
-			<div class="box">
-				<p>
-					<b><u>Coming Soon...</u></b><br />
-					<a href="#" accesskey="m"><span class="key">I</span>nteractive White Boards</a><br />
-					<a href="#" accesskey="m"><span class="key">C</span>hat with friends, Faculties</a><br />
-					<a href="#" accesskey="m"><span class="key">V</span>oice Mailboxes</a><br />
-				</p>
-				<div class="buttons"><p><a href="http://localhost:8080/login.jsp" class="bluebtn"><span>Enter..</span></a></p></div>
-			</div>-->
-			<%-- /tpl:put --%>
 		</div>	
 		<%@include file="../footer.jsp" %>
 	</div>

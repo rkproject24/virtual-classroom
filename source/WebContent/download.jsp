@@ -5,7 +5,6 @@
 	String fileName = 	request.getParameter("fileName");
 	
 	String filePath = request.getParameter("filePath");
-	
 	String fileExtension = "";
 	
 	int i = 0;
@@ -42,7 +41,7 @@
 		out.println("Ooops.. There is an error while opening this file.\n Please contact system administrator.");
 	}
 	outs.flush();
-	outs.close();
+	//outs.close();
 	in.close();	
 %>
             

@@ -25,6 +25,19 @@ function loadCss() {
 		menusheet.href="${pageContext.request.contextPath}/theme/css/menu.css";		
 	}
 }
+
+function printDiv() {
+    var printContents = document.getElementById("printArea").innerHTML;
+    alert(printContents)
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
+
 </script> 
 <link id="pagestyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/style3.css">
 <link id="menustyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/menu.css">
@@ -40,6 +53,7 @@ function loadCss() {
 				<div class="buttons">
 				</div>
 				<%@include file="../DisplayCalendar.jsp" %>
+				<div id="printArea">
 				<h2><a href="#"><u>Final Progress Report</u></a></h2>
 				<p class="description">This is the final progress report of student.</p>
 				
@@ -54,10 +68,11 @@ function loadCss() {
 					CommonsDatabaseActivities dbObj = new CommonsDatabaseActivities();
 					StudentBean bean = (StudentBean)dbObj.getStudentDetails(userId);
 					String studentName = bean.getName();
-					//String duration = bean.getDuration();
+					String duration = bean.getDuration();
+					if(duration==null) duration = "N/A";
 					String fatherName = bean.getFatherName();
 					String Email = bean.getEmailP();
-					String StartDate = bean.getStartDate();
+					Date StartDate = bean.getStartDate();
 					String courseId = bean.getCourseId();
 					System.out.println("courseId"+ courseId);
 					String courseName = (String)dbObj.getCourseName(courseId);
@@ -65,25 +80,30 @@ function loadCss() {
 					java.util.ArrayList list = (java.util.ArrayList)dbObj.getReport(courseId,userId);
 					%>
 					<br />
-						<table border="1" width = "800px" cellpadding = "5" cellspacing="0" align="centre">
+						<table border="1"  align="centre">
 						<tr>
-						<td width="3" colspan="2" ><font size="2"><b><u><i>NAME:</i></u></b></font>&nbsp;&nbsp;&nbsp;<font size="2"><%= studentName%></font></td>
-					
-						<td width="3" colspan="2" ><font size="2"><b><u><i>COURSE START DATE:</i></u></b></font>&nbsp;&nbsp;<font size="2"><%= StartDate%> - <%= currentDate%> </font></td>
+						<td><font size="2"><b><u><i>Name:</i></u></b></font>&nbsp;&nbsp;&nbsp;<font size="2"><%= studentName%></font></td>
 						</tr>
 						<tr>
-						<td width="3" colspan="5" ><font size="2"><b><u><i>COURSE NAME:</i></u></b></font>&nbsp;&nbsp;&nbsp;<font size="2"><%= courseName %></font></td>
+						<td><font size="2"><b><u><i>Course start date:</i></u></b></font>&nbsp;&nbsp;<font size="2"><%= StartDate%> - <%= currentDate%> </font></td>
 						</tr>
 						<tr>
-						<td width="3" colspan="5" ><font size="2"><b><u><i>FATHER'S NAME:</i></u></b></font>&nbsp;&nbsp;&nbsp;<font size="2"><%= fatherName%></font></td>
+						<td ><font size="2"><b><u><i>Course Name:</i></u></b></font>&nbsp;&nbsp;&nbsp;<font size="2"><%= courseName %></font></td>
+						</tr>
+						<tr>
+						<tr>
+						<td ><font size="2"><b><u><i>Duration:</i></u></b></font>&nbsp;&nbsp;&nbsp;<font size="2"><%= duration %></font></td>
+						</tr>
+						<tr>
+						<td><font size="2"><b><u><i>Father Name:</i></u></b></font>&nbsp;&nbsp;&nbsp;<font size="2"><%= fatherName%></font></td>
 						</tr>	
 						<tr>
-						<td width="3" colspan="5" ><font size="2"><b><u><i>EMAIL ID:</i></u></b></font>&nbsp;&nbsp;&nbsp;<font size="2"><%= Email%></font></td>
+						<td><font size="2"><b><u><i>Email Id:</i></u></b></font>&nbsp;&nbsp;&nbsp;<font size="2"><%= Email%></font></td>
 						</tr>
 						</table>
 						<br/>
 						
-						<table border="1" width = "800px" cellpadding = "5" cellspacing="0">
+						<table border="1" cellpadding = "5" cellspacing="0">
 						<tr><th class="top"><font size="2"><b><u>Subject Name</u></b></font></th><th class="top" scope="col"><font size="2"><b><u>Max Marks</u></b></font></th>
 						<th class="top"><font size="2"><b><u>Highest in Class</u></b></font></th><th class="top"><font size="2"><b><u>Marks Scored</u></b></font></th></tr>
 					<%
@@ -102,6 +122,7 @@ function loadCss() {
 							}
 							
 						 total = total + (Integer.parseInt(temp));
+						 System.out.println("TEST ID  :: "+ report.getTestId());
 						//if(report.getTestId()== 0)
 						//{
 						//	response.sendRedirect("http://localhost:8080/VCS/student/underProgress.jsp");
@@ -122,30 +143,29 @@ function loadCss() {
 						%>
 						</table>
 						<br />
-						<table border="1" width = "800px" cellpadding = "5" cellspacing="0">
+						<table border="1" cellpadding = "5" cellspacing="0">
 						<tr>
-						<td width="570px"></td>
+						<td></td>
 						<td><b><u><i><font size="2">GRAND TOTAL:</font></i></u></b>&nbsp;&nbsp;&nbsp;&nbsp;<font size="2"><%=total %></font></td>
 						</tr>
 						<tr>
-						<td width="570px"></td>
+						<td></td>
 						<td><b><u><i><font size="2">PERCENTAGE MARKS:</font></i></u></b>&nbsp;&nbsp;&nbsp;&nbsp;<font size="2"><%= per %></font></td>
 						</tr>
 						
 						
 				</table>
+				</div>
 				<br/>
 				
-				<a href = "http://localhost:8080/VCS/student/generatePdf.jsp" class = "greenbtn" align="centre"><span><u>Downlaod as PDF</u></span></a>
+				<a href = "javaScript: printDiv();" class = "greenbtn"><span><u>Print this Page</u></span></a>
+				<a href = "http://localhost:8080/VCS/student/generatePdf.jsp" class = "greenbtn"><span><u>Downlaod as PDF</u></span></a>
 				
-		</body></div>
-			
-			
 			</div>	
 		
 		
 			
 		<%@include file="../footer.jsp" %>
-	</div>
+</div>
 </body>
 </html:html>

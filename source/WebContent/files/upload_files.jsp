@@ -209,17 +209,11 @@ function callMethods() {
 							Student can even view and download his/her progress reports at later time when he/she is finish with his/her term.
 							Administrator and Management can view or upload or download general files containing information related to some circular or the rules list of VCS etc.
 				</div>
-				<%-- /tpl:put --%>
 			</div>
-			
-			
-			<%-- tpl:put name="bottom_box" --%>
-				<%-- /tpl:put --%>
 		</div>	
 		
 		
 		<div id="right">
-			<%-- tpl:put name="right_boxes" --%>
 			
 			<div class="boxtop"></div>
 			<div class="box">
@@ -242,6 +236,7 @@ function callMethods() {
 							com.ignou.vcs.commons.Utilities util = new com.ignou.vcs.commons.Utilities();
 							java.util.ArrayList courses = util.getSeparateValue(courseID);
 					%>
+	<br><br>
 					<b><u>Courses</u></b><br />
 					<%		
 							for( int i = 0; i < courses.size(); i++) {

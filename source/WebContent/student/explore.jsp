@@ -82,7 +82,7 @@ function loadCss() {
 			</table>
 				</div>
 			
-			
+			<div class="buttons"><p><a href="#" class="bluebtn" title="Click here to go to library."><span>More</span></a></p></div>
 			</div>	
 		
 		

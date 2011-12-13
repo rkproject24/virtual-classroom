@@ -30,7 +30,7 @@
 	%>
 				
 	<div class="calendar">
-		<p><%=month %><br /><%=day %><br><%=year %></p>
+		<p><%=month %><br /><%=day %></p>
 	</div>
 	<br>
 	<br>

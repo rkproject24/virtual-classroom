@@ -117,16 +117,7 @@ function loadCss() {
 		<div id="right">
 			<%-- tpl:put name="right_boxes" --%>
 			<div class="boxtop"></div>
-			<div class="box">
-				<p>
-					<b><u>News</u></b><br />
-					<a href="#" accesskey="m">IIIrd Standard students to undergo 2 more major tests prior to module V. </a><br />
-					<a href="#" accesskey="m">Vth Standard Major Test Evaluated. Check your Progress.</a><br />
-					<a href="#" accesskey="m">Annual Programming contest to begin from 15th November 2008.</a><br />
-					<a href="#" accesskey="m">IOPC (IIT Kanpur) starting 21st November Check http://www.iitk.ac.in for more dtails.</a><br />
-				</p>
-				<div class="buttons"><p><a href="#" class="bluebtn"><span>Read All</span></a></p></div>
-			</div>
+			<%@include file="../latest_news.jsp" %>
 			
 			<div class="boxtop"></div>
 			<div id = "id2">

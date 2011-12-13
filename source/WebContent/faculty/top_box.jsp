@@ -24,7 +24,6 @@
 <table cellspacing = "2" border = "0" align="center" cellpadding="0" padding="2">
 <%
 	UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
-	
 	if(userBean==null)
 	{
 		response.sendRedirect("./NewLogin.jsp");

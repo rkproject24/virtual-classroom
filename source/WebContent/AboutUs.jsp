@@ -49,7 +49,7 @@ function loadCss() {
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="GENERATOR" content="Rational Application Developer">
-<%-- tpl:put name="headarea" --%><title>Virtual Classroom System</title><%-- /tpl:put --%>
+<title>Virtual Classroom System</title>
 </head>
 <body onLoad="javascript:loadCss()">
 
@@ -62,8 +62,6 @@ function loadCss() {
 				<%@include file="../DisplayCalendar.jsp" %>
 				<h2><a href="#"><u>Virtual Classroom System</u></a></h2>
 				<p class="description">Studying the e-way.</p>
-				<%-- /tpl:put --%>
-				<%-- tpl:put name="centre_content" --%>
 				<center><h3><u><i>Our Sincere Thanks</i></u></h3></center>
 				<p>
 					It plunges me in exhilaration in taking privilege in expressing our 
@@ -76,18 +74,11 @@ function loadCss() {
 
 				</p>
 				<p align="right"> <b><i>- Pradeepthi Savaram</b></i></p>
-				<%-- /tpl:put --%>
 			</div>
-			
-			
-			<%-- tpl:put name="bottom_box" --%>
-			
-			<%-- /tpl:put --%>
 		</div>	
 		
 		
 		<div id="right">
-			<%-- tpl:put name="right_boxes" --%>
 			<div class="boxtop"></div>
 			<%@include file="latest_news.jsp" %>
 			
@@ -101,10 +92,8 @@ function loadCss() {
 				</p>
 				<div class="buttons"><p><a href="#" class="bluebtn"><span>More</span></a></p></div>
 			</div>
-			<%-- /tpl:put --%>
 		</div>	
 		<%@include file="footer.jsp" %>
 	</div>
 </body>
 </html:html>
-<%-- /tpl:insert --%>

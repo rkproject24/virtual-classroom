@@ -12,6 +12,8 @@
 		</form-bean>
 		<form-bean name="loginForm" type="com.ignou.vcs.forms.LoginForm">
 		</form-bean>
+		<form-bean name="forgotPasswordForm" type="com.ignou.vcs.forms.ForgotPasswordForm">
+		</form-bean>
 		<form-bean name="uploadFileForm" type="com.ignou.vcs.forms.UploadFileForm">
 		</form-bean>
 		<form-bean name="solutionForm" type="com.ignou.vcs.forms.SolutionForm">
@@ -64,6 +66,13 @@
 			<forward contextRelative="false" redirect = "true" name="failure" path="/LoginDenied.jsp">
 			</forward>
 			<forward contextRelative="false" name="archived" path="/AccountExpired.jsp">
+			</forward>
+		</action>
+		<action path="/forgotPassword" type="com.ignou.vcs.actions.ForgotPasswordAction" 
+			name="forgotPasswordForm" scope="request" input="/forgotPassword.jsp" validate="true">
+			<forward contextRelative="false" redirect = "true" name="success" path="/ForgotPasswordSuccess.jsp">
+			</forward>
+			<forward contextRelative="false" redirect = "true" name="failure" path="/forgotPassword.jsp">
 			</forward>
 		</action>
 		<action path="/uploadFile" type="com.ignou.vcs.actions.UploadFileAction" scope="request" name="uploadFileForm" input="/files/uploadFile_form.jsp">

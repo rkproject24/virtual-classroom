@@ -71,7 +71,8 @@ function loadCss() {
 </div>
 <br><br><br><br>
 <center>
-<html:errors></html:errors> <html:form action="/verifyLogin">
+<html:errors></html:errors> 
+<html:form action="/verifyLogin">
 
 	<b><u>Please
 	enter your Login Details.</u></b>
@@ -98,6 +99,9 @@ function loadCss() {
 	</TABLE>
 
 </html:form> 
+<br><br>
+Forgot your password? Click <a href="forgotPassword.jsp"> here </a>to reset your password <br>
+Don't have account? Click <a href="register/register_Form.jsp"> here </a>to reset Signup. <br> 
 </center>
 
 <br><br><br><br><br><br>

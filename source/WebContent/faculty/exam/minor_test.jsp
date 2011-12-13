@@ -28,7 +28,7 @@
 		
 	}	  
  %>
-<html:form action="/test" onsubmit = "return formValidator()" method = "post" name = "Testform" type = "vcs.forms.Test">
+<html:form action="/test" onsubmit = "return formValidator()" method = "post" name = "Testform" type = "com.ignou.vcs.forms.Test">
 <table border="0">
 	<tbody>
 		<tr>
