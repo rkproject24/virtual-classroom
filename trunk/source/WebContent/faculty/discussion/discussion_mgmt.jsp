@@ -12,6 +12,10 @@
 <%@page import="com.ignou.vcs.database.VCSDatabaseActivities"%><table>
 		<tr><th class="top"><u>Title</u></th><th class="top" scope="col"><u>Date</u></th><th class="top" scope="col"><u>Time</u></th></tr>
 	<%
+	if(schedule.size()<0)
+	{
+		out.println("<tr><th scope='row'><font color='red'>No discussion found.</font></td></tr>");
+	}
 	for(int i = 0;i<schedule.size();i++)
 	{
 		Schedule scheduleForm = (Schedule)schedule.get(i); 

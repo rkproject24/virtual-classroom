@@ -18,8 +18,11 @@
 							<td> 
 							<a class="" id="menu4" href = "http://localhost:8080/VCS/register/appointment_requests.jsp">Faculties</a> 
 							</td>
-							<td class="last" style="text-align: right"> 
+							<td> 
 								<a id="menu3">Reports</a>
+							</td>
+							<td class="last" style="text-align: right"> 
+								<a id="menu7">Forums</a>
 							</td>
 						</tr>
 				</tbody>

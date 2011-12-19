@@ -21,7 +21,6 @@ if (TransMenu.isSupported()) {
 		menu5.addItem("Students","http://localhost:8080/VCS/administrator/view_students.jsp", "0");
 		menu5.addItem("Faculties", "http://localhost:8080/VCS/administrator/view_faculties.jsp", "0");
 		
-		
 		function init()
 			{
 			if (TransMenu.isSupported()) 

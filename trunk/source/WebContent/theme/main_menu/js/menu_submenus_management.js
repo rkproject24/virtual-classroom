@@ -21,6 +21,12 @@ if (TransMenu.isSupported()) {
 		menu6.addItem("Schedule", "http://localhost:8080/VCS/faculty/discussion/schedule.jsp", "0");
 		menu6.addItem("View",  "http://localhost:8080/VCS/faculty/discussion/view_discussion.jsp", "0");
 		
+		var menu7 = ms.addMenu(document.getElementById("menu7"));
+		menu7.addItem("Display Forums","http://localhost:8080/VCS/discussionforums/DisplaySubjects.jsp", "0");
+		menu7.addItem("View Polls", "http://localhost:8080/VCS/discussionforums/AllPolls.jsp", "0");
+		menu7.addItem("Create Poll", "http://localhost:8080/VCS/discussionforums/InsertPoll.jsp", "0");
+		
+		
 		function init()
 			{
 			if (TransMenu.isSupported()) 
@@ -45,6 +51,9 @@ if (TransMenu.isSupported()) {
 							
 				menu6.onactivate = function() {document.getElementById("menu6").className = "hover"; };
 				menu6.ondeactivate = function() {document.getElementById("menu6").className = ""; };
+				
+				menu7.onactivate = function() {document.getElementById("menu7").className = "hover"; };
+				menu7.ondeactivate = function() {document.getElementById("menu7").className = ""; };
 				}
 				
 			}

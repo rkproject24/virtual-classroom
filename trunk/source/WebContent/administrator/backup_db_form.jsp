@@ -72,19 +72,13 @@ function loadCss() {
 				
 				<p>
 				This interface will let you take backup of the current status of Database.<br />
-				Please note that this is offline backup, hence it will force all current database connections to quit.<br />
-				Note: This backup will take place at <b>"C:\db2_backup\"</b>
+				Please note that this is off line backup, hence it will force all current database connections to quit.<br />
 				
 				<a href="javascript:jah('backed_up.jsp','id1')" class="greenbtn"><span> Backup Now </span></a>
 				</p>
 				</div>
-				<%-- /tpl:put --%>
 			</div>
 			
-			
-			<%-- tpl:put name="bottom_box" --%>
-			
-			<%-- /tpl:put --%>
 		</div>	
 		
 		

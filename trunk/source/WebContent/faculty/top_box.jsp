@@ -24,6 +24,8 @@
 <table cellspacing = "2" border = "0" align="center" cellpadding="0" padding="2">
 <%
 	UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
+	CommonsDatabaseActivities dbObj = new CommonsDatabaseActivities();
+	
 	if(userBean==null)
 	{
 		response.sendRedirect("./NewLogin.jsp");
@@ -35,7 +37,6 @@
 	String uploadedBy = "";
 	String image = Utilities.LECTURE_IMAGES_PATH;
 	String filePath = "http://localhost:8080/VCS/DATA/lectures/" ;
-		
 	FilesDatabaseActivities dbObject = new FilesDatabaseActivities();
 	ArrayList allFiles = dbObject.getLectures(userBean.getCourseID(), userBean.getLevel(), userBean.getSubjectID(), userId);
 	System.out.println("Files Size(Faculty) : " + allFiles.size());
