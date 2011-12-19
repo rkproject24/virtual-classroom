@@ -61,9 +61,6 @@ function loadCss() {
 				<%@include file="../../DisplayCalendar.jsp"%>
 				<h2><a href="#"><u>Discussions</u></a></h2>
 				<p class="description">Click on course to view discussion</p>
-				<%-- /tpl:put --%>
-				<%-- tpl:put name="centre_content" --%>
-					
 					<%
 						String userid = (String)request.getSession().getAttribute("userId");
 						VCSDatabaseActivities db_ob = new VCSDatabaseActivities();
@@ -80,21 +77,10 @@ function loadCss() {
 				<p>Management can also schedule discussion with the faculty either course wise or subject wise. This way management is in touch with the faculties which are registered in VCS.</p>
 				
 					 </div>
-		
-				
-				<%-- /tpl:put --%>
 			</div>
-			
-			
-			<%-- tpl:put name="bottom_box" --%>
-			
-			
-			<%-- /tpl:put --%>
 		</div>	
 		
-		
 		<div id="right">
-			<%-- tpl:put name="right_boxes" --%>
 			<script src = "${pageContext.request.contextPath}/faculty/discussion/ajax.js"></script>
 			<%
 			 if(level == 0)

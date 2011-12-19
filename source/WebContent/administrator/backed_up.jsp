@@ -4,26 +4,31 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 
-<%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
-<html:html>
-<head>
-<title>backed_up</title>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="GENERATOR" content="Rational Application Developer">
-</head>
-<body>
-<p>
+<%@page
+	import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
 
-<%
-CommonsDatabaseActivities obj = new CommonsDatabaseActivities();
-	//obj.backupDatabase();
-
-
- %>
-
-
-The Database has been backed up successfully.<br />
-Please go to <b>C:\db2_backup\</b> to check backup.
-</p>
-</body>
+<%@page import="com.ignou.vcs.commons.DatabaseBackupManager"%><html:html>
+	<head>
+		<title>backed_up</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<meta name="GENERATOR" content="Rational Application Developer">
+	</head>
+	<body>
+		<center>
+			<p>
+			<%
+				Boolean isBackupSuccess = DatabaseBackupManager.takeBackUp();
+					if (isBackupSuccess) {
+			%> <font color="#7ab149"><b>Database backup successful.</b></font><br>
+						Please check the below path:<br>
+			<%
+				out.println(DatabaseBackupManager.backupName + "");
+					} else {
+			%> <font color="#ff0000"><b>Unable to backup.</b></font><br>
+			<%
+				}
+			%>
+			</p>
+		</center>
+	</body>
 </html:html>

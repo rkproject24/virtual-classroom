@@ -97,7 +97,7 @@ var i = 0;
 					<%
 						String userID = (String)request.getSession().getAttribute("userId");
 						UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
-						
+						CommonsDatabaseActivities dbObject = new CommonsDatabaseActivities();
 						if(userBean==null)
 						{
 							response.sendRedirect("./NewLogin.jsp");

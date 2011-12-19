@@ -165,20 +165,25 @@ function loadCss() {
 					<p>Archive Users that have completed their course.</p></td>
 				</tr>
 				<tr>
-					<td><!--<a href="http://localhost:8080/VCS/administrator/backup_db_form.jsp">--><img src="${pageContext.request.contextPath}/theme/images_links/app_48.png" class="thumbnail">
+					<td><a href="http://localhost:8080/VCS/administrator/backup_db_form.jsp"><img src="${pageContext.request.contextPath}/theme/images_links/app_48.png" class="thumbnail">
 					<b><u>Backup Database</u></b></a>
 					<p>Take Backup of VCS Database.</p></td>
+				</tr>
+				<tr>
+					<td><a href="http://localhost:8080/VCS/administrator/backup_db_form.jsp"><img src="${pageContext.request.contextPath}/theme/images_links/app_48.png" class="thumbnail">
+					<b><u>Restore Database</u></b></a>
+					<p>Restoring VCS Database.</p></td>
 				</tr>
 				<tr>
 					<td><a href="http://localhost:8080/VCS/faculty/view_news.jsp"><img src="${pageContext.request.contextPath}/theme/images_links/questionmark_48.png" class="thumbnail">
 					<b><u>News @ VCS</u></b></a>
 					<p>Get yourself equipped with the latest hapenings @ VCS.</p></td>
 				</tr>
-<!--				<tr>-->
-<!--					<td><a href="http://localhost:8080/VCS/admin/"><img src="${pageContext.request.contextPath}/theme/images_links/questionmark_48.png" class="thumbnail">-->
-<!--					<b><u>Manage Discussion</u></b></a>-->
-<!--					<p>Discuss with fa.</p></td>-->
-<!--				</tr>-->
+				<tr>
+					<td><a href="http://localhost:8080/VCS/admin/"><img src="${pageContext.request.contextPath}/theme/images_links/questionmark_48.png" class="thumbnail">
+					<b><u>Manage Discussion</u></b></a>
+					<p>Discuss with fa.</p></td>
+				</tr>
 					
 					
 				<%  
@@ -228,7 +233,6 @@ function loadCss() {
 		 %>
 		 
 		<%} %>	
-		</div>
 		</div>
 		<%@include file="footer.jsp" %>
 	
