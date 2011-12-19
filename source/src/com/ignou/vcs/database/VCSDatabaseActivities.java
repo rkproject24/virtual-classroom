@@ -914,9 +914,9 @@ public class VCSDatabaseActivities {
 			{
 				com.ignou.vcs.forms.Schedule scheduleForm = new com.ignou.vcs.forms.Schedule();
 				scheduleForm.setDate(rs.getString("date"));
-				scheduleForm.setDescription(rs.getString("description"));
+				scheduleForm.setDescription(rs.getString("Organizedfor"));
 				scheduleForm.setTitle(rs.getString("title"));
-				scheduleForm.setTime(rs.getString("time"));
+				//scheduleForm.setTime(rs.getString("time"));
 				scheduleForm.setOrganizedBy(rs.getString("organizedby"));
 				scheduleForm.setDuration(rs.getString("duration"));
 				schedule.add(scheduleForm);
