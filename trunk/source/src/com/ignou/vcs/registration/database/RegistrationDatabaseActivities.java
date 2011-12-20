@@ -8,8 +8,10 @@ import java.sql.Statement;
 import javax.mail.MessagingException;
 import javax.sql.DataSource;
 
+import com.ignou.vcs.commons.EMailUtilities;
 import com.ignou.vcs.commons.PasswordService;
 import com.ignou.vcs.commons.SendMailUsingAuthentication;
+import com.ignou.vcs.commons.beans.MailBean;
 import com.ignou.vcs.commons.beans.SubjectBean;
 import com.ignou.vcs.datasource.DataSourceFactory;
 import com.ignou.vcs.registration.beans.*;
@@ -313,14 +315,19 @@ public class RegistrationDatabaseActivities {
 		e1.printStackTrace();
 	 }
 		try {
-			SendMailUsingAuthentication smtpMailSender = new SendMailUsingAuthentication();
 
-			  String[] recepients = {emailP};
+			  ArrayList<String> recepients = new ArrayList<String>();
+			  recepients.add(emailP);
+			  ArrayList<String> ccRecepients = db.getAdminMailIds();
+			  
 			  String subject = "Welcome to Virtual Classroom System";
 			  String message = "Congratulations, You are now a part of VCS. Your Login Details are as follows:\n Username:" + id + " \n Password:" + password + "." ;
-			  String from = "";
-
-			  smtpMailSender.postMail(recepients,subject,message,from);
+			  MailBean mb = new MailBean();
+			  mb.setMailSubject(subject);
+			  mb.setMsgContent(message);
+			  mb.setToRecipients(recepients);
+			  mb.setCCRecipients(ccRecepients);
+			  EMailUtilities.sendMail(mb);
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

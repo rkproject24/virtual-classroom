@@ -1,5 +1,6 @@
 package com.ignou.vcs.actions;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +10,10 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
+import com.ignou.vcs.commons.EMailUtilities;
 import com.ignou.vcs.commons.SendMailUsingAuthentication;
+import com.ignou.vcs.commons.beans.MailBean;
 import com.ignou.vcs.commons.beans.StudentBean;
 import com.ignou.vcs.commons.beans.UserBean;
 import com.ignou.vcs.commons.database.CommonsDatabaseActivities;
@@ -65,12 +69,10 @@ public class ScheduleAction extends Action
 			String subjectId = userBean.getSubjectID();
 
 			String subjectName = dbObject.getSubjectName(subjectId);
-			ArrayList<StudentBean> allStudents = dbObject
-					.getStudents(scheduleForm.getCourse());
+			ArrayList<StudentBean> allStudents = dbObject.getStudents(scheduleForm.getCourse());
 
-			SendMailUsingAuthentication smtpMailSender = new SendMailUsingAuthentication();
 
-			String[] recepients = new String[allStudents.size()];
+			ArrayList<String> recepients = new ArrayList<String>();
 			String subject_mail = subjectName + " Discussion Scheduled";
 			String message = "A Discussion has been scheduled for your standard. Discussion Information - \n Title:"
 					+ scheduleForm.getTitle()
@@ -78,22 +80,22 @@ public class ScheduleAction extends Action
 					+ scheduleForm.getTime()
 					+ "\n Description:"
 					+ scheduleForm.getDescription() + "\n Faculty:" + facName;
-			String from = "teamcoderZ@gmail.com";
 
-			for (int i = 0; i < allStudents.size(); i++) {
+			for (int i = 0; i < allStudents.size(); i++) 
+			{
 				StudentBean studentBean = (StudentBean) allStudents.get(i);
 				System.out.println("Email :" + studentBean.getEmailP());
-				recepients[i] = studentBean.getEmailP();
+				recepients.add(studentBean.getEmailP());
 
 			}
-
-			try {
-				smtpMailSender
-						.postMail(recepients, subject_mail, message, from);
-			} catch (RuntimeException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			ArrayList<String> ccReceipients = dbObject.getFacultyIds(Integer.parseInt(subjectId));
+			
+			MailBean mb = new MailBean();
+			mb.setMailSubject(subject_mail);
+			mb.setMsgContent(message);
+			mb.setToRecipients(recepients);
+			mb.setCCRecipients(ccReceipients);
+			EMailUtilities.sendMail(mb);
 
 		} else {
 			if (level == 2) {

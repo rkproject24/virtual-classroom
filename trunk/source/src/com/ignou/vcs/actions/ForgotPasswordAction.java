@@ -1,5 +1,7 @@
 package com.ignou.vcs.actions;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,7 +12,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.ignou.vcs.commons.EMailUtilities;
 import com.ignou.vcs.commons.SendMailUsingAuthentication;
+import com.ignou.vcs.commons.beans.MailBean;
 import com.ignou.vcs.commons.database.CommonsDatabaseActivities;
 import com.ignou.vcs.forms.ForgotPasswordForm;
 
@@ -39,8 +43,9 @@ public class ForgotPasswordAction extends Action
 
 			if (password!="") 
 			{
-				SendMailUsingAuthentication sm = new SendMailUsingAuthentication();
-				String[] recepients = {email};
+				ArrayList<String> recepients = new ArrayList<String>();
+				ArrayList<String> ccRecepients = dbObject.getAdminMailIds();
+				recepients.add(email);
 			    String subject = "VCS - your password";
 			    String message = "Hi "+ userName+"\n"
 			    			+ "Your password for "+userName +" is "+password+"\n\n\n"
@@ -54,9 +59,12 @@ public class ForgotPasswordAction extends Action
 			    			"- - -\n" +
 			    			"Regards,\n" +
 			    			"VCS - Administrator";
-			    String from = "";
 
-			    sm.postMail(recepients,subject,message,from);
+			   MailBean mb = new MailBean();
+			   mb.setMailSubject(subject);
+			   mb.setMsgContent(message);
+			   mb.setToRecipients(recepients);
+			   EMailUtilities.sendMail(mb);
 			} else 
 			{
 				errors.add("forgotPassword", new ActionError("error.forgotPassword"));
