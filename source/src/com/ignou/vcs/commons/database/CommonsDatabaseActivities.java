@@ -640,6 +640,69 @@ public class CommonsDatabaseActivities {
 		return list;
  }
  
+ public ArrayList<String> getAdminMailIds()
+ {
+	 ArrayList<String> emails = new ArrayList<String>();
+	 try
+	 {
+		 Statement stmt = con.createStatement();
+		 ResultSet rs = stmt.executeQuery("select emailp from admin");
+		 while(rs.next())
+		 {
+			 String mail = rs.getString(1);
+			 emails.add(mail);
+		 }
+	 }
+	 catch(Exception e)
+	 {
+		 e.printStackTrace();
+	 }
+	 
+	 return emails;
+ }
+ 
+ public ArrayList<String> getManagementMailIds()
+ {
+	 ArrayList<String> emails = new ArrayList<String>();
+	 try
+	 {
+		 Statement stmt = con.createStatement();
+		 ResultSet rs = stmt.executeQuery("select emailp from management");
+		 while(rs.next())
+		 {
+			 String mail = rs.getString(1);
+			 emails.add(mail);
+		 }
+	 }
+	 catch(Exception e)
+	 {
+		 e.printStackTrace();
+	 }
+	 
+	 return emails;
+ }
+ 
+ public ArrayList<String> getFacultyIds(int subjectId)
+ {
+	 ArrayList<String> emails = new ArrayList<String>();
+	 try
+	 {
+		 Statement stmt = con.createStatement();
+		 ResultSet rs = stmt.executeQuery("select emailprimary from faculty where subjectId="+subjectId);
+		 while(rs.next())
+		 {
+			 String mail = rs.getString(1);
+			 emails.add(mail);
+		 }
+	 }
+	 catch(Exception e)
+	 {
+		 e.printStackTrace();
+	 }
+	 
+	 return emails;
+ }
+ 
 	public static void main(String args[]) {
 		CommonsDatabaseActivities obj = new CommonsDatabaseActivities();
 	//	bj.backupDatabase("C:\\");
