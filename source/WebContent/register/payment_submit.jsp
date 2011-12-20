@@ -1,4 +1,5 @@
-<%@ page import="com.ignou.vcs.registration.code.*,com.ignou.vcs.registration.beans.*,com.ignou.vcs.registration.database.*,com.ignou.vcs.commons.*,com.ignou.vcs.commons.database.*,com.ignou.vcs.commons.beans.*;" %>
+
+<%@page import="java.util.ArrayList"%><%@ page import="com.ignou.vcs.registration.code.*,com.ignou.vcs.registration.beans.*,com.ignou.vcs.registration.database.*,com.ignou.vcs.commons.*,com.ignou.vcs.commons.database.*,com.ignou.vcs.commons.beans.*;" %>
 <% 
 RegistrationBean regBean = (RegistrationBean)request.getSession().getAttribute("regBean");
 String courseId=(String)request.getSession().getAttribute("cid");
@@ -31,13 +32,19 @@ int level=0;
 String encryptedPassword = PasswordService.getInstance().encrypt(password);
 String userId=db1.generateId(encryptedPassword,level);
 db.insertValue(userId,courseId,duration,fees,details,name,dob,email_id_primary,email_id_secondary,contact_no_primary,contact_no_secondary,address,father_name,occupation);
-SendMailUsingAuthentication smtpMailSender = new SendMailUsingAuthentication();
 
-	  String[] recepients = {email_id_primary};
+	  ArrayList<String> recepients = new ArrayList<String>();
+	  recepients.add(email_id_primary);
+	  ArrayList<String> ccRecepients = db1.getAdminMailIds();
+	  
 	  String subject = "Welcome to Virtual Classroom System";
 	  String message = "Congratulations, You are now a part of VCS. Your Login Details are as follows:\n Username:" + userId + " \n Password:" + password + "." ;
-	  String from = "teamcoderZ@gmail.com";
-
-	  smtpMailSender.postMail(recepients,subject,message,from);
+	  MailBean mb = new MailBean();
+	  mb.setMailSubject(subject);
+	  mb.setMsgContent(message);
+	  mb.setToRecipients(recepients);
+	  mb.setCCRecipients(ccRecepients);
+	  
+	  EMailUtilities.sendMail(mb);
 %>
 You have been succesfully registered!!!

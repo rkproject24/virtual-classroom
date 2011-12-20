@@ -43,6 +43,10 @@ function loadCss() {
  
  <%
  }
+	else
+	{
+		response.sendRedirect("./NewLogin.jsp");
+	}
  
   %>
 
