@@ -1,6 +1,5 @@
 package com.ignou.vcs.actions;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,9 +9,7 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
 import com.ignou.vcs.commons.EMailUtilities;
-import com.ignou.vcs.commons.SendMailUsingAuthentication;
 import com.ignou.vcs.commons.beans.MailBean;
 import com.ignou.vcs.commons.beans.StudentBean;
 import com.ignou.vcs.commons.beans.UserBean;

@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 import com.ignou.vcs.commons.SendMailUsingAuthentication;
 import com.ignou.vcs.commons.Utilities;
 import com.ignou.vcs.commons.beans.FacultyBean;
+import com.ignou.vcs.commons.beans.NewsBean;
 import com.ignou.vcs.commons.beans.StudentBean;
 import com.ignou.vcs.commons.beans.SubjectBean;
 import com.ignou.vcs.commons.beans.UserBean;
@@ -612,33 +613,34 @@ public class CommonsDatabaseActivities {
 		return test;
 	}
 	
- public ArrayList getNews()
- {
-	 ArrayList list = new ArrayList();
-	 Statement state=null;
-	 ResultSet res = null;
-	 String sql="";
-	 try{
-		 
-		 sql = "SELECT * FROM NEWS";
-		 state=con.createStatement();
-		 res=state.executeQuery(sql);
-		 while(res.next()){
-		 com.ignou.vcs.commons.beans.NewsBean news = new com.ignou.vcs.commons.beans.NewsBean();
-		 news.setNewsId(res.getInt("NEWSID"));
-		 news.setSubject(res.getString("SUBJECT"));
-		 news.setDescription(res.getString("DESCRIPTION"));
-		 news.setDate(res.getString("DATE"));
-		 
-		 list.add(news);
-		}
-	 }
-	 	catch (SQLException e) {
+	public ArrayList<NewsBean> getNews(boolean isShort) {
+		ArrayList<NewsBean> list = new ArrayList<NewsBean>();
+		Statement state = null;
+		ResultSet res = null;
+		String sql = "";
+		try {
+			if (isShort) {
+				sql = "SELECT * FROM news ORDER BY DATE DESC LIMIT 5";
+			} else {
+				sql = "SELECT * FROM NEWS";
+			}
+			state = con.createStatement();
+			res = state.executeQuery(sql);
+			while (res.next()) {
+				NewsBean news = new NewsBean();
+				news.setNewsId(res.getInt(1));
+				news.setTitle(res.getString(2));
+				news.setDescription(res.getString(3));
+				news.setDate(res.getString(4));
+				list.add(news);
+			}
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
- }
+	}
+
  
  public ArrayList<String> getAdminMailIds()
  {

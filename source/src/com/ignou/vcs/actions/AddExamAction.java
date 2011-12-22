@@ -10,15 +10,15 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.ignou.vcs.commons.PasswordService;
+import com.ignou.vcs.commons.SendMailUsingAuthentication;
 import com.ignou.vcs.commons.database.CommonsDatabaseActivities;
-import com.ignou.vcs.forms.ChangePasswordForm;
+import com.ignou.vcs.forms.ForgotPasswordForm;
 
 /**
  * @version 1.0
  * @author Pradeepthi S
  */
-public class Change_passwordAction extends Action
+public class AddExamAction extends Action
 
 {
 
@@ -28,22 +28,38 @@ public class Change_passwordAction extends Action
 
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
-		ChangePasswordForm changePasswordForm = (ChangePasswordForm) form;
+		ForgotPasswordForm forgotPasswordForm = (ForgotPasswordForm) form;
 
 		try {
-			String userId = (String) request.getSession()
-					.getAttribute("userId");
 			CommonsDatabaseActivities dbObject = new CommonsDatabaseActivities();
-			String oldEncryptedPasswordInDb = dbObject.getPassword(userId);
-			String oldEncryptedPasswordFromUser = PasswordService.getInstance()
-					.encrypt(changePasswordForm.getOldPassword());
+			String userName = forgotPasswordForm.getUserName();
+			String email = forgotPasswordForm.getEmail();
+			String password = dbObject.getPassword(userName);
+			
 
-			if (oldEncryptedPasswordFromUser.equals(oldEncryptedPasswordInDb)) {
-				String encryptedNewPassword = PasswordService.getInstance()
-						.encrypt(changePasswordForm.getNewPassword());
-				dbObject.updatePassword(userId, encryptedNewPassword);
-			} else {
-				errors.add("oldPassword", new ActionError("error.changePassword.incorrectOldPassword"));
+			if (password!="") 
+			{
+				SendMailUsingAuthentication sm = new SendMailUsingAuthentication();
+				String[] recepients = {email};
+			    String subject = "VCS - your password";
+			    String message = "Hi "+ userName+"\n"
+			    			+ "Your password for "+userName +" is "+password+"\n\n\n"
+			    			+"Password instructions:\n" +
+			    			"1. Please donot share your password with any known/unknown persons.\n" +
+			    			"2.DO NOT USE birthdays, names or other passwords which would be easy to guess, " +
+			    			"the idea is to choose something which does not reside in any dictionary or in any language. \n" +
+			    			"3. Never write your password down on paper or anything else which could be read by another person, " +
+			    			"i.e., DO NOT PUT A POST-IT WITH YOUR PASSWORD WRITTEN ON IT AND ATTACH IT TO YOUR MONITOR (or under your mouse pad).\n" +
+			    			"\n" +
+			    			"- - -\n" +
+			    			"Regards,\n" +
+			    			"VCS - Administrator";
+			    String from = "";
+
+			    sm.postMail(recepients,subject,message,from);
+			} else 
+			{
+				errors.add("forgotPassword", new ActionError("error.forgotPassword"));
 			}
 			// do something here
 

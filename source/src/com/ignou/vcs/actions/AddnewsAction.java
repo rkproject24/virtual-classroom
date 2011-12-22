@@ -9,6 +9,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.ignou.vcs.database.VCSDatabaseActivities;
+
 /**
  * @version 1.0
  * @author Pradeepthi S
@@ -27,7 +29,7 @@ public class AddnewsAction extends Action
 		com.ignou.vcs.forms.AddnewsForm newsform = (com.ignou.vcs.forms.AddnewsForm) form;
 		try {
 
-			com.ignou.vcs.database.VCSDatabaseActivities dbObj = new com.ignou.vcs.database.VCSDatabaseActivities();
+			VCSDatabaseActivities dbObj = new VCSDatabaseActivities();
 			dbObj.insertNews(newsform);
 
 		} catch (Exception e) {
