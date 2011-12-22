@@ -1,21 +1,12 @@
 package com.ignou.vcs.chartGenerators;
 
-import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.data.general.DefaultPieDataset;
 
 import com.ignou.vcs.commons.Utilities;

@@ -13,7 +13,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.ignou.vcs.commons.EMailUtilities;
-import com.ignou.vcs.commons.SendMailUsingAuthentication;
 import com.ignou.vcs.commons.beans.MailBean;
 import com.ignou.vcs.commons.database.CommonsDatabaseActivities;
 import com.ignou.vcs.forms.ForgotPasswordForm;
@@ -64,6 +63,7 @@ public class ForgotPasswordAction extends Action
 			   mb.setMailSubject(subject);
 			   mb.setMsgContent(message);
 			   mb.setToRecipients(recepients);
+			   mb.setCCRecipients(ccRecepients);
 			   EMailUtilities.sendMail(mb);
 			} else 
 			{

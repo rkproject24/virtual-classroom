@@ -8,8 +8,6 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
-import com.ignou.vcs.commons.PasswordService;
 import com.ignou.vcs.commons.beans.UserBean;
 import com.ignou.vcs.commons.database.CommonsDatabaseActivities;
 import com.ignou.vcs.forms.LoginForm;

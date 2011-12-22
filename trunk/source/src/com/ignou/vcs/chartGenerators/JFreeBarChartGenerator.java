@@ -1,6 +1,5 @@
 package com.ignou.vcs.chartGenerators;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  * Bar Chart generation Code using JFree Charts API
- * @author ankit.kumar
+ * @author 
  *
  */
 public class JFreeBarChartGenerator {

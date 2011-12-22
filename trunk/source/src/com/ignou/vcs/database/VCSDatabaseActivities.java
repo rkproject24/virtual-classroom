@@ -5,16 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import javax.sql.DataSource;
-
-
-import com.ibm.db2.jcc.DB2Xml;
 import com.ignou.vcs.commons.*;
-import com.ignou.vcs.commons.beans.SubjectBean;
 import com.ignou.vcs.datasource.DataSourceFactory;
+import com.ignou.vcs.forms.AddnewsForm;
 import com.ignou.vcs.forms.Test;
-import com.ignou.vcs.forms.Test_paper;
 import com.ignou.vcs.notices.beans.Notice;
 
 public class VCSDatabaseActivities {
@@ -1518,7 +1512,7 @@ public class VCSDatabaseActivities {
 		return list;
 	}
 	
-	public void insertNews(com.ignou.vcs.forms.AddnewsForm form)
+	public void insertNews(AddnewsForm form)
 	{
 		ResultSet res=null;
 		Statement state=null;

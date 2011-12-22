@@ -5,7 +5,7 @@ public class CourseBean {
 	String name;
 	String duration;
 	String assignments;
-	ArrayList AllSubjects;
+	ArrayList<String> AllSubjects;
 	
 	public String getAssignments() {
 		return assignments;
@@ -31,10 +31,10 @@ public class CourseBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public ArrayList getAllSubjects() {
+	public ArrayList<String> getAllSubjects() {
 		return AllSubjects;
 	}
-	public void setAllSubjects(ArrayList allSubjects) {
+	public void setAllSubjects(ArrayList<String> allSubjects) {
 		AllSubjects = allSubjects;
 	}
 	
