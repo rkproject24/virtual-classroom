@@ -69,30 +69,31 @@
 				<a href="#"><u>Virtual Classroom System</u></a>
 			</h2>
 			<p class="description">Studying the e-way.</p>
-
+			<%
+				String ques = request.getParameter("q");
+				
+				int questionId = Integer.parseInt(ques);
+			%>
 		</div>
+		<html:form action="/updateQuestion.do">
+		<html:hidden property="questionId" value="<%=questionId %>"/>
+		
+		<table>
+			<tr><td>Question</td><td><html:text property="question"></html:text></td><td><FONT color="red"><html:errors property="question"/></FONT></td></tr>
+			<tr><td>Options(Enter options separated by ("|")</td><td><html:text property="options"></html:text></td>
+			<td><td><FONT color="red"><html:errors property="options"/></FONT></td></tr>
+			<tr><td>Correct Answer</td><td><html:text property="correctAnswer"></html:text></td>
+			<td><td><FONT color="red"><html:errors property="correctAnswer"/></FONT></td></tr>
+			<tr><td>Marks</td><td><html:text property="marks"></html:text></td><td><FONT color="red"><html:errors property="marks"/></FONT></td></tr>
+			<tr>
+				<td></td>
+				<td align="left" width="180"><html:submit property="Submit"
+					value="Submit"></html:submit>&nbsp;&nbsp;&nbsp;&nbsp;<html:reset /></td>
+				<td></td>
+			</tr>
+		</table>
+		</html:form>
 
-
-		<div id="right">
-			<div class="boxtop"></div>
-			<%@include file="../../latest_news.jsp"%>
-
-			<div class="boxtop"></div>
-			<div class="box">
-				<p>
-					<b><u>Collaborate</u></b><br /> <a href="#" accesskey="m"><span
-						class="key">I</span>nteractive White Boards</a><br /> <a href="#"
-						accesskey="m"><span class="key">C</span>hat with friends,
-						Faculties</a><br /> <a href="#" accesskey="m"><span class="key">V</span>oice
-						Mailboxes</a><br />
-				</p>
-				<div class="buttons">
-					<p>
-						<a href="#" class="bluebtn"><span>More</span></a>
-					</p>
-				</div>
-			</div>
-		</div>
 		<%@include file="../../footer.jsp"%>
 	</div>
 </body>

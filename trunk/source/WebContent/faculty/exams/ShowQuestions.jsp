@@ -6,15 +6,16 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 
-<%@page import="com.ignou.vcs.exams.beans.QuestionBean"%><html:html>
+<%@page import="com.ignou.vcs.exams.beans.QuestionBean"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%><html:html>
 <head>
 <title>Select Questions</title>
 <script type="text/javascript">
 	function getQuestionIds()
 	{
 		var values = [];
-	
-		if(document.fm.ans.length<1)
+		if(document.fm.question.length<1)
 		{
 			var altTxt = "You havn't selected questions. Do you still want to contine?";
 			if (confirm(altTxt))
@@ -22,17 +23,18 @@
 				self.close();
 			}
 		}
-		for(var i=0;i<document.fm.ans.length;i++)
+		
+		for(var i=0;i<document.fm.question.length;i++)
 		{
-		  if(document.fm.ans[i].checked)
+		  if(document.fm.question[i].checked)
 		  {
-			  values.push(document.fm.ans[i].value);
+			  values.push(document.fm.question[i].value);
 		  } 
 		 }
 		
 		if(values.length>0)
 		{
-			window.opener.fm.asdf.value = values.join('|');
+			window.opener.document.getElementById('questionIds').value = values.join('|');
 		}	
 		self.close();
 	}
@@ -62,42 +64,31 @@
 	}
 
 </script>
-<link id="pagestyle" type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/theme/css/style1.css" />
-<link id="menustyle" type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/theme/css/menu.css" />
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/theme/js/transmenu_Packed.js"></script>
-
-<!-- LightBox css and scripts -->
 <%
 	String usid = (String) request.getSession().getAttribute("userId");
 		if (usid != null) {
 %>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/theme/css/lightbox_vid.css"
-	media="screen,projection" type="text/css" />
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/theme/js/prototype.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/theme/js/lightbox.js"></script>
 <%
 	}
 %>
 </head>
 <body>
-	<center><form name="fm"><table>
+	<center>
+		<h2>Virtual Classroom Systems</h2><br>
+		<form name="fm"><table>
 		<tr>
 			<td>S.No</td>
-			<td>Question</td>
+			<td align="center">Question</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr></td>
 		</tr>
 	<%
 		ArrayList<QuestionBean> allQuestions = new ArrayList<QuestionBean>();
 		String cId = request.getParameter("c");
 		String sId = request.getParameter("s");
 		int courseId = Integer.parseInt(cId);
-		int subjectId = Integer.parseInt(cId);
-		
+		int subjectId = Integer.parseInt(sId);
 		ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
 		
 		if(courseId>0)
@@ -106,7 +97,7 @@
 		}
 		else if(subjectId>0)
 		{
-			allQuestions = eda.getSubjectQuestions(subjectId);	
+			allQuestions = eda.getSubjectQuestions(subjectId);
 		}
 		
 		if(allQuestions.size()>0)
@@ -121,11 +112,23 @@
 			</tr>
 			<%
 			}
+		}else
+		{
+			out.println("No Questions Found..." + allQuestions.size());
 		}
 	%>
 	</table>
+	<hr>
 	<input type="button" value="Select" onclick="javaScript: getQuestionIds();" class="greenbtn">
 	<input type="button" value="Close" onclick="javaScript: closeMe();" class="greenbtn">
-	</form></center>
+	</form>
+	<hr>
+	All rights reserved to Virtual Classroom Systems<br>
+	<%
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM, yyyy - hh:mm");
+	%>
+	<p align="right">Last Updated at <%=sdf.format(dt)%></p>
+	</center>
 </body>
 </html:html>

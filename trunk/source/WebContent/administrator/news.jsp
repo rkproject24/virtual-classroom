@@ -56,10 +56,10 @@ function loadCss() {
 <script type="text/javascript">
 function formValidator(){
 	
-	var date = window.document.addnewsForm.date;
-	var subject = window.document.addnewsForm.subject;
+	var date = document.addnewsForm.date;
+	var subject = document.addnewsForm.subject;
 
-	var desc = window.document.addnewsForm.description;
+	var desc = document.addnewsForm.description;
 
 	
 
