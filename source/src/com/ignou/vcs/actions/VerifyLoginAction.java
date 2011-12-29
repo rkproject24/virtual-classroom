@@ -61,7 +61,7 @@ public class VerifyLoginAction extends Action
 		} catch (Exception e) {
 
 			// Report the error using the appropriate name and ID.
-			errors.add("username", new ActionError("error.username"));
+			errors.add("ServerError", new ActionError("error.server.error"));
 
 		}
 

@@ -26,7 +26,6 @@ public class AddExamForm extends ActionForm
 	private String examName="";
 	private int examType;
 	private int subjectId;
-	private int courseId;
 	private String questionIds="";
 	private int maxMarks;
 	private int passMarks;
@@ -36,7 +35,7 @@ public class AddExamForm extends ActionForm
 	{
 		return examName;
 	}
-	public void setExamName(final String examName) 
+	public void setExamName(String examName) 
 	{
 		this.examName = examName;
 	}
@@ -45,7 +44,7 @@ public class AddExamForm extends ActionForm
 	{
 		return maxMarks;
 	}
-	public void setMaxMarks(final int maxMarks) 
+	public void setMaxMarks(int maxMarks) 
 	{
 		this.maxMarks = maxMarks;
 	}
@@ -54,7 +53,7 @@ public class AddExamForm extends ActionForm
 	{
 		return passMarks;
 	}
-	public void setPassMarks(final int passMarks) 
+	public void setPassMarks(int passMarks) 
 	{
 		this.passMarks = passMarks;
 	}
@@ -63,7 +62,7 @@ public class AddExamForm extends ActionForm
 	{
 		return duration;
 	}
-	public void setDuration(final int duration) 
+	public void setDuration(int duration) 
 	{
 		this.duration = duration;
 	}
@@ -72,7 +71,7 @@ public class AddExamForm extends ActionForm
 	{
 		return questionIds;
 	}
-	public void setQuestionIds(final String questionIds) 
+	public void setQuestionIds(String questionIds) 
 	{
 		this.questionIds = questionIds;
 	}
@@ -81,7 +80,7 @@ public class AddExamForm extends ActionForm
 	{
 		return examType;
 	}
-	public void setExamType(final int examType) 
+	public void setExamType(int examType) 
 	{
 		this.examType = examType;
 	}
@@ -90,35 +89,25 @@ public class AddExamForm extends ActionForm
 	{
 		return subjectId;
 	}
-	public void setSubjectId(final int subjectId) 
+	public void setSubjectId(int subjectId) 
 	{
 		this.subjectId = subjectId;
 	}
 	
-	public int getCourseId() 
-	{
-		return courseId;
-	}
-	public void setCourseId(final int courseId) 
-	{
-		this.courseId = courseId;
-	}
-
-    public void reset(final ActionMapping mapping, final HttpServletRequest request) 
+    public void reset(ActionMapping mapping, HttpServletRequest request) 
     {
 
 	// Reset values are provided as samples only. Change as appropriate.
     	examName = null;
     	examType=0;
-    	subjectId=0;
-    	courseId=0;
     	questionIds = null;
     	maxMarks=0;
     	passMarks=0;
     	duration=0;
+    	subjectId=0;
     }
 
-    public ActionErrors validate(final ActionMapping mapping,
+    public ActionErrors validate(ActionMapping mapping,
 	    final HttpServletRequest request) 
     {
 
@@ -128,29 +117,27 @@ public class AddExamForm extends ActionForm
 
 	if ((getExamName() == null) || (getExamName().length() == 0)) 
 	 {
-	   errors.add("exams", new ActionError("error.exams.examName"));
-	 }else if ((getSubjectId() == 0)) 
+	   errors.add("examName", new ActionError("error.exams.examName"));
+	 } else
+	 if(getExamType()<0)
 	 {
-	   errors.add("exams", new ActionError("error.exams.subjectId"));
-	 }else if(getCourseId()==0)
-	 {
-		 errors.add("exams", new ActionError("error.exams.courseId")); 
+		 errors.add("examType", new ActionError("error.exams.examType")); 
 	 }
-	 else if(getExamType()==0)
+	 if ((getSubjectId() == 0)) 
 	 {
-		 errors.add("exams", new ActionError("error.exams.examType")); 
-	 }else if ((getQuestionIds() == null) || (getQuestionIds().length() == 0)) 
+	   errors.add("subjectId", new ActionError("error.exams.subjectId"));
+	 }
+	 if ((getMaxMarks() == 0)) 
 	 {
-	   errors.add("exams", new ActionError("error.exams.questions"));
-	 }else if ((getMaxMarks() == 0)) 
+	   errors.add("maxMarks", new ActionError("error.exams.maxMarks"));
+	 }else
+	 if ((getPassMarks() == 0)) 
 	 {
-	   errors.add("exams", new ActionError("error.exams.maxMarks"));
-	 }else if ((getPassMarks() == 0)) 
+	   errors.add("passMarks", new ActionError("error.exams.passMarks"));
+	 }else
+	 if(getDuration()==0)
 	 {
-	   errors.add("exams", new ActionError("error.exams.passMarks"));
-	 }else if(getDuration()==0)
-	 {
-		 errors.add("exams", new ActionError("error.exams.examDuration")); 
+		 errors.add("examDuration", new ActionError("error.exams.examDuration")); 
 	 }
 	 
 	return errors;

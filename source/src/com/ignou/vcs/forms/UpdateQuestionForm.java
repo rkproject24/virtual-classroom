@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
@@ -25,10 +27,9 @@ public class UpdateQuestionForm extends ActionForm
 {
 	int questionId;
 	String question;
-	ArrayList<String> options;
+	String options;
 	int marks;
 	String correctAnswer;
-	String updatedBy;
 	
 	public int getQuestionId() 
 	{
@@ -57,11 +58,11 @@ public class UpdateQuestionForm extends ActionForm
 		this.question = question;
 	}
 	
-	public ArrayList<String> getOptions() 
+	public String getOptions() 
 	{
 		return options;
 	}
-	public void setOptions(ArrayList<String> options) 
+	public void setOptions(String options) 
 	{
 		this.options = options;
 	}
@@ -75,14 +76,6 @@ public class UpdateQuestionForm extends ActionForm
 		this.marks = marks;
 	}
 	
-	public String getUpdatedBy() 
-	{
-		return updatedBy;
-	}
-	public void setUpdatedBy(String updatedBy) 
-	{
-		this.updatedBy = updatedBy;
-	}
 
     public void reset(ActionMapping mapping, HttpServletRequest request) 
     {
@@ -91,7 +84,6 @@ public class UpdateQuestionForm extends ActionForm
     	options = null;
     	marks = 0;
     	correctAnswer = null;
-    	updatedBy = null;
     }
 
     public ActionErrors validate(ActionMapping mapping,
@@ -101,16 +93,19 @@ public class UpdateQuestionForm extends ActionForm
 	// Validate the fields in your form, adding
 	// adding each error to this.errors as found, e.g.
 
-	/* if ((getUserName() == null) || (getUserName().length() == 0)) 
+	 if ((getQuestion() == null) || (getQuestion().length() == 0)) 
 	 {
-	   errors.add("forgotPassword", new org.apache.struts.action.ActionError("error.forgotPassword.userName.required"));
-	 }else if ((getEmail() == null) || (getEmail().length() == 0)) 
+	   errors.add("question", new ActionError("error.questions.question"));
+	 }else if ((getOptions() == null) || (getOptions().length() == 0)) 
 	 {
-	   errors.add("forgotPassword", new org.apache.struts.action.ActionError("error.forgotPassword.email.required"));
-	 }else if(isValidEmail(getEmail())==false)
+		   errors.add("options", new ActionError("error.questions.options"));
+	 }else if (getMarks() == 0) 
 	 {
-		 errors.add("forgotPassword", new org.apache.struts.action.ActionError("error.forgotPassword.validEmail.required")); 
-	 }*/
+		   errors.add("marks", new ActionError("error.questions.marks"));
+	 }else if ((getCorrectAnswer() == null) || (getCorrectAnswer().length() == 0)) 
+	 {
+		   errors.add("correctAnswer", new ActionError("error.questions.correctAnswer"));
+	 }	 
 	 
 	return errors;
 

@@ -50,12 +50,13 @@ public class ExamsDatabaseActivities
 					options.add(st.nextToken());
 				}
 				qb.setOptions(options); // options
-				qb.setMarks(rs.getInt(7)); // marks for individual question
-				qb.setCorrectAnswer(rs.getString(8)); // correct answer
-				qb.setCreatedBy(rs.getString(9)); // question created by
-				qb.setCreatedDate(rs.getDate(10));
-				qb.setUpdatedBy(rs.getString("11"));
-				qb.setUpdatedDate(rs.getDate("12"));
+				qb.setCorrectAnswer(rs.getString(7)); // correct answer
+				qb.setMarks(rs.getInt(8)); // marks for individual question
+				//qb.setCorrectAnswer(rs.getString(9)); // explanation
+				qb.setCreatedBy(rs.getString(10)); // question created by
+				qb.setCreatedDate(rs.getDate(11));
+				qb.setUpdatedBy(rs.getString(12));
+				qb.setUpdatedDate(rs.getDate(13));
 				
 				allSubjectQues.add(qb); 
 			}
@@ -143,7 +144,7 @@ public class ExamsDatabaseActivities
 			pstmt.setString(7, qb.getCorrectAnswer());
 			pstmt.setString(8, qb.getCreatedBy());
 			pstmt.setDate(9,dd );
-			pstmt.setString(10, qb.getUpdatedBy());
+			pstmt.setString(10, "");
 			pstmt.setDate(11,dd);
 			
 			int i = pstmt.executeUpdate();
@@ -238,6 +239,38 @@ public class ExamsDatabaseActivities
 	{
 		ArrayList<ExamBean> examDetails = new ArrayList<ExamBean>();
 		return examDetails;
+	}
+	
+	public ArrayList<ExamBean> getExamDetailsForApproval()
+	{
+		ArrayList<ExamBean> approvalExams = new ArrayList<ExamBean>();
+		
+		try
+		{
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from exams where examApprovelStatus=1");
+			while(rs.next())
+			{
+				ExamBean eb = new ExamBean();
+				eb.setExamId(rs.getInt(1));
+				eb.setExamName(rs.getString(2));
+				eb.setSubjectId(rs.getInt(3));
+				eb.setCourseId(rs.getInt(4));
+				eb.setQuestionIds(rs.getString(5));
+				eb.setMaxMarks(rs.getInt(6));
+				eb.setPassMarks(rs.getInt(7));
+				eb.setDuration(rs.getInt(8));
+				
+				approvalExams.add(eb);
+			}
+			
+			
+			
+		}catch(Exception e)
+		{
+			
+		}
+		return approvalExams;
 	}
 	
 	public boolean createExam(ExamBean eb, String createdBy)
@@ -438,6 +471,36 @@ public class ExamsDatabaseActivities
 		}
 		
 		return questions;
+	}
+	
+	public ArrayList<ExamBean> getAllSubjectExams(int subjectId)
+	{
+		ArrayList<ExamBean> allExams = new ArrayList<ExamBean>();
+		
+		try
+		{
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from exams where subjectid="+subjectId);
+			while(rs.next())
+			{
+				ExamBean eb = new ExamBean();
+				eb.setExamId(rs.getInt(1));
+				eb.setExamName(rs.getString(2));
+				eb.setSubjectId(rs.getInt(3));
+				eb.setCourseId(rs.getInt(4));
+				eb.setQuestionIds(rs.getString(5));
+				eb.setMaxMarks(rs.getInt(6));
+				eb.setPassMarks(rs.getInt(7));
+				eb.setDuration(rs.getInt(8));
+				
+				allExams.add(eb);
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return allExams;
 	}
 	
 	//SELECT * FROM subjects ORDER BY subjectId LIMIT 5;  to get 5 records from first

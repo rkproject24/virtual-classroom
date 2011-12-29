@@ -20,7 +20,6 @@ public class ApproveExamForm extends ActionForm
 	private int examId;
 	private String examAppovalComments;
 	private int examAppovalStatus; 
-	private String approvedBy = "";
 	
 	public int getExamId() 
 	{
@@ -49,14 +48,6 @@ public class ApproveExamForm extends ActionForm
 		this.examAppovalComments = examAppovalComments;
 	}
 	
-	public String getApprovedBy() 
-	{
-		return approvedBy;
-	}
-	public void setApprovedBy(String approvedBy) 
-	{
-		this.approvedBy = approvedBy;
-	}
 	
 	public void reset(ActionMapping mapping, HttpServletRequest request) 
     {
@@ -64,7 +55,6 @@ public class ApproveExamForm extends ActionForm
 		examId = 0;
 		examAppovalComments = null;
 		examAppovalStatus = 0; 
-		approvedBy = null;
     }
 	
     public ActionErrors validate(ActionMapping mapping,
@@ -75,16 +65,13 @@ public class ApproveExamForm extends ActionForm
 	// Validate the fields in your form, adding
 	// adding each error to this.errors as found, e.g.
 
-	 /*if ((getUserName() == null) || (getUserName().length() == 0)) 
+	 if (getExamAppovalStatus() < 0) 
 	 {
-	   errors.add("forgotPassword", new org.apache.struts.action.ActionError("error.forgotPassword.userName.required"));
-	 }else if ((getEmail() == null) || (getEmail().length() == 0)) 
+	   errors.add("examAppovalStatus", new org.apache.struts.action.ActionError("error.exams.examAppovalStatus"));
+	 }else if (getExamAppovalStatus()==1 &&(getExamAppovalComments() == null || getExamAppovalComments().length() == 0)) 
 	 {
-	   errors.add("forgotPassword", new org.apache.struts.action.ActionError("error.forgotPassword.email.required"));
-	 }else if(isValidEmail(getEmail())==false)
-	 {
-		 errors.add("forgotPassword", new org.apache.struts.action.ActionError("error.forgotPassword.validEmail.required")); 
-	 }*/
+	   errors.add("examAppovalComments", new org.apache.struts.action.ActionError("error.exams.examAppovalComments"));
+	 }
 	 
 		return errors;
 

@@ -52,7 +52,7 @@ public class InsertPollAction extends Action
 		{
 
 			// Report the error using the appropriate name and ID.
-			errors.add("name", new ActionError("id"));
+			errors.add("ServerError", new ActionError("error.server.error"));
 
 		}
 

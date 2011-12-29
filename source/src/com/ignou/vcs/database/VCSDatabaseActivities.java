@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import com.ignou.vcs.beans.SubjectBean;
+import com.ignou.vcs.beans.courseBean;
 import com.ignou.vcs.commons.*;
 import com.ignou.vcs.datasource.DataSourceFactory;
 import com.ignou.vcs.forms.AddnewsForm;
@@ -666,11 +669,10 @@ public class VCSDatabaseActivities {
 		return level;
 	}
 	
-	public ArrayList getAllCourses()
+	public ArrayList<courseBean> getAllCourses()
 	{
-		ResultSet res=null;
 		Statement state=null;
-		ArrayList course_list = new ArrayList();
+		ArrayList<courseBean> course_list = new ArrayList<courseBean>();
 		
 		try {
 			String sql = "SELECT name,courseid FROM COURSE";
@@ -693,7 +695,7 @@ public class VCSDatabaseActivities {
 		
 		return course_list;
 	}
-	public ArrayList getAllSubjects()
+	public ArrayList<SubjectBean> getAllSubjects()
 	{
 		ResultSet res=null;
 		Statement state=null;

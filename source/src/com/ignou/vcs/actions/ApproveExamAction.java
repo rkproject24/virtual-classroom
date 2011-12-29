@@ -1,5 +1,7 @@
 package com.ignou.vcs.actions;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,9 +12,11 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.ignou.vcs.commons.SendMailUsingAuthentication;
+import com.ignou.vcs.commons.EMailUtilities;
+import com.ignou.vcs.commons.beans.MailBean;
 import com.ignou.vcs.commons.database.CommonsDatabaseActivities;
-import com.ignou.vcs.forms.ForgotPasswordForm;
+import com.ignou.vcs.exams.database.ExamsDatabaseActivities;
+import com.ignou.vcs.forms.ApproveExamForm;
 
 /**
  * @version 1.0
@@ -28,45 +32,62 @@ public class ApproveExamAction extends Action
 
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
-		ForgotPasswordForm forgotPasswordForm = (ForgotPasswordForm) form;
-
-		try {
-			CommonsDatabaseActivities dbObject = new CommonsDatabaseActivities();
-			String userName = forgotPasswordForm.getUserName();
-			String email = forgotPasswordForm.getEmail();
-			String password = dbObject.getPassword(userName);
-			
-
-			if (password!="") 
+		ApproveExamForm approveExamForm = (ApproveExamForm) form;
+		String approvedBy = (String) request.getSession().getAttribute("userId");
+		String ex = request.getParameter("examId");
+		String sub = request.getParameter("subject");
+		try 
+		{
+			int subjectId = Integer.parseInt(sub);
+			int examId = Integer.parseInt(ex);
+			ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
+			Boolean b = eda.approveExam(examId, approvedBy, approveExamForm.getExamAppovalComments(), approveExamForm.getExamId());
+			if(b)
 			{
-				SendMailUsingAuthentication sm = new SendMailUsingAuthentication();
-				String[] recepients = {email};
-			    String subject = "VCS - your password";
-			    String message = "Hi "+ userName+"\n"
-			    			+ "Your password for "+userName +" is "+password+"\n\n\n"
-			    			+"Password instructions:\n" +
-			    			"1. Please donot share your password with any known/unknown persons.\n" +
-			    			"2.DO NOT USE birthdays, names or other passwords which would be easy to guess, " +
-			    			"the idea is to choose something which does not reside in any dictionary or in any language. \n" +
-			    			"3. Never write your password down on paper or anything else which could be read by another person, " +
-			    			"i.e., DO NOT PUT A POST-IT WITH YOUR PASSWORD WRITTEN ON IT AND ATTACH IT TO YOUR MONITOR (or under your mouse pad).\n" +
-			    			"\n" +
-			    			"- - -\n" +
-			    			"Regards,\n" +
-			    			"VCS - Administrator";
-			    String from = "";
-
-			    sm.postMail(recepients,subject,message,from);
-			} else 
-			{
-				errors.add("forgotPassword", new ActionError("error.forgotPassword"));
+				int approvalStatus = approveExamForm.getExamAppovalStatus();
+				String subject = "";
+				String message = "";
+				
+				if(approvalStatus==0)
+				{
+					subject = "Your exam has been approved.";
+					message = "Hi,/n" +
+							"The exam with id : " + approveExamForm.getExamId()+
+							" created by you has been APPROVED./n" +
+							"" +
+							"------/n" +
+							"Regards,/n" +
+							""+approvedBy;
+				}else
+				{
+					subject = "Your exam has been rejected.";
+					message = "Hi,/n" +
+							"The exam with id : " + approveExamForm.getExamId()+
+							" created by you has been REJECTED./n" +
+							"Please revisit the exam, modify and resubmit for approval." +
+							"------/n" +
+							"Regards,/n" +
+							""+approvedBy;
+				}
+				
+				CommonsDatabaseActivities cba = new CommonsDatabaseActivities();
+				ArrayList<String> toList = cba.getFacultyIds(subjectId);
+				ArrayList<String> ccList = cba.getManagementMailIds();
+				
+				MailBean mb = new MailBean();
+				mb.setToRecipients(toList);
+				mb.setCCRecipients(ccList);
+				mb.setMailSubject(subject);
+				mb.setMsgContent(message);
+				
+				EMailUtilities.sendMail(mb);
 			}
-			// do something here
-
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 
 			// Report the error using the appropriate name and ID.
-			errors.add("name", new ActionError("id"));
+			errors.add("ServerError", new ActionError("error.server.error"));
 
 		}
 
