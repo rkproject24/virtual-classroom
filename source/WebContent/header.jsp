@@ -18,17 +18,14 @@ function formValidator()
 	System.out.println("UserId: " + userIDForName);
 	String userName = "";
 	String userLevel = "";
-	UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
-	
-	if(userBean==null)
-	{
-		response.sendRedirect("./NewLogin.jsp");
+	CommonsDatabaseActivities dbObjectForName = new CommonsDatabaseActivities();
+	if (userIDForName != null ) {
+		UserBean userBeanForName = (UserBean)dbObjectForName.getUserInfo(userIDForName) ;
+		userName = userBeanForName.getName();
+		userLevel = userBeanForName.getLevel();
+		System.out.println("UserNAME: " + userName);
+		System.out.println("UserLEVEL: " + userLevel);
 	}
-	
-	userName = userBean.getName();
-	userLevel = userBean.getLevel();
-	System.out.println("UserNAME: " + userName);
-	System.out.println("UserLEVEL: " + userLevel);
  %>
 
 <div id="content">
@@ -67,13 +64,14 @@ function formValidator()
 <%
 				} 
 			 %> <%-- tpl:put name="top_menu_middle" --%> <%-- /tpl:put --%>
+<div>
+<!--<div id="search">-->
 
-<div id="search">
-<form method="post"
-	action="${pageContext.request.contextPath}/search/search.jsp"
-	onsubmit="return formValidator()" name="searchForm">
-<p><input type="text" name="search" class="search" /> <input
-	type="submit" value="Search" class="button" /></p>
-</form>
+<!--<form method="post"-->
+<!--	action="${pageContext.request.contextPath}/search/search.jsp"-->
+<!--	onsubmit="return formValidator()" name="searchForm">-->
+<!--<p><input type="text" name="search" class="search" /> <input-->
+<!--	type="submit" value="Search" class="button" /></p>-->
+<!--</form>-->
 </div>
 </div>

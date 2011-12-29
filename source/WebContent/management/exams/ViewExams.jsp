@@ -8,7 +8,10 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.ignou.vcs.commons.beans.UserBean"%>
 <%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
-<html:html>
+
+<%@page import="com.ignou.vcs.exams.database.ExamsDatabaseActivities"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.ignou.vcs.exams.beans.ExamBean"%><html:html>
 <head>
 <script type="text/javascript" language="javascript" >
 
@@ -26,6 +29,12 @@ function loadCss() {
 		menusheet.href="${pageContext.request.contextPath}/theme/css/menu.css";		
 	}
 }
+
+function showQuestions(examId)
+{
+	window.location.href = "CheckQuestions.jsp?e="+examId;
+}
+
 </script> 
 <link id="pagestyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/style1.css" />
 <link id="menustyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/menu.css" />
@@ -62,25 +71,45 @@ function loadCss() {
 				<%@include file="../../DisplayCalendar.jsp" %>
 				<h2><a href="#"><u>Virtual Classroom System</u></a></h2>
 				<p class="description">Studying the e-way.</p>
+				<center>
 				
+				<%
+					ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
+					ArrayList<ExamBean> exams = eda.getExamDetailsForApproval();
+				
+					if(exams.size()>0)
+					{
+						%>
+						<table>
+						<tr><td>S.No.</td><td>Exam Name</td><td></td></tr>
+						<%
+						for(int i=0;i<exams.size();i++)
+						{
+							ExamBean exam = exams.get(i);
+						%>
+							<tr>
+								<td><%=i+1 %></td>
+								<td><a href="javaScript: showQuestions(<%=exam.getExamId() %>"><%=exam.getExamName() %></a></td>
+								<td></td>
+							</tr>
+
+						<%
+						}
+						%>
+						</table>
+						<%
+					}
+					else
+					{
+						out.println("<font color='red'>No Exams available for approval</font>");
+					}
+						
+				%>
+				
+			</center>
 			</div>
 		
-		
-		<div id="right">
-			<div class="boxtop"></div>
-			<%@include file="../../latest_news.jsp" %>
-			
-			<div class="boxtop"></div>
-			<div class="box">
-				<p>
-					<b><u>Collaborate</u></b><br />
-					<a href="#" accesskey="m"><span class="key">I</span>nteractive White Boards</a><br />
-					<a href="#" accesskey="m"><span class="key">C</span>hat with friends, Faculties</a><br />
-					<a href="#" accesskey="m"><span class="key">V</span>oice Mailboxes</a><br />
-				</p>
-				<div class="buttons"><p><a href="#" class="bluebtn"><span>More</span></a></p></div>
-			</div>
-		</div>	
+
 		<%@include file="../../footer.jsp" %>
 	</div>
 </body>

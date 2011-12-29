@@ -9,7 +9,9 @@
 <%@page import="com.ignou.vcs.commons.beans.UserBean"%>
 <%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
 
-<%@page import="com.ignou.vcs.commons.Utilities"%><html:html>
+<%@page import="com.ignou.vcs.commons.Utilities"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.ignou.vcs.commons.beans.NewsBean"%><html:html>
 <head>
 <script type="text/javascript" language="javascript" >
 function loadCss() {
@@ -71,13 +73,13 @@ function loadCss() {
 					<th class="top"><u>Description</u></th></tr>
 				<%
 					CommonsDatabaseActivities dbObj = new CommonsDatabaseActivities();
-					java.util.ArrayList list = (java.util.ArrayList)dbObj.getNews();
+					ArrayList<NewsBean> list = dbObj.getNews(false);
 					
 					for(int i =0;i<list.size();i++)
 					{
 						com.ignou.vcs.commons.beans.NewsBean newsBean = new com.ignou.vcs.commons.beans.NewsBean();
-						newsBean = (com.ignou.vcs.commons.beans.NewsBean)list.get(i);
-						String subject = newsBean.getSubject();
+						newsBean = list.get(i);
+						String subject = newsBean.getTitle();
 						int newsId = newsBean.getNewsId();
 						String date1 = newsBean.getDate();
 						String description = newsBean.getDescription();

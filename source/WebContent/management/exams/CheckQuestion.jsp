@@ -8,7 +8,11 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.ignou.vcs.commons.beans.UserBean"%>
 <%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
-<html:html>
+
+<%@page import="com.ignou.vcs.exams.database.ExamsDatabaseActivities"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.ignou.vcs.exams.beans.QuestionBean"%>
+<%@page import="java.util.Iterator"%><html:html>
 <head>
 <script type="text/javascript" language="javascript" >
 
@@ -62,25 +66,43 @@ function loadCss() {
 				<%@include file="../../DisplayCalendar.jsp" %>
 				<h2><a href="#"><u>Virtual Classroom System</u></a></h2>
 				<p class="description">Studying the e-way.</p>
-				
+				<center>
+					<%
+						String id = request.getParameter("e");
+						int examId = Integer.parseInt(id);
+						ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
+						ArrayList<QuestionBean> questions = eda.getExamPaper(examId);
+						
+						if(questions.size()>0)
+						{
+							%>
+							<table>
+							<%
+							for( int i=0;i<questions.size();i++)
+							{
+								QuestionBean qb = questions.get(i);
+								%>
+								<tr><td>Question </td><td><%=i+1 %></td></tr>
+								<tr><td colspan="2"><%=qb.getQuestion() %></td></tr>
+								<%
+								ArrayList<String> st = qb.getOptions();
+
+								Iterator<String> it = st.iterator();
+								while(it.hasNext()) 
+								{
+									String option = (String) it.next();
+									out.println("<tr><td></td><td><input type='radio' name='option"+(i+1)+"' value='" + option+"'>" + option+"</input></td></tr>");
+								}
+							}
+							%>
+							</table>
+							<%
+						}
+					%>
+				</center>				
 			</div>
 		
 		
-		<div id="right">
-			<div class="boxtop"></div>
-			<%@include file="../../latest_news.jsp" %>
-			
-			<div class="boxtop"></div>
-			<div class="box">
-				<p>
-					<b><u>Collaborate</u></b><br />
-					<a href="#" accesskey="m"><span class="key">I</span>nteractive White Boards</a><br />
-					<a href="#" accesskey="m"><span class="key">C</span>hat with friends, Faculties</a><br />
-					<a href="#" accesskey="m"><span class="key">V</span>oice Mailboxes</a><br />
-				</p>
-				<div class="buttons"><p><a href="#" class="bluebtn"><span>More</span></a></p></div>
-			</div>
-		</div>	
 		<%@include file="../../footer.jsp" %>
 	</div>
 </body>

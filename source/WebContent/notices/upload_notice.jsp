@@ -144,7 +144,9 @@ function isNumeric(elem, helperMsg){
 </head>
 <body onLoad="javascript:loadCss()">
 <%@include file="../header.jsp" %>								
-		
+	<%
+	UserBean userBean = (UserBean)dbObjectForName.getUserInfo(userIDForName) ;
+	%>		
 		<div class="left">
 			<div class="left_articles">
 				<div class="buttons">
@@ -195,12 +197,7 @@ function isNumeric(elem, helperMsg){
 					<%
 						String userID = (String)request.getSession().getAttribute("userId");
 						CommonsDatabaseActivities dbObject = new CommonsDatabaseActivities();
-						UserBean userBean = (UserBean)request.getSession().getAttribute("UserBean");
 						
-						if(userBean==null)
-						{
-							response.sendRedirect("./NewLogin.jsp");
-						}
 						
 						if(userBean.getLevel().equals("0") || userBean.getLevel().equals("1")) {
 							System.out.println("It comes Here!!!!!");
@@ -210,7 +207,6 @@ function isNumeric(elem, helperMsg){
 						
 						<TD><html:select property="courseID" disabled="true" multiple = "true">
 							<%
-								
 								String courseID = userBean.getCourseID();
 								
 								Utilities util = new Utilities();

@@ -1,4 +1,3 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
@@ -8,10 +7,13 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.ignou.vcs.commons.beans.UserBean"%>
 <%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
-<html:html>
+
+<%@page import="com.ignou.vcs.database.VCSDatabaseActivities"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.ignou.vcs.beans.courseBean"%>
+<%@page import="com.ignou.vcs.beans.SubjectBean"%><html:html>
 <head>
 <script type="text/javascript" language="javascript" >
-
 function loadCss() {
 	var browser = navigator.appName.toLowerCase();
 	// document.write(browser);
@@ -25,12 +27,17 @@ function loadCss() {
 		stylesheet.href="${pageContext.request.contextPath}/theme/css/style1.css";
 		menusheet.href="${pageContext.request.contextPath}/theme/css/menu.css";		
 	}
+
+	function addExam()
+	{
+		window.location.href = 'AddExam.jsp'; 
+		
+	}	
 }
 </script> 
 <link id="pagestyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/style1.css" />
 <link id="menustyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/menu.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/theme/js/transmenu_Packed.js"></script>
-
 <!-- LightBox css and scripts -->
 <%
 	String usid = (String) request.getSession().getAttribute("userId");
@@ -39,47 +46,71 @@ function loadCss() {
  	<link rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/lightbox_vid.css" media="screen,projection" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/theme/js/prototype.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/theme/js/lightbox.js"></script>
- 	
- 
  <%
  }
  
   %>
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="GENERATOR" content="Rational Application Developer">
+
 <title>Virtual Classroom System</title>
 </head>
 <body onLoad="javascript:loadCss()">
-
 <%@include file="../../header.jsp"%>								
 		
 		<div class="left">
 			<div class="left_articles">
 				<div class="buttons">
 				</div>
-				<%@include file="../../DisplayCalendar.jsp" %>
-				<h2><a href="#"><u>Virtual Classroom System</u></a></h2>
-				<p class="description">Studying the e-way.</p>
+				<%@include file="../../DisplayCalendar.jsp"%>
+				<a href="http://localhost:8080/VCS/player3_vid.jsp?filePath=http://localhost:8080/VCS/DATA/lectures/48.flv"  class=lbOn><img src="${pageContext.request.contextPath}/theme/images/qn1.jpeg" align="bottom" class="question"></a>
+				<h2><a href="#"><u>Exams</u></a></h2>
+				<p class="description">Click on course to select to select student</p>
+					 <div id = "id1">
+					 
+		There are two types of Tests that are conducted in Virtual Classroom System namely:
+		
+		<ol>
+		<li><b>Minor Tests</b></li>
+		<li><b>Major Tests</b></li>
+		</ol>
+			<p>	Minor Test covers syllabus specified by the faculty and has some pre requirements that each student must fulfill in order to appear for the test. </p>
 				
+			<p>	Major Test covers the whole syllabus and is conducted at the end of course of the student. Student has completed the course until and unless he/she has passes all the tests given by him/her.</p>
+				
+			<p>	Faculty is responsible for preparing and evaluating the test. Student can view his individual and class performance report of each test. </p>
+		
+		
+					 </div>
+				<%
+					VCSDatabaseActivities db_obj = new VCSDatabaseActivities();
+					ArrayList<SubjectBean> subjects = db_obj.getAllSubjects();
+					
+					
+				%>
 			</div>
+		</div>	
 		
 		
 		<div id="right">
-			<div class="boxtop"></div>
-			<%@include file="../../latest_news.jsp" %>
-			
+			<%-- tpl:put name="right_boxes" --%>
+			<script src = "${pageContext.request.contextPath}/faculty/exam/js/ajax.js"></script>
 			<div class="boxtop"></div>
 			<div class="box">
 				<p>
-					<b><u>Collaborate</u></b><br />
-					<a href="#" accesskey="m"><span class="key">I</span>nteractive White Boards</a><br />
-					<a href="#" accesskey="m"><span class="key">C</span>hat with friends, Faculties</a><br />
-					<a href="#" accesskey="m"><span class="key">V</span>oice Mailboxes</a><br />
+					<b><u>Subjects</u></b><br />
+					<%
+						for(int i = 0;i<subjects.size();i++)
+						{
+							SubjectBean sb = subjects.get(i);
+							String subject = sb.getSubjectId();
+							String subjectName = sb.getSubjectName();
+					 %>
+						<a href="javascript:jah('ExamsList.jsp','id1','<%= subject%>')"><%=subjectName %></a><br />
+					<%} %>
+					
 				</p>
-				<div class="buttons"><p><a href="#" class="bluebtn"><span>More</span></a></p></div>
 			</div>
+			<div id = "id2"> </div>
 		</div>	
 		<%@include file="../../footer.jsp" %>
 	</div>

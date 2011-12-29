@@ -9,7 +9,12 @@
 <%@page import="com.ignou.vcs.commons.beans.UserBean"%>
 <%@page
 	import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
-<html:html>
+
+<%@page import="com.ignou.vcs.database.VCSDatabaseActivities"%>
+<%@page import="com.ignou.vcs.commons.beans.SubjectBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.ignou.vcs.commons.beans.CourseBean"%>
+<%@page import="com.ignou.vcs.beans.courseBean"%><html:html>
 <head>
 <script type="text/javascript" language="javascript">
 	function loadCss() {
@@ -24,6 +29,27 @@
 			stylesheet.href = "${pageContext.request.contextPath}/theme/css/style1.css";
 			menusheet.href = "${pageContext.request.contextPath}/theme/css/menu.css";
 		}
+	}
+
+	function selectQuestions()
+	{
+		var crsId = document.getElementById("crs").value;
+		var subId = document.getElementById("sub").value;
+		var param = "ShowQuestions.jsp?c="+crsId+"&s="+subId;
+
+		newwindow=window.open(param,'chld','height=500,width=580');
+		if (window.focus) {newwindow.focus();}
+	}
+
+	function questions()
+	{
+		var qiDs = document.getElementById("questionIds").value;
+		if(qiDs.length<1)
+		{
+			alert("Please select questions");
+			return false;
+		}
+		return true;
 	}
 </script>
 <link id="pagestyle" type="text/css" rel="stylesheet"
@@ -69,7 +95,78 @@
 				<a href="#"><u>Virtual Classroom System</u></a>
 			</h2>
 			<p class="description">Studying the e-way.</p>
+			<center>
+					<h2>Adding Exam</h2>
+					<%
+						
+						CommonsDatabaseActivities cda = new CommonsDatabaseActivities();
+					 	ArrayList<SubjectBean> allSubjects = cda.getAllSubjects();
+						
+					%><br><FONT color="red"><html:errors property="ServerError"/></FONT><br>
+				<html:form action="/addExam.do" onsubmit="return questions();">
+					
+					<table>
+						<tr>
+							<td>Exam Name</td>
+							<td><html:text property="examName"></html:text></td>
+							<td><FONT color="red"><html:errors property="examName"/></FONT></td>
+						</tr>
+						<tr>
+							<td>Subject</td>
+							<td><html:select property="subjectId">
+									<%
+									for(int i=0; i<allSubjects.size();i++)
+									{
+										SubjectBean sb = allSubjects.get(i);
+									%>
+									<html:option value='<%=sb.getSubjectId() %>'><%=sb.getSubjectName()%></html:option>
+									<% 
+									}
+									%>
+								</html:select></td>
+							<td><FONT color="red"><html:errors property="subjectId"/></FONT></td>
+						</tr>
+						<tr>
+							<td>Exam Type</td>
+							<td>
+								<html:select property="examType">
+									<html:option value='0'>Major Exam</html:option>
+									<html:option value='1'>Minor Exam</html:option>
+								</html:select>
+							</td>
+							<td><FONT color="red"><html:errors property="examType"/></FONT></td>
+						</tr>
+						<tr>
+							<td>Questions</td>
+								<td><input type="text" name="questionIds" id="questionIds"><br><html:button property="questionIds" value="Select Questions" onclick="selectQuestions()"></html:button></td>
+							<td><FONT color="red"><html:errors property="questions"/></FONT></td>
+						</tr>
+						<tr>
+							<td>Maximum Marks</td>
+							<td><html:text property="maxMarks"></html:text></td>
+							<td><FONT color="red"><html:errors property="maxMarks"/></FONT></td>
+						</tr>
+						<tr>
+							<td>Pass Marks</td>
+							<td><html:text property="passMarks"></html:text></td>
+							<td><FONT color="red"><html:errors property="passMarks"/></FONT></td>
+						</tr>
+						<tr>
+							<td>Exam Duration</td>
+							<td><html:text property="duration"></html:text></td>
+							<td><FONT color="red"><html:errors property="examDuration"/></FONT></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td align="left" width="180"><html:submit property="Submit"
+								value="Submit"></html:submit>&nbsp;&nbsp;&nbsp;&nbsp;<html:reset /></td>
+							<td></td>
+						</tr>
 
+					</table>
+				</html:form>
+				
+			</center>
 		</div>
 
 
