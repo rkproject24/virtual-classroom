@@ -1,5 +1,7 @@
 package com.ignou.vcs.actions;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,9 +12,12 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.ignou.vcs.commons.SendMailUsingAuthentication;
+import com.ignou.vcs.commons.EMailUtilities;
+import com.ignou.vcs.commons.beans.MailBean;
 import com.ignou.vcs.commons.database.CommonsDatabaseActivities;
-import com.ignou.vcs.forms.ForgotPasswordForm;
+import com.ignou.vcs.exams.beans.ExamBean;
+import com.ignou.vcs.exams.database.ExamsDatabaseActivities;
+import com.ignou.vcs.forms.AddExamForm;
 
 /**
  * @version 1.0
@@ -24,63 +29,80 @@ public class AddExamAction extends Action
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+			throws Exception 
+			{
 
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
-		ForgotPasswordForm forgotPasswordForm = (ForgotPasswordForm) form;
-
-		try {
-			CommonsDatabaseActivities dbObject = new CommonsDatabaseActivities();
-			String userName = forgotPasswordForm.getUserName();
-			String email = forgotPasswordForm.getEmail();
-			String password = dbObject.getPassword(userName);
+		AddExamForm addExam = (AddExamForm) form;
+		String questionIds = request.getParameter("questionIds");
+		String crs = request.getParameter("courseId");
+		String sub = request.getParameter("subjectId");
+		String userName = (String) request.getSession().getAttribute("userId");
+		
+		try 
+		{
+			int subjectId = Integer.parseInt(sub);
+			int courseId = Integer.parseInt(crs);
+			ExamBean eb = new ExamBean();
+			eb.setCourseId(courseId);
+			eb.setSubjectId(subjectId);
+			eb.setExamName(addExam.getExamName());
+			eb.setExamType(addExam.getExamType());
+			eb.setMaxMarks(addExam.getMaxMarks());
+			eb.setPassMarks(addExam.getPassMarks());
+			eb.setQuestionIds(questionIds);
 			
-
-			if (password!="") 
+			ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
+			if(userName!=null)
 			{
-				SendMailUsingAuthentication sm = new SendMailUsingAuthentication();
-				String[] recepients = {email};
-			    String subject = "VCS - your password";
-			    String message = "Hi "+ userName+"\n"
-			    			+ "Your password for "+userName +" is "+password+"\n\n\n"
-			    			+"Password instructions:\n" +
-			    			"1. Please donot share your password with any known/unknown persons.\n" +
-			    			"2.DO NOT USE birthdays, names or other passwords which would be easy to guess, " +
-			    			"the idea is to choose something which does not reside in any dictionary or in any language. \n" +
-			    			"3. Never write your password down on paper or anything else which could be read by another person, " +
-			    			"i.e., DO NOT PUT A POST-IT WITH YOUR PASSWORD WRITTEN ON IT AND ATTACH IT TO YOUR MONITOR (or under your mouse pad).\n" +
-			    			"\n" +
-			    			"- - -\n" +
-			    			"Regards,\n" +
-			    			"VCS - Administrator";
-			    String from = "";
-
-			    sm.postMail(recepients,subject,message,from);
-			} else 
-			{
-				errors.add("forgotPassword", new ActionError("error.forgotPassword"));
+				Boolean b = eda.createExam(eb, userName);
+				if(b)
+				{
+					ArrayList<String> toList = new ArrayList<String>();
+					ArrayList<String> ccList = new ArrayList<String>();
+					CommonsDatabaseActivities cbs = new CommonsDatabaseActivities();
+					toList = cbs.getManagementMailIds();
+					ccList = cbs.getFacultyIds(subjectId);
+					
+					MailBean mb = new MailBean();
+					mb.setMailSubject("Need Approval for "+addExam.getExamName() + " exam.");
+					String msg = "Hi,/n"+
+							"A Exam has created by " +userName+
+							"./n Please have look into it and approve./n" +
+							"You need to log in to VCS application --> Exams --> Approvals." +
+							"------" +
+							"Regards," +
+							"VCS - Administrator";
+					mb.setMsgContent(msg);
+					mb.setToRecipients(toList);
+					mb.setCCRecipients(ccList);
+					
+					EMailUtilities.sendMail(mb);
+				}
 			}
-			// do something here
-
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 
 			// Report the error using the appropriate name and ID.
-			errors.add("name", new ActionError("id"));
-
+			errors.add("ServerError", new ActionError("error.server.error"));
 		}
 
 		// If a message is required, save the specified key(s)
 		// into the request for use by the <struts:errors> tag.
 
-		if (!errors.isEmpty()) {
+		if (!errors.isEmpty()) 
+		{
 			saveErrors(request, errors);
 
 			// Forward control to the appropriate 'failure' URI (change name as
 			// desired)
 			forward = mapping.findForward("failure");
 
-		} else {
+		} 
+		else 
+		{
 
 			// Forward control to the appropriate 'success' URI (change name as
 			// desired)

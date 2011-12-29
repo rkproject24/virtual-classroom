@@ -1,17 +1,10 @@
 package com.ignou.vcs.commons.database;
 
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import javax.mail.MessagingException;
-import javax.sql.DataSource;
-
-import com.ignou.vcs.commons.SendMailUsingAuthentication;
 import com.ignou.vcs.commons.Utilities;
 import com.ignou.vcs.commons.beans.FacultyBean;
 import com.ignou.vcs.commons.beans.NewsBean;
@@ -19,7 +12,6 @@ import com.ignou.vcs.commons.beans.StudentBean;
 import com.ignou.vcs.commons.beans.SubjectBean;
 import com.ignou.vcs.commons.beans.UserBean;
 import com.ignou.vcs.datasource.DataSourceFactory;
-import com.ignou.vcs.registration.beans.CourseBean;
 
 
 public class CommonsDatabaseActivities {
@@ -245,7 +237,7 @@ public class CommonsDatabaseActivities {
 		return encryptedPassword;
 	}
 	
-	public ArrayList getAllSubjects()
+	public ArrayList<SubjectBean> getAllSubjects()
 	{
 		ResultSet rs=null;
 		Statement state=null;

@@ -55,7 +55,7 @@ public class ForgotPasswordAction extends Action
 			    			"3. Never write your password down on paper or anything else which could be read by another person, " +
 			    			"i.e., DO NOT PUT A POST-IT WITH YOUR PASSWORD WRITTEN ON IT AND ATTACH IT TO YOUR MONITOR (or under your mouse pad).\n" +
 			    			"\n" +
-			    			"- - -\n" +
+			    			"------\n" +
 			    			"Regards,\n" +
 			    			"VCS - Administrator";
 
@@ -74,7 +74,7 @@ public class ForgotPasswordAction extends Action
 		} catch (Exception e) {
 
 			// Report the error using the appropriate name and ID.
-			errors.add("name", new ActionError("id"));
+			errors.add("ServerError", new ActionError("error.server.error"));
 
 		}
 
