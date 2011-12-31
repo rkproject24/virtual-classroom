@@ -26,6 +26,8 @@
 		</form-bean>
 		<form-bean name="updateQuestionForm" type="com.ignou.vcs.forms.UpdateQuestionForm">
 		</form-bean>
+		<form-bean name="acceptForm" type="com.ignou.vcs.forms.UserAcceptanceForm">
+		</form-bean>
 		<form-bean name="uploadFileForm" type="com.ignou.vcs.forms.UploadFileForm">
 		</form-bean>
 		<form-bean name="solutionForm" type="com.ignou.vcs.forms.SolutionForm">
@@ -96,37 +98,44 @@
 		</action>
 		<action path="/addExam" type="com.ignou.vcs.actions.AddExamAction" 
 			name="addExamForm" scope="request" input="/faculty/exams/AddExam.jsp" validate="true">
-			<forward contextRelative="false" redirect = "true" name="success" path="/discussionforums/AllPolls.jsp">
+			<forward contextRelative="false" redirect = "true" name="success" path="/faculty/exams/ShowExams.jsp">
 			</forward>
-			<forward contextRelative="false" redirect = "true" name="failure" path="/discussionforums/InsertPoll.jsp">
+			<forward contextRelative="false" redirect = "true" name="failure" path="/faculty/exams/AddExam.jsp">
 			</forward>
 		</action>
 		<action path="/updateExam" type="com.ignou.vcs.actions.UpdateExamAction" 
 			name="updateExamForm" scope="request" input="/faculty/exams/UpdateExam.jsp" validate="true">
 			<forward contextRelative="false" redirect = "true" name="success" path="/discussionforums/AllPolls.jsp">
 			</forward>
-			<forward contextRelative="false" redirect = "true" name="failure" path="/discussionforums/InsertPoll.jsp">
+			<forward contextRelative="false" redirect = "true" name="failure" path="/faculty/exams/UpdateExam.jsp">
 			</forward>
 		</action>
 		<action path="/approveExam" type="com.ignou.vcs.actions.ApproveExamAction" 
 			name="approveExamForm" scope="request" input="/management/exams/ApproveExam.jsp" validate="true">
 			<forward contextRelative="false" redirect = "true" name="success" path="/discussionforums/AllPolls.jsp">
 			</forward>
-			<forward contextRelative="false" redirect = "true" name="failure" path="/discussionforums/InsertPoll.jsp">
+			<forward contextRelative="false" redirect = "true" name="failure" path="/management/exams/ViewExams.jsp">
 			</forward>
 		</action>
 		<action path="/addQuestion" type="com.ignou.vcs.actions.AddQuestionAction" 
 			name="addQuestionForm" scope="request" input="/faculty/exams/AddQuestion.jsp" validate="true">
-			<forward contextRelative="false" redirect = "true" name="success" path="/discussionforums/AllPolls.jsp">
+			<forward contextRelative="false" redirect = "true" name="success" path="/faculty/exams/ShowQuestions.jsp">
 			</forward>
-			<forward contextRelative="false" redirect = "true" name="failure" path="/discussionforums/InsertPoll.jsp">
+			<forward contextRelative="false" redirect = "true" name="failure" path="/faculty/exams/AddQuestion.jsp">
 			</forward>
 		</action>
 		<action path="/updateQuestion" type="com.ignou.vcs.actions.UpdateQuestionAction" 
 			name="updateQuestionForm" scope="request" input="/faculty/exams/UpdateQuestion.jsp" validate="true">
-			<forward contextRelative="false" redirect = "true" name="success" path="/discussionforums/AllPolls.jsp">
+			<forward contextRelative="false" redirect = "true" name="success" path="/faculty/exams/ShowQuestions.jsp">
 			</forward>
-			<forward contextRelative="false" redirect = "true" name="failure" path="/discussionforums/InsertPoll.jsp">
+			<forward contextRelative="false" redirect = "true" name="failure" path="/faculty/exams/UpdateQuestion.jsp">
+			</forward>
+		</action>
+		<action path="/UserAcceptance" type="com.ignou.vcs.actions.UserAcceptanceAction" 
+			name="addExamForm" scope="request" input="/student/exams/UserAcceptance.jsp" validate="true">
+			<forward contextRelative="false" redirect = "true" name="success" path="/student/exams/ExamPaper.jsp">
+			</forward>
+			<forward contextRelative="false" redirect = "true" name="failure" path="/student/exams/UserAcceptance.jsp">
 			</forward>
 		</action>
 		<action path="/uploadFile" type="com.ignou.vcs.actions.UploadFileAction" scope="request" name="uploadFileForm" input="/files/uploadFile_form.jsp">

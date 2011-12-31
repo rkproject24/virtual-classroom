@@ -8,13 +8,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.ignou.vcs.commons.beans.UserBean"%>
 <%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
-
-<%@page import="com.ignou.vcs.database.VCSDatabaseActivities"%>
-<%@page import="com.ignou.vcs.beans.StudentBean"%>
-<%@page import="com.ignou.vcs.exams.database.ExamsDatabaseActivities"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.ignou.vcs.exams.beans.ExamBean"%>
-<%@page import="com.ignou.vcs.exams.beans.StudentExamBean"%><html:html>
+<html:html>
 <head>
 <script type="text/javascript" language="javascript" >
 
@@ -32,17 +26,6 @@ function loadCss() {
 		menusheet.href="${pageContext.request.contextPath}/theme/css/menu.css";		
 	}
 }
-
-function showExam(examId)
-{
-	window.location.href = "Instructions.jsp?e="+examId;
-}
-
-function viewExamResult(examId)
-{
-	window.location.href = "ExamResults.jsp?e="+examId;
-}
-
 </script> 
 <link id="pagestyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/style1.css" />
 <link id="menustyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/menu.css" />
@@ -60,6 +43,10 @@ function viewExamResult(examId)
  
  <%
  }
+	else
+	{
+		response.sendRedirect("./NewLogin.jsp");
+	}
  
   %>
 
@@ -70,65 +57,47 @@ function viewExamResult(examId)
 </head>
 <body onLoad="javascript:loadCss()">
 
-<%@include file="../../header.jsp"%>								
+<%@include file="header.jsp"%>								
 		
 		<div class="left">
 			<div class="left_articles">
 				<div class="buttons">
 				</div>
-				<%@include file="../../DisplayCalendar.jsp" %>
+				<%@include file="../DisplayCalendar.jsp" %>
 				<h2><a href="#"><u>Virtual Classroom System</u></a></h2>
 				<p class="description">Studying the e-way.</p>
-				<%
-					VCSDatabaseActivities vda = new VCSDatabaseActivities();
-					StudentBean sb = vda.getStudentDetails(userIDForName);
-					
-					int courseId = Integer.parseInt(sb.getCourseId());
-					ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
-					ArrayList<StudentExamBean> allExams = eda.getStudentExamDetails(courseId);
-					if(allExams.size()>0)
-					{
-						%>
-						<table>
-							<tr><td>S.No</td><td>Exam Name</td><td>Comments</td></tr>
-							<%
-								for(int i=0;i<allExams.size();i++)
-								{
-									StudentExamBean seb = allExams.get(i);
-									%>
-									<tr><td><%=i+1 %></td>
-										<td><%=seb.getExamName() %></td>
-										<td><%
-											String result = seb.getResult();
-											if(result.equalsIgnoreCase("pass"))
-											{
-												out.println("Alreay Passed<br> You got : "+seb.getScore());
-												out.println("<br> <a href='javaScript: viewExamResult("+seb.getExamId()+")'></a>");
-											}else
-											{
-												String showLink = "<a href='javaScript: showExam("+seb.getExamId()+")'>Write Exam</a>";
-												out.println(showLink);
-											}
-										%></td>
-									</tr>
-									<%
-								}
-							%>
-						</table>
-						<%
-					}
-					else
-					{
-						%>
-						<b><font color="red">No Exams found for your course. Please contact your faculty.</font></b>
-						<%
-					}
-				%>
+				<center><h3><u><i>Our Sincere Thanks</i></u></h3></center>
+				<p>
+					It plunges me in exhilaration in taking privilege in expressing our 
+					heart felt gratitude to all those who helped ,encouraged and foreseeing successful 
+					completion of the project. Ecstasies to work under gregarious guidance of <b>Mr.Subba Rao</b> 
+					to whom extremely in debted for his value and timely suggestions. 
+					</p><br><br>
+<p>I wish to convey my sincere thanks to <b>Mr.Subba Rao </b>(faculty) ,Aurora degree College,(Dept. of Computer Science), and all those who all directly or indirectly contributed their assistance in finishing out this project successfully. 
+
+
+				</p>
+				<p align="right"> <b><i>- Pradeepthi Savaram</b></i></p>
 			</div>
+		</div>	
 		
 		
-		
-		<%@include file="../../footer.jsp" %>
+		<div id="right">
+			<div class="boxtop"></div>
+			<%@include file="latest_news.jsp" %>
+			
+			<div class="boxtop"></div>
+			<div class="box">
+				<p>
+					<b><u>Collaborate</u></b><br />
+					<a href="#" accesskey="m"><span class="key">I</span>nteractive White Boards</a><br />
+					<a href="#" accesskey="m"><span class="key">C</span>hat with friends, Faculties</a><br />
+					<a href="#" accesskey="m"><span class="key">V</span>oice Mailboxes</a><br />
+				</p>
+				<div class="buttons"><p><a href="#" class="bluebtn"><span>More</span></a></p></div>
+			</div>
+		</div>	
+		<%@include file="footer.jsp" %>
 	</div>
 </body>
 </html:html>
