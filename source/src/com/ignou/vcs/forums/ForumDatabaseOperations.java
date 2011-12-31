@@ -1,10 +1,8 @@
 package com.ignou.vcs.forums;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -286,6 +284,7 @@ public class ForumDatabaseOperations
 					lastPost = rs1.getString(2);
 					lastPostBy = rs1.getString(3);
 				}
+				sb.setPostId(postId);
 				sb.setSubjectId(rs.getInt(1));
 				sb.setSubjectName(rs.getString(2));
 				sb.setNoOfPosts(noOfPosts);
@@ -431,4 +430,83 @@ public class ForumDatabaseOperations
 		
 		return allComments;
 	}
+
+	public static Boolean insertPost(PostsBean pb)
+	{
+		Boolean isSubmitted = false;
+		
+		if(conn==null)
+		{
+			conn = DataSourceFactory.getConnection();
+		}
+		Calendar cal = Calendar.getInstance();
+		Date dd = new Date(cal.getTimeInMillis());
+		try
+		{
+			String query = "insert into posts (posttitle,postdescription,subjectId," +
+					"postedBy,postedDate,poststatus) values (?,?,?,?,?,?)";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pb.getPostTitle());
+			pstmt.setString(2, pb.getPostDescription());
+			pstmt.setInt(3, pb.getSubjectId());
+			pstmt.setString(4, pb.getPostBy());
+			pstmt.setDate(5, dd);
+			pstmt.setString(6, "active");
+			
+			int i = pstmt.executeUpdate();
+			if(i==1)
+			{
+				isSubmitted = true;
+			}
+			else
+			{
+				isSubmitted = false;
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return isSubmitted;
+	}
+
+	public static Boolean insertComment(CommentBean pb)
+	{
+		Boolean isSubmitted = false;
+		
+		if(conn==null)
+		{
+			conn = DataSourceFactory.getConnection();
+		}
+		Calendar cal = Calendar.getInstance();
+		Date dd = new Date(cal.getTimeInMillis());
+		try
+		{
+			String query = "insert into comments (commentdescription,postId," +
+					"commentedBy,commentedDate,commentstatus) values (?,?,?,?,?)";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pb.getCommentDescription());
+			pstmt.setInt(2, pb.getPostId());
+			pstmt.setString(3, pb.getCommentedBy());
+			pstmt.setDate(4, dd);
+			pstmt.setString(5, "active");
+			
+			int i = pstmt.executeUpdate();
+			if(i==1)
+			{
+				isSubmitted = true;
+			}
+			else
+			{
+				isSubmitted = false;
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return isSubmitted;
+	}
+
+
 }
