@@ -133,6 +133,7 @@ public class CommonsDatabaseActivities {
 				String image = res.getString("image");
 				userBean.setLevel(level);
 				userBean.setImage(image); 
+				userBean.setUserId(UserID);
 				String sqlQuery = "";
 				String name = "";
 				String courseID = "";

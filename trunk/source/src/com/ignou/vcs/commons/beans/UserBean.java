@@ -2,10 +2,18 @@ package com.ignou.vcs.commons.beans;
 
 public class UserBean {
 	String name;
+	String userId;
 	String level;
 	String courseID;
 	String subjectID;
 	String image;
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	
 	public String getCourseID() {
 		return courseID;
