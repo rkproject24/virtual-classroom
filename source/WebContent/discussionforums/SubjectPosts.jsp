@@ -11,14 +11,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Posts</title>
 <script type="text/javascript">
-function replyToThisPost(postId)
+function replyToThisPost(postId,user)
 {
-	alert(postId);
+	if(user=="")
+	{
+		alert("Please login to Comment.");
+		return false;
+	}
+	var param = "NewComment.jsp?p="+postId;
+
+	newwindow=window.open(param,'chld','height=500,width=580,resize=0');
+	if (window.focus) {newwindow.focus();}
 }
 
-function newPost(sub)
+function newPost(sub,user)
 {
-	alert("new post for "+ sub);
+	if(user=="")
+	{
+		alert("Please login to post.");
+		return false;
+	}
+	var param = "NewPost.jsp?s="+sub;
+
+	newwindow=window.open(param,'chld','height=500,width=580,resize=0');
+	if (window.focus) {newwindow.focus();}
 }
 
 function viewComments(postId)
@@ -134,22 +150,11 @@ function loadCss() {
 <br>
 <hr>
 <br>
-<input type="button" value="New Post" onclick="javaScript: newPost(<%=subjectId %>)">
+<input type="button" value="New Post" onclick="javaScript: newPost(<%=subjectId %>,'<%=userName %>')">
 </center></div></div>
 	<div id="right">
 			<div class="boxtop"></div>
 			<%@include file="Polls.jsp" %>
-			
-			<div class="boxtop"></div>
-			<div class="box">
-				<p>
-					<b><u>Collaborate</u></b><br />
-					<a href="#" accesskey="m"><span class="key">I</span>nteractive White Boards</a><br />
-					<a href="#" accesskey="m"><span class="key">C</span>hat with friends, Faculties</a><br />
-					<a href="#" accesskey="m"><span class="key">V</span>oice Mailboxes</a><br />
-				</p>
-				<div class="buttons"><p><a href="#" class="bluebtn"><span>More</span></a></p></div>
-			</div>
 		</div>	
 		<%@include file="../footer.jsp" %>
 	</div>
