@@ -8,13 +8,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.ignou.vcs.commons.beans.UserBean"%>
 <%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
-
-<%@page import="com.ignou.vcs.database.VCSDatabaseActivities"%>
-<%@page import="com.ignou.vcs.beans.StudentBean"%>
-<%@page import="com.ignou.vcs.exams.database.ExamsDatabaseActivities"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.ignou.vcs.exams.beans.ExamBean"%>
-<%@page import="com.ignou.vcs.exams.beans.StudentExamBean"%><html:html>
+<html:html>
 <head>
 <script type="text/javascript" language="javascript" >
 
@@ -33,14 +27,9 @@ function loadCss() {
 	}
 }
 
-function showExam(examId)
+function returnToMain()
 {
-	window.location.href = "Instructions.jsp?e="+examId;
-}
-
-function viewExamResult(examId)
-{
-	window.location.href = "ExamResults.jsp?e="+examId;
+	window.location.href = "ShowExams.jsp";
 }
 
 </script> 
@@ -79,53 +68,50 @@ function viewExamResult(examId)
 				<%@include file="../../DisplayCalendar.jsp" %>
 				<h2><a href="#"><u>Virtual Classroom System</u></a></h2>
 				<p class="description">Studying the e-way.</p>
-				<%
-					VCSDatabaseActivities vda = new VCSDatabaseActivities();
-					StudentBean sb = vda.getStudentDetails(userIDForName);
-					
-					int courseId = Integer.parseInt(sb.getCourseId());
-					ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
-					ArrayList<StudentExamBean> allExams = eda.getStudentExamDetails(courseId);
-					if(allExams.size()>0)
-					{
-						%>
-						<table>
-							<tr><td>S.No</td><td>Exam Name</td><td>Comments</td></tr>
-							<%
-								for(int i=0;i<allExams.size();i++)
-								{
-									StudentExamBean seb = allExams.get(i);
-									%>
-									<tr><td><%=i+1 %></td>
-										<td><%=seb.getExamName() %></td>
-										<td><%
-											String result = seb.getResult();
-											if(result.equalsIgnoreCase("pass"))
-											{
-												out.println("Alreay Passed<br> You got : "+seb.getScore());
-												out.println("<br> <a href='javaScript: viewExamResult("+seb.getExamId()+")'></a>");
-											}else
-											{
-												String showLink = "<a href='javaScript: showExam("+seb.getExamId()+")'>Write Exam</a>";
-												out.println(showLink);
-											}
-										%></td>
-									</tr>
-									<%
-								}
-							%>
-						</table>
-						<%
-					}
-					else
-					{
-						%>
-						<b><font color="red">No Exams found for your course. Please contact your faculty.</font></b>
-						<%
-					}
-				%>
+				
+<center>
+					<html:form action="/UserAcceptance.do" onreset="returnToMain()">
+						<p>
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+						when an unknown printer took a galley of type and scrambled it to make a type 
+						specimen book. It has survived not only five centuries, but also the leap into 
+						electronic typesetting, remaining essentially unchanged. It was popularised in the 
+						1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more 
+						recently with desktop publishing software like Aldus PageMaker including versions 
+						of Lorem Ipsum.
+						</p>
+						<br><br>
+						<p>
+						Contrary to popular belief, Lorem Ipsum is not simply random text. 
+						It has roots in a piece of classical Latin literature from 45 BC, 
+						making it over 2000 years old. Richard McClintock, a Latin professor at 
+						Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, 
+						consectetur, from a Lorem Ipsum passage, and going through the cites of the word in 
+						classical literature, discovered the undoubtable source. Lorem Ipsum comes from 
+						sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of 
+						Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory 
+						of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, 
+						"Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+						</p>
+						<p>
+						<ul>
+							<li>You need to click on Start Exam button to enable the questions</li>
+							<li>You need to click on End Exam if you wish to end the exam.</li>
+							<li>You cannot click on back button when you start the exam.</li>
+							<li>You cannot write again the same exam if you refresh the browser.</li>
+						</ul>
+						<input type="hidden" name='userstatus'>
+						<input type="hidden" name='userAcceptance'>
+						<input type="hidden" name='exam' value="">
+						<br>
+						<html:submit property="Submit" value="Accept"></html:submit>
+							&nbsp;&nbsp;&nbsp;&nbsp;<html:reset value="Decline" />
+					</html:form>
+				</center>
+
+
 			</div>
-		
 		
 		
 		<%@include file="../../footer.jsp" %>
