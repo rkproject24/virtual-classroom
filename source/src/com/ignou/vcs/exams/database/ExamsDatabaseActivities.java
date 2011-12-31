@@ -13,6 +13,7 @@ import java.util.StringTokenizer;
 import com.ignou.vcs.datasource.DataSourceFactory;
 import com.ignou.vcs.exams.beans.ExamBean;
 import com.ignou.vcs.exams.beans.QuestionBean;
+import com.ignou.vcs.exams.beans.StudentExamBean;
 
 public class ExamsDatabaseActivities 
 {
@@ -272,6 +273,35 @@ public class ExamsDatabaseActivities
 		}
 		return approvalExams;
 	}
+	
+	public ArrayList<StudentExamBean> getStudentExamDetails(int courseId)
+	{
+		ArrayList<StudentExamBean> studentExams = new ArrayList<StudentExamBean>();
+		try
+		{
+			String query = "select a.examId,a.examName,a.subjectId,b.result,b.score from exams as a, studentexamstatus as b where a.courseId=b.courseId";
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next())
+			{
+				StudentExamBean seb = new StudentExamBean();
+				seb.setCourseId(courseId);
+				seb.setExamId(rs.getInt(1));
+				seb.setExamName(rs.getString(2));
+				seb.setSubjectId(rs.getInt(3));
+				seb.setResult(rs.getString(4));
+				seb.setScore(rs.getInt(5));
+				
+				studentExams.add(seb);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return studentExams;
+	}
+
 	
 	public boolean createExam(ExamBean eb, String createdBy)
 	{
