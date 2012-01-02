@@ -10,9 +10,9 @@
 <%@page
 	import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
 
-<%@page import="com.ignou.vcs.exams.database.ExamsDatabaseActivities"%>
-<%@page import="com.ignou.vcs.exams.beans.QuestionBean"%>
-<%@page import="java.util.ArrayList"%><html:html>
+<%@page import="com.ignou.vcs.database.VCSDatabaseActivities"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.ignou.vcs.beans.courseBean"%><html:html>
 <head>
 <script type="text/javascript" language="javascript">
 	function loadCss() {
@@ -72,46 +72,37 @@
 				<a href="#"><u>Virtual Classroom System</u></a>
 			</h2>
 			<p class="description">Studying the e-way.</p>
+			<div id = "id1"></div>
 			<%
-				String ques = request.getParameter("q");
-				int questionId = Integer.parseInt(ques);
-
-				ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
-				QuestionBean question = eda.getQuestionDetails(questionId);
-				ArrayList<String> ops = question.getOptions();
-				String options = "";
-				for(int i=0; i<ops.size();i++)
-				{
-					if(i==question.getOptions().size()-1)
-					{
-						options = options+ question.getOptions().get(i);
-					}else
-					{
-						options = options+ question.getOptions().get(i)+"|";
-					}
-				}
-				%>
+			VCSDatabaseActivities db_obj = new VCSDatabaseActivities();
+			ArrayList<courseBean> courses = db_obj.getAllCourses();
+					
+			%>
 		</div>
-		<html:form action="/updateQuestion.do">
-		<input type="hidden" name="questionId" value="<%=questionId %>"/>
-		
-		<table>
-			<tr><td>Question</td><td><html:text property="question" value="<%=question.getQuestion() %>"></html:text></td><td><FONT color="red"><html:errors property="question"/></FONT></td></tr>
-			<tr><td>Options(Enter options separated by ("|")</td><td><html:text property="options"  value="<%=options %>"></html:text></td>
-			<td><td><FONT color="red"><html:errors property="options"/></FONT></td></tr>
-			<tr><td>Correct Answer</td><td><html:text property="correctAnswer" value="<%=question.getCorrectAnswer() %>"></html:text></td>
-			<td><td><FONT color="red"><html:errors property="correctAnswer"/></FONT></td></tr>
-			<tr><td>Marks</td><td><input type="text" name="marks" value="<%=question.getMarks() %>"></td><td></td></tr>
-			<tr>
-				<td></td>
-				<td align="left" width="180"><html:submit property="Submit"
-					value="Submit"></html:submit>&nbsp;&nbsp;&nbsp;&nbsp;<html:reset /></td>
-				<td></td>
-			</tr>
-		</table>
-		</html:form>
+</div>
 
+		<div id="right">
+			<%-- tpl:put name="right_boxes" --%>
+			<script src = "${pageContext.request.contextPath}/faculty/exam/js/ajax.js"></script>
+<br>			
+<div class="boxtop"></div>
+			<div class="box">
+				<p>
+					<b><u>Courses</u></b><br />
+					<%
+						for(int i = 0;i<courses.size();i++)
+						{
+							courseBean cb = courses.get(i);
+							int course = cb.getCourseid();
+							String courseName = cb.getCoursename();
+					 %>
+						<a href="javascript:jah('QuestionsList.jsp','id1','<%= course%>')"><%=courseName %></a><br />
+					<%} %>
+					
+				</p>
+			 </div>
+			 <br>
+		</div>	
 		<%@include file="../../footer.jsp"%>
-	</div>
 </body>
 </html:html>

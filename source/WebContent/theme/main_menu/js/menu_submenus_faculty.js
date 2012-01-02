@@ -17,9 +17,8 @@ if (TransMenu.isSupported()) {
 		
 		
 		var menu4 = ms.addMenu(document.getElementById("menu4"));
-		menu4.addItem("Prepare Test Paper","http://localhost:8080/VCS/faculty/exam/test.jsp", "0");
-		menu4.addItem("View/Modify Test Paper", "http://localhost:8080/VCS/faculty/exam/modifyTest.jsp", "0");
-		menu4.addItem("Evaluate Test Paper","http://localhost:8080/VCS/faculty/exam/evaluate_test.jsp", "0");
+		menu4.addItem("Exams","http://localhost:8080/VCS/faculty/exams/ShowExams.jsp", "0");
+		menu4.addItem("Questions","http://localhost:8080/VCS/faculty/exams/ViewAllQuestions.jsp", "0");
 		
 		
 		var menu6 = ms.addMenu(document.getElementById("menu6"));
