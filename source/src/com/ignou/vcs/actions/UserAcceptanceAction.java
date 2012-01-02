@@ -38,7 +38,6 @@ public class UserAcceptanceAction extends Action
 
 		if(userStatus.equalsIgnoreCase("accepted"))
 		{
-			
 		}
 		else
 		{
