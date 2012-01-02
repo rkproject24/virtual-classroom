@@ -35,9 +35,9 @@ function showQuestions(examId)
 	window.location.href = "CheckQuestion.jsp?e="+examId;
 }
 
-function submitApproval(subjectId, examId)
+function submitApproval(subjectId, examId,courseId)
 {
-	window.location.href = "ApproveExam.jsp?e="+examId+"&s="+subjectId;
+	window.location.href = "ApproveExam.jsp?e="+examId+"&s="+subjectId+"&c="+courseId;
 }
 
 </script> 
@@ -95,7 +95,7 @@ function submitApproval(subjectId, examId)
 							<tr>
 								<td><%=i+1 %></td>
 								<td><a href="javaScript: showQuestions(<%=exam.getExamId() %>)"><%=exam.getExamName() %></a></td>
-								<td>Click <a href="javaScript: submitApproval(<%=exam.getSubjectId() %>,<%=exam.getExamId() %>)">here</a> to approve or reject.</td>
+								<td>Click <a href="javaScript: submitApproval(<%=exam.getSubjectId() %>,<%=exam.getExamId() %>,<%=exam.getCourseId() %>)">here</a> to approve or reject.</td>
 							</tr>
 
 						<%
