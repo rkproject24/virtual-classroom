@@ -10,9 +10,11 @@
 <%@page
 	import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
 
-<%@page import="com.ignou.vcs.exams.database.ExamsDatabaseActivities"%>
-<%@page import="com.ignou.vcs.exams.beans.QuestionBean"%>
-<%@page import="java.util.ArrayList"%><html:html>
+<%@page import="com.ignou.vcs.database.VCSDatabaseActivities"%>
+<%@page import="com.ignou.vcs.commons.beans.SubjectBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.ignou.vcs.commons.beans.CourseBean"%>
+<%@page import="com.ignou.vcs.beans.courseBean"%><html:html>
 <head>
 <script type="text/javascript" language="javascript">
 	function loadCss() {
@@ -73,44 +75,25 @@
 			</h2>
 			<p class="description">Studying the e-way.</p>
 			<%
-				String ques = request.getParameter("q");
-				int questionId = Integer.parseInt(ques);
-
-				ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
-				QuestionBean question = eda.getQuestionDetails(questionId);
-				ArrayList<String> ops = question.getOptions();
-				String options = "";
-				for(int i=0; i<ops.size();i++)
-				{
-					if(i==question.getOptions().size()-1)
-					{
-						options = options+ question.getOptions().get(i);
-					}else
-					{
-						options = options+ question.getOptions().get(i)+"|";
-					}
-				}
-				%>
+			String e = request.getParameter("e");
+			%>
+			<center>
+					<h2> Exam Details</h2>
+					<%
+						int examId = Integer.parseInt(e);
+						
+					%>
+				
+			</center>
 		</div>
-		<html:form action="/updateQuestion.do">
-		<input type="hidden" name="questionId" value="<%=questionId %>"/>
-		
-		<table>
-			<tr><td>Question</td><td><html:text property="question" value="<%=question.getQuestion() %>"></html:text></td><td><FONT color="red"><html:errors property="question"/></FONT></td></tr>
-			<tr><td>Options(Enter options separated by ("|")</td><td><html:text property="options"  value="<%=options %>"></html:text></td>
-			<td><td><FONT color="red"><html:errors property="options"/></FONT></td></tr>
-			<tr><td>Correct Answer</td><td><html:text property="correctAnswer" value="<%=question.getCorrectAnswer() %>"></html:text></td>
-			<td><td><FONT color="red"><html:errors property="correctAnswer"/></FONT></td></tr>
-			<tr><td>Marks</td><td><input type="text" name="marks" value="<%=question.getMarks() %>"></td><td></td></tr>
-			<tr>
-				<td></td>
-				<td align="left" width="180"><html:submit property="Submit"
-					value="Submit"></html:submit>&nbsp;&nbsp;&nbsp;&nbsp;<html:reset /></td>
-				<td></td>
-			</tr>
-		</table>
-		</html:form>
 
+
+		<div id="right">
+			
+			<%@include file="../../latest_news.jsp"%>
+
+			
+		</div>
 		<%@include file="../../footer.jsp"%>
 	</div>
 </body>

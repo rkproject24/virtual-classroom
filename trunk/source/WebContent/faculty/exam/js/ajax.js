@@ -253,3 +253,24 @@ function jahDone(target) {
         }
     }
 }
+
+function getExams(url,target,str) {
+    // native XMLHttpRequest object
+        url = url + "&s=" + str; 
+        document.getElementById(target).innerHTML = '<span class="ajah_waiting"><a href="java script:jah(\''+url+'\',\''+target+'\');">sending...</a></span>';
+    if (window.XMLHttpRequest) {
+        req = new XMLHttpRequest();
+        req.onreadystatechange = function() {jahDone(target);};
+        req.open("POST", url, true);
+        req.send(null);
+    // IE/Windows ActiveX version
+
+    } else if (window.ActiveXObject) {
+        req = new ActiveXObject("Microsoft.XMLHTTP");
+        if (req) {
+            req.onreadystatechange = function() {jahDone(target);};
+            req.open("POST", url, true);
+            req.send();
+        }
+    }
+}

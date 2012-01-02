@@ -1,3 +1,4 @@
+<div class="boxtop"></div>
 <div class="box">
 	<p><center><b><u>News</u></b></center><br />
 		1. <a href="news/AdobeSummit.jsp" accesskey="m">New Java Courses launched. </a><br />

@@ -35,7 +35,8 @@
 	{
 		var crsId = document.getElementById("crs").value;
 		var subId = document.getElementById("sub").value;
-		var param = "ShowQuestions.jsp?c="+crsId+"&s="+subId;
+		var exam = document.getElementById("examType").value;
+		var param = "ShowQuestions.jsp?c="+crsId+"&s="+subId+"&e="+exam;
 
 		newwindow=window.open(param,'chld','height=500,width=580');
 		if (window.focus) {newwindow.focus();}
@@ -95,16 +96,21 @@
 				<a href="#"><u>Virtual Classroom System</u></a>
 			</h2>
 			<p class="description">Studying the e-way.</p>
+			<%
+			String s = request.getParameter("s");
+			String c = request.getParameter("c");
+			%>
 			<center>
 					<h2>Adding Exam</h2>
 					<%
 						
 						CommonsDatabaseActivities cda = new CommonsDatabaseActivities();
-					 	ArrayList<SubjectBean> allSubjects = cda.getAllSubjects();
+					 	ArrayList<SubjectBean> allSubjects = cda.getSubjects(c,false);
 						
 					%><br><FONT color="red"><html:errors property="ServerError"/></FONT><br>
 				<html:form action="/addExam.do" onsubmit="return questions();">
-					
+					<input type="hidden" id="sub" name="subjectId" value="<%=s%>">
+					<input type="hidden" id="crs" name="courseId" value="<%=c %>">
 					<table>
 						<tr>
 							<td>Exam Name</td>
@@ -129,10 +135,10 @@
 						<tr>
 							<td>Exam Type</td>
 							<td>
-								<html:select property="examType">
-									<html:option value='0'>Major Exam</html:option>
-									<html:option value='1'>Minor Exam</html:option>
-								</html:select>
+								<select name="examType" id="examType">
+									<option value='0'>Course Wise</option>
+									<option value='1'>Subject Wise</option>
+								</select>
 							</td>
 							<td><FONT color="red"><html:errors property="examType"/></FONT></td>
 						</tr>

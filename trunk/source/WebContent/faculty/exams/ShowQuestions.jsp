@@ -87,15 +87,17 @@
 		ArrayList<QuestionBean> allQuestions = new ArrayList<QuestionBean>();
 		String cId = request.getParameter("c");
 		String sId = request.getParameter("s");
+		String e = request.getParameter("e");
 		int courseId = Integer.parseInt(cId);
 		int subjectId = Integer.parseInt(sId);
+		int examType = Integer.parseInt(e);
 		ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
 		
-		if(courseId>0)
+		if(examType==0)
 		{
 			allQuestions = eda.getCourseQuestions(courseId);
 		}
-		else if(subjectId>0)
+		else 
 		{
 			allQuestions = eda.getSubjectQuestions(subjectId);
 		}

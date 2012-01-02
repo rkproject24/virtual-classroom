@@ -112,7 +112,7 @@
 		</action>
 		<action path="/approveExam" type="com.ignou.vcs.actions.ApproveExamAction" 
 			name="approveExamForm" scope="request" input="/management/exams/ApproveExam.jsp" validate="true">
-			<forward contextRelative="false" redirect = "true" name="success" path="/discussionforums/AllPolls.jsp">
+			<forward contextRelative="false" redirect = "true" name="success" path="/management/exams/ViewExams.jsp">
 			</forward>
 			<forward contextRelative="false" redirect = "true" name="failure" path="/management/exams/ViewExams.jsp">
 			</forward>
@@ -126,7 +126,7 @@
 		</action>
 		<action path="/updateQuestion" type="com.ignou.vcs.actions.UpdateQuestionAction" 
 			name="updateQuestionForm" scope="request" input="/faculty/exams/UpdateQuestion.jsp" validate="true">
-			<forward contextRelative="false" redirect = "true" name="success" path="/faculty/exams/ShowQuestions.jsp">
+			<forward contextRelative="false" redirect = "true" name="success" path="/faculty/exams/ViewAllQuestions.jsp">
 			</forward>
 			<forward contextRelative="false" redirect = "true" name="failure" path="/faculty/exams/UpdateQuestion.jsp">
 			</forward>

@@ -140,7 +140,11 @@ function loadCss() {
 					<b><u>View Students</u></b></a>
 					<p>View all the students and their profiles who are taking education at VCS</p></td>
 				</tr>
-				
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/management/exams/ViewExams.jsp"><img src="${pageContext.request.contextPath}/theme/images_links/users_two_48.png" class="thumbnail">
+					<b><u>Exam Approvals</u></b></a>
+					<p>View all the exams and exam approvals at VCS</p></td>
+				</tr>
 				<tr>
 					<td><a href="http://localhost:8080/VCS/faculty/view_news.jsp"><img src="${pageContext.request.contextPath}/theme/images_links/newspaper_48.png" class="thumbnail">
 					<b><u>News @ VCS</u></b></a>

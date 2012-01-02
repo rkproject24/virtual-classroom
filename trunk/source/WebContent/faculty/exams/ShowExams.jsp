@@ -27,12 +27,6 @@ function loadCss() {
 		stylesheet.href="${pageContext.request.contextPath}/theme/css/style1.css";
 		menusheet.href="${pageContext.request.contextPath}/theme/css/menu.css";		
 	}
-
-	function addExam()
-	{
-		window.location.href = 'AddExam.jsp'; 
-		
-	}	
 }
 </script> 
 <link id="pagestyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/style1.css" />
@@ -83,7 +77,8 @@ function loadCss() {
 					 </div>
 				<%
 					VCSDatabaseActivities db_obj = new VCSDatabaseActivities();
-					ArrayList<SubjectBean> subjects = db_obj.getAllSubjects();
+					ArrayList<courseBean> courses = db_obj.getAllCourses();
+							
 					
 					
 				%>
@@ -97,20 +92,21 @@ function loadCss() {
 			<div class="boxtop"></div>
 			<div class="box">
 				<p>
-					<b><u>Subjects</u></b><br />
+					<b><u>Courses</u></b><br />
 					<%
-						for(int i = 0;i<subjects.size();i++)
+						for(int i = 0;i<courses.size();i++)
 						{
-							SubjectBean sb = subjects.get(i);
-							String subject = sb.getSubjectId();
-							String subjectName = sb.getSubjectName();
+							courseBean cb = courses.get(i);
+							int course = cb.getCourseid();
+							String courseName = cb.getCoursename();
 					 %>
-						<a href="javascript:jah('ExamsList.jsp','id1','<%= subject%>')"><%=subjectName %></a><br />
+						<a href="javascript:jah('SubjectsList.jsp','id2','<%= course%>')"><%=courseName %></a><br />
 					<%} %>
 					
 				</p>
-			</div>
-			<div id = "id2"> </div>
+			 </div>
+			 <br>
+			 <div id = "id2">
 		</div>	
 		<%@include file="../../footer.jsp" %>
 	</div>
