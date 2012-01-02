@@ -36,10 +36,16 @@ public class UpdateQuestionAction extends Action
 		ActionForward forward = new ActionForward(); // return value
 		UpdateQuestionForm updateQuestionForm = (UpdateQuestionForm) form;
 		ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
+		String userName = (String) request.getSession().getAttribute("userId");
+		String ques = request.getParameter("questionId");
+		String ma = request.getParameter("marks");
 		
 		try 
 		{
+			int questionId = Integer.parseInt(ques);
+			int marks = Integer.parseInt(ma);
 			QuestionBean qb = new QuestionBean();
+			qb.setQuestionId(questionId);
 			qb.setQuestion(updateQuestionForm.getQuestion());
 			qb.setCorrectAnswer(updateQuestionForm.getCorrectAnswer());
 			String opt = updateQuestionForm.getOptions();
@@ -50,7 +56,8 @@ public class UpdateQuestionAction extends Action
 				options.add(st.nextToken());
 			}
 			qb.setOptions(options);
-			qb.setMarks(updateQuestionForm.getMarks());
+			qb.setMarks(marks);
+			qb.setUpdatedBy(userName);
 			
 			Boolean isUpdated = eda.updateQuestion(qb);
 			

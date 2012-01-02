@@ -1,11 +1,5 @@
 package com.ignou.vcs.forms;
 
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionError;
@@ -25,20 +19,9 @@ import org.apache.struts.action.ActionMapping;
  */
 public class UpdateQuestionForm extends ActionForm
 {
-	int questionId;
 	String question;
 	String options;
-	int marks;
 	String correctAnswer;
-	
-	public int getQuestionId() 
-	{
-		return questionId;
-	}
-	public void setQuestionId(int questionId) 
-	{
-		this.questionId = questionId;
-	}
 	
 	public String getCorrectAnswer() 
 	{
@@ -67,22 +50,12 @@ public class UpdateQuestionForm extends ActionForm
 		this.options = options;
 	}
 	
-	public int getMarks() 
-	{
-		return marks;
-	}
-	public void setMarks(int marks) 
-	{
-		this.marks = marks;
-	}
-	
 
     public void reset(ActionMapping mapping, HttpServletRequest request) 
     {
 	// Reset values are provided as samples only. Change as appropriate.
     	question = null;
     	options = null;
-    	marks = 0;
     	correctAnswer = null;
     }
 
@@ -99,9 +72,6 @@ public class UpdateQuestionForm extends ActionForm
 	 }else if ((getOptions() == null) || (getOptions().length() == 0)) 
 	 {
 		   errors.add("options", new ActionError("error.questions.options"));
-	 }else if (getMarks() == 0) 
-	 {
-		   errors.add("marks", new ActionError("error.questions.marks"));
 	 }else if ((getCorrectAnswer() == null) || (getCorrectAnswer().length() == 0)) 
 	 {
 		   errors.add("correctAnswer", new ActionError("error.questions.correctAnswer"));

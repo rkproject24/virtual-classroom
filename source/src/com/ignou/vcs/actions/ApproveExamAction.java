@@ -35,13 +35,13 @@ public class ApproveExamAction extends Action
 		ApproveExamForm approveExamForm = (ApproveExamForm) form;
 		String approvedBy = (String) request.getSession().getAttribute("userId");
 		String ex = request.getParameter("examId");
-		String sub = request.getParameter("subject");
+		String sub = request.getParameter("subjectId");
 		try 
 		{
 			int subjectId = Integer.parseInt(sub);
 			int examId = Integer.parseInt(ex);
 			ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
-			Boolean b = eda.approveExam(examId, approvedBy, approveExamForm.getExamAppovalComments(), approveExamForm.getExamId());
+			Boolean b = eda.approveExam(examId, approvedBy, approveExamForm.getExamAppovalComments(), approveExamForm.getExamAppovalStatus());
 			if(b)
 			{
 				int approvalStatus = approveExamForm.getExamAppovalStatus();

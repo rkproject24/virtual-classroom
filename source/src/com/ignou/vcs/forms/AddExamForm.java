@@ -24,7 +24,6 @@ public class AddExamForm extends ActionForm
 	 */
 	private static final long serialVersionUID = 1L;
 	private String examName="";
-	private int examType;
 	private int subjectId;
 	private String questionIds="";
 	private int maxMarks;
@@ -76,15 +75,6 @@ public class AddExamForm extends ActionForm
 		this.questionIds = questionIds;
 	}
 	
-	public int getExamType() 
-	{
-		return examType;
-	}
-	public void setExamType(int examType) 
-	{
-		this.examType = examType;
-	}
-	
 	public int getSubjectId() 
 	{
 		return subjectId;
@@ -99,7 +89,6 @@ public class AddExamForm extends ActionForm
 
 	// Reset values are provided as samples only. Change as appropriate.
     	examName = null;
-    	examType=0;
     	questionIds = null;
     	maxMarks=0;
     	passMarks=0;
@@ -118,11 +107,7 @@ public class AddExamForm extends ActionForm
 	if ((getExamName() == null) || (getExamName().length() == 0)) 
 	 {
 	   errors.add("examName", new ActionError("error.exams.examName"));
-	 } else
-	 if(getExamType()<0)
-	 {
-		 errors.add("examType", new ActionError("error.exams.examType")); 
-	 }
+	 } 
 	 if ((getSubjectId() == 0)) 
 	 {
 	   errors.add("subjectId", new ActionError("error.exams.subjectId"));
@@ -130,11 +115,11 @@ public class AddExamForm extends ActionForm
 	 if ((getMaxMarks() == 0)) 
 	 {
 	   errors.add("maxMarks", new ActionError("error.exams.maxMarks"));
-	 }else
+	 }
 	 if ((getPassMarks() == 0)) 
 	 {
 	   errors.add("passMarks", new ActionError("error.exams.passMarks"));
-	 }else
+	 }
 	 if(getDuration()==0)
 	 {
 		 errors.add("examDuration", new ActionError("error.exams.examDuration")); 

@@ -94,12 +94,13 @@ public class ExamsDatabaseActivities
 					options.add(st.nextToken());
 				}
 				qb.setOptions(options); // options
-				qb.setMarks(rs.getInt(7)); // marks for individual question
 				qb.setCorrectAnswer(rs.getString(8)); // correct answer
-				qb.setCreatedBy(rs.getString(9)); // question created by
-				qb.setCreatedDate(rs.getDate(10)); //creation date
-				qb.setUpdatedBy(rs.getString(11)); //updated by
-				qb.setUpdatedDate(rs.getDate(12)); //updated date
+				qb.setMarks(rs.getInt(8)); // marks for individual question
+				// 9th - explanation
+				qb.setCreatedBy(rs.getString(10)); // question created by
+				qb.setCreatedDate(rs.getDate(11)); //creation date
+				qb.setUpdatedBy(rs.getString(12)); //updated by
+				qb.setUpdatedDate(rs.getDate(13)); //updated date
 				
 				allCourseQues.add(qb); 
 			}
@@ -110,6 +111,46 @@ public class ExamsDatabaseActivities
 		}
 			
 		return allCourseQues;
+	}
+	
+	public QuestionBean getQuestionDetails(int questionId)
+	{
+		QuestionBean questionDetails = new QuestionBean();
+		try
+		{
+			String query = "select * from questions where questionId="+questionId;
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			if(rs.next())
+			{
+				questionDetails.setQuestionId(rs.getInt(1)); //question id
+				questionDetails.setSubjectId(rs.getInt(2)); //subject id
+				questionDetails.setCourseId(rs.getInt(3)); // course id
+				questionDetails.setQuestionType(rs.getInt(4)); //question type(multiple choice/blanks
+				questionDetails.setQuestion(rs.getString(5)); //question
+				ArrayList<String> options = new ArrayList<String>();
+				String opt = rs.getString(6);
+				StringTokenizer st = new StringTokenizer(opt,"|");
+				while(st.hasMoreTokens())
+				{
+					options.add(st.nextToken());
+				}
+				questionDetails.setOptions(options); // options
+				questionDetails.setCorrectAnswer(rs.getString(7)); // correct answer
+				questionDetails.setMarks(rs.getInt(8)); // marks for individual question
+				// 9th - explanation
+				questionDetails.setCreatedBy(rs.getString(10)); // question created by
+				questionDetails.setCreatedDate(rs.getDate(11)); //creation date
+				questionDetails.setUpdatedBy(rs.getString(12)); //updated by
+				questionDetails.setUpdatedDate(rs.getDate(13)); //updated date
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+			
+		return questionDetails;
 	}
 	
 	public boolean createQuestion(QuestionBean qb)
@@ -249,7 +290,7 @@ public class ExamsDatabaseActivities
 		try
 		{
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from exams where examApprovelStatus=1");
+			ResultSet rs = stmt.executeQuery("select * from exams where examAppovalStatus=1");
 			while(rs.next())
 			{
 				ExamBean eb = new ExamBean();
@@ -394,8 +435,8 @@ public class ExamsDatabaseActivities
 			Calendar cal = Calendar.getInstance();
 			Date dd = new Date(cal.getTimeInMillis());
 
-			String query = "update exams (examAppovalComments,examAppovalStatus," +
-					"approvedBy,approvalDate) values (?,?,?,?,?,?,?,?,?) where examId="+examId;
+			String query = "update exams set examAppovalComments=?,examAppovalStatus=?," +
+					"approvedBy=?,approvalDate=? where examId="+examId;
 			
 			PreparedStatement pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, approvalComments);
@@ -456,7 +497,7 @@ public class ExamsDatabaseActivities
 		try
 		{
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select questionIds from exam where examid="+examId);
+			ResultSet rs = stmt.executeQuery("select questionIds from exams where examid="+examId);
 			if(rs.next())
 			{
 				String qIds = rs.getString(1);
@@ -464,29 +505,30 @@ public class ExamsDatabaseActivities
 				while(st.hasMoreTokens())
 				{
 					QuestionBean qb = new QuestionBean();
-					rs = stmt.executeQuery("select * from questions where questionId="+st.nextToken());
-					if(rs.next())
+					ResultSet rs1 = stmt.executeQuery("select * from questions where questionId="+st.nextToken());
+					if(rs1.next())
 					{
-						qb.setQuestionId(rs.getInt(1));
-						qb.setSubjectId(rs.getInt(2));
-						qb.setCourseId(rs.getInt(3));
-						qb.setQuestionType(rs.getInt(3));
-						qb.setQuestion(rs.getString(4));
+						qb.setQuestionId(rs1.getInt(1));
+						qb.setSubjectId(rs1.getInt(2));
+						qb.setCourseId(rs1.getInt(3));
+						qb.setQuestionType(rs1.getInt(4));
+						qb.setQuestion(rs1.getString(5));
 						
 						ArrayList<String> options = new ArrayList<String>();
-						String opt = rs.getString(5);
+						String opt = rs1.getString(6);
 						StringTokenizer stt = new StringTokenizer(opt,"|");
 						while(stt.hasMoreTokens())
 						{
 							options.add(stt.nextToken());
 						}
 						qb.setOptions(options);
-						qb.setCorrectAnswer(rs.getString(6));
-						qb.setMarks(rs.getInt(7));
-						qb.setCreatedBy(rs.getString(8));
-						qb.setCreatedDate(rs.getDate(9));
-						qb.setUpdatedBy(rs.getString(10));
-						qb.setUpdatedDate(rs.getDate(11));
+						qb.setCorrectAnswer(rs1.getString(7));
+						qb.setMarks(rs1.getInt(8));
+						//9th - explanation
+						qb.setCreatedBy(rs1.getString(10));
+						qb.setCreatedDate(rs1.getDate(11));
+						qb.setUpdatedBy(rs1.getString(12));
+						qb.setUpdatedDate(rs1.getDate(13));
 					}
 					questions.add(qb);
 				}

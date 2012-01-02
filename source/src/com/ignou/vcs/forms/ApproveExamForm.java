@@ -64,13 +64,14 @@ public class ApproveExamForm extends ActionForm
 	ActionErrors errors = new ActionErrors();
 	// Validate the fields in your form, adding
 	// adding each error to this.errors as found, e.g.
-
-	 if (getExamAppovalStatus() < 0) 
+	System.out.println(getExamAppovalStatus() + "");
+	if ((getExamAppovalComments() == null || getExamAppovalComments().length() == 0)) 
 	 {
-	   errors.add("examAppovalStatus", new org.apache.struts.action.ActionError("error.exams.examAppovalStatus"));
-	 }else if (getExamAppovalStatus()==1 &&(getExamAppovalComments() == null || getExamAppovalComments().length() == 0)) 
-	 {
-	   errors.add("examAppovalComments", new org.apache.struts.action.ActionError("error.exams.examAppovalComments"));
+		if(getExamAppovalStatus()==1)
+		{
+			errors.add("examAppovalComments", new org.apache.struts.action.ActionError("error.exams.examAppovalComments"));
+		}
+	
 	 }
 	 
 		return errors;

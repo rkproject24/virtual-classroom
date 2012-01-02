@@ -38,17 +38,19 @@ public class AddExamAction extends Action
 		String questionIds = request.getParameter("questionIds");
 		String crs = request.getParameter("courseId");
 		String sub = request.getParameter("subjectId");
+		String exTy = request.getParameter("examType"); 
 		String userName = (String) request.getSession().getAttribute("userId");
 		
 		try 
 		{
 			int subjectId = Integer.parseInt(sub);
 			int courseId = Integer.parseInt(crs);
+			int examType = Integer.parseInt(exTy);
 			ExamBean eb = new ExamBean();
 			eb.setCourseId(courseId);
 			eb.setSubjectId(subjectId);
 			eb.setExamName(addExam.getExamName());
-			eb.setExamType(addExam.getExamType());
+			eb.setExamType(examType);
 			eb.setMaxMarks(addExam.getMaxMarks());
 			eb.setPassMarks(addExam.getPassMarks());
 			eb.setQuestionIds(questionIds);
