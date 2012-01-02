@@ -87,16 +87,19 @@
 <h2>Updating Exam</h2>
 <br>
 <%
+	String crs = request.getParameter("c");
 	String sub = request.getParameter("s");
 	String exam = request.getParameter("e");
 	
 	int subjectId = Integer.parseInt(sub);
+	int courseId = Integer.parseInt(crs);
 	int examId = Integer.parseInt(exam);
 %>
 <FONT color="red"><html:errors property="ServerError" /></FONT><br>
 <html:form action="/approveExam.do">
 	<input type="hidden" name="examId" value='<%=examId %>'>
 	<input type="hidden" name="subjectId" value='<%=subjectId %>'>
+	<input type="hidden" name="courseId" value='<%=courseId %>'>
 	<table>
 		<tr>
 			<td>Approval</td>
