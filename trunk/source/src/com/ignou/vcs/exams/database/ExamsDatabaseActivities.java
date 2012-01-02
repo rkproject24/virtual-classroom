@@ -320,7 +320,7 @@ public class ExamsDatabaseActivities
 		ArrayList<StudentExamBean> studentExams = new ArrayList<StudentExamBean>();
 		try
 		{
-			String query = "select a.examId,a.examName,a.subjectId,b.result,b.score from exams as a, studentexamstatus as b where a.courseId=b.courseId";
+			String query = "select a.examId,a.examName,a.subjectId,b.result,b.score from exams as a, studentexamstatus as b where a.courseId=b.courseId="+courseId;
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next())
@@ -426,7 +426,7 @@ public class ExamsDatabaseActivities
 		return isUpdated;
 	}
 	
-	public boolean approveExam(int examId, String approvedBy,String approvalComments, int status)
+	public boolean approveExam(int examId, String approvedBy,String approvalComments, int status,int subjectId, int courseId)
 	{
 		Boolean isApproved = false;
 		
@@ -446,9 +446,18 @@ public class ExamsDatabaseActivities
 			
 			int i = pstmt.executeUpdate();
 			
-			if(i>1)
+			if(i>0)
 			{
 				isApproved = true;
+				if(status==0)
+				{
+					StudentExamBean sb = new StudentExamBean();
+					sb.setSubjectId(subjectId);
+					sb.setCourseId(courseId);
+					sb.setExamId(examId);
+					
+					Boolean b = updateCourseStudents(sb);
+				}
 			}else
 			{
 				isApproved = false;
@@ -460,6 +469,40 @@ public class ExamsDatabaseActivities
 		}
 		
 		return isApproved;
+	}
+	
+	private boolean updateCourseStudents(StudentExamBean sb)
+	{
+		Boolean isUpdated = false;
+		try
+		{
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select userId from student where courseId="+sb.getCourseId());
+			
+			while(rs.next())
+			{
+				String userId = rs.getString(1);
+				System.out.println(userId + " user for course "+sb.getCourseId());
+				String query = "insert into studentexamstatus (" +
+						"examId,subjectId,courseId,userId,score,result) values " +
+						"(?,?,?,?,?,?)";
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, sb.getExamId());
+				pstmt.setInt(2, sb.getSubjectId());
+				pstmt.setInt(3, sb.getCourseId());
+				pstmt.setString(4, userId);
+				pstmt.setInt(5, 0);
+				pstmt.setString(6, "enrolled");
+				
+				int i = pstmt.executeUpdate();
+			}
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return isUpdated;
 	}
 	
 	public boolean deleteExam(int examId)
