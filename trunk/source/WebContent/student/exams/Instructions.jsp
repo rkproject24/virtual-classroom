@@ -32,6 +32,11 @@ function returnToMain()
 	window.location.href = "ShowExams.jsp";
 }
 
+function updateUserStatus()
+{
+	document.getElementById("userStatus").value = "accepted";
+}
+
 </script> 
 <link id="pagestyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/style1.css" />
 <link id="menustyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/menu.css" />
@@ -68,9 +73,11 @@ function returnToMain()
 				<%@include file="../../DisplayCalendar.jsp" %>
 				<h2><a href="#"><u>Virtual Classroom System</u></a></h2>
 				<p class="description">Studying the e-way.</p>
-				
+				<%
+					String examId = request.getParameter("e");
+				%>
 <center>
-					<html:form action="/UserAcceptance.do" onreset="returnToMain()">
+					<form action="ExamPaper.jsp" method="post" onsubmit="updateUserStatus()" onreset="returnToMain()">
 						<p>
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
 						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
@@ -101,13 +108,13 @@ function returnToMain()
 							<li>You cannot click on back button when you start the exam.</li>
 							<li>You cannot write again the same exam if you refresh the browser.</li>
 						</ul>
-						<input type="hidden" name='userstatus'>
-						<input type="hidden" name='userAcceptance'>
-						<input type="hidden" name='exam' value="">
+						<input type="hidden" name='userName' value="<%=userName%>">
+						<input type="hidden" id="userStatus" name='userStatus'>
+						<input type="hidden" name='exam' value="<%=examId%>">
 						<br>
-						<html:submit property="Submit" value="Accept"></html:submit>
-							&nbsp;&nbsp;&nbsp;&nbsp;<html:reset value="Decline" />
-					</html:form>
+						<input type="submit" value="Accept">
+							&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Decline">
+					</form>
 				</center>
 
 
