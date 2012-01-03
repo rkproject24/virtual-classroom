@@ -51,7 +51,7 @@ function loadCss() {
 <meta name="GENERATOR" content="Rational Application Developer">
 <title>Virtual Classroom System</title>
 </head>
-<body onLoad="javascript:loadCss()">
+<body onLoad="javascript:window.history.forward(1);javascript:loadCss()">
 
 <%@include file="../../header.jsp"%>								
 		
@@ -62,7 +62,20 @@ function loadCss() {
 				<%@include file="../../DisplayCalendar.jsp" %>
 				<h2><a href="#"><u>Virtual Classroom System</u></a></h2>
 				<p class="description">Studying the e-way.</p>
+				<%
+				String secured = (String)session.getAttribute("MarksSecured");
+				String total = (String) session.getAttribute("TotalMarks");
+				try
+				{
+					int marksSecured = Integer.parseInt(secured);
+					int totalMarks = Integer.parseInt(total);
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
 				
+				%>
 			</div>
 		
 		

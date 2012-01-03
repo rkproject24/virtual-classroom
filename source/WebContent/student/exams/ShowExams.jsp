@@ -14,7 +14,8 @@
 <%@page import="com.ignou.vcs.exams.database.ExamsDatabaseActivities"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.ignou.vcs.exams.beans.ExamBean"%>
-<%@page import="com.ignou.vcs.exams.beans.StudentExamBean"%><html:html>
+<%@page import="com.ignou.vcs.exams.beans.StudentExamBean"%>
+<%@page import="com.ignou.vcs.exams.beans.StudentExamStatusBean"%><html:html>
 <head>
 <script type="text/javascript" language="javascript" >
 
@@ -85,7 +86,7 @@ function viewExamResult(examId)
 					
 					int courseId = Integer.parseInt(sb.getCourseId());
 					ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
-					ArrayList<StudentExamBean> allExams = eda.getStudentExamDetails(courseId);
+					ArrayList<StudentExamStatusBean> allExams = eda.getStudentExamDetails(courseId);
 					if(allExams.size()>0)
 					{
 						%>
@@ -94,7 +95,7 @@ function viewExamResult(examId)
 							<%
 								for(int i=0;i<allExams.size();i++)
 								{
-									StudentExamBean seb = allExams.get(i);
+									StudentExamStatusBean seb = allExams.get(i);
 									%>
 									<tr><td><%=i+1 %></td>
 										<td><%=seb.getExamName() %></td>
