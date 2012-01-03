@@ -14,6 +14,7 @@ import com.ignou.vcs.datasource.DataSourceFactory;
 import com.ignou.vcs.exams.beans.ExamBean;
 import com.ignou.vcs.exams.beans.QuestionBean;
 import com.ignou.vcs.exams.beans.StudentExamBean;
+import com.ignou.vcs.exams.beans.StudentExamStatusBean;
 
 public class ExamsDatabaseActivities 
 {
@@ -315,17 +316,17 @@ public class ExamsDatabaseActivities
 		return approvalExams;
 	}
 	
-	public ArrayList<StudentExamBean> getStudentExamDetails(int courseId)
+	public ArrayList<StudentExamStatusBean> getStudentExamDetails(int courseId)
 	{
-		ArrayList<StudentExamBean> studentExams = new ArrayList<StudentExamBean>();
+		ArrayList<StudentExamStatusBean> studentExams = new ArrayList<StudentExamStatusBean>();
 		try
 		{
-			String query = "select a.examId,a.examName,a.subjectId,b.result,b.score from exams as a, studentexamstatus as b where a.courseId=b.courseId="+courseId;
+			String query = "select a.examId,a.examName,a.subjectId,b.result,b.score from exams as a, studentexamstatus as b where a.courseId=b.courseId";
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next())
 			{
-				StudentExamBean seb = new StudentExamBean();
+				StudentExamStatusBean seb = new StudentExamStatusBean();
 				seb.setCourseId(courseId);
 				seb.setExamId(rs.getInt(1));
 				seb.setExamName(rs.getString(2));
@@ -342,6 +343,7 @@ public class ExamsDatabaseActivities
 		}
 		return studentExams;
 	}
+
 
 	
 	public boolean createExam(ExamBean eb, String createdBy)
@@ -533,7 +535,97 @@ public class ExamsDatabaseActivities
 		return isDeleted;
 	}
 	
-	public ArrayList<QuestionBean> getExamPaper(int examId)
+	public StudentExamBean getExamPaper(int examId,String userName)
+	{
+		StudentExamBean seb = new StudentExamBean();
+		ArrayList<QuestionBean> questions = getExamQuestions(examId);
+		System.out.println(questions.size() + "  No of questions");
+		try
+		{
+			Statement stmt = conn.createStatement();
+			int subjectId = 0;
+			int courseId = 0;
+			String subjectName = "";
+			String courseName = "";
+			
+			seb.setExamId(examId);
+			seb.setQuestions(questions);
+			
+			ResultSet rs = stmt.executeQuery("select subjectId,courseId,examName," +
+					"maxMarks,passMarks,duration from exams where examId=" + examId);
+			if(rs.next())
+			{
+				subjectId = rs.getInt(1);
+				seb.setSubjectId(subjectId);
+				courseId = rs.getInt(2);
+				seb.setCourseId(courseId);
+				seb.setExamName(rs.getString(3));
+				seb.setMaxMarks(rs.getInt(4));
+				seb.setPassMarks(rs.getInt(5));
+				seb.setDuration(rs.getInt(6));
+			}
+			
+			if(courseId!=0)
+			{
+				courseName = getCourseName(courseId);
+			}
+			
+			if(subjectId!=0)
+			{
+				subjectName = getSubjectName(subjectId);
+			}
+			
+			seb.setCourseName(courseName);
+			seb.setSubjectName(subjectName);
+			seb.setUserName(userName);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return seb;
+	}
+	
+	private String getSubjectName(int subjectId)
+	{
+		String subjectName = "";
+		try
+		{
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select subjectName from subjects");
+			if(rs.next())
+			{
+				subjectName = rs.getString(1);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return subjectName;
+	}
+	
+	private String getCourseName(int courseId)
+	{
+		String courseName = "";
+		try
+		{
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select Name from course");
+			if(rs.next())
+			{
+				courseName = rs.getString(1);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return courseName;
+	}
+
+	private ArrayList<QuestionBean> getExamQuestions(int examId)
 	{
 		ArrayList<QuestionBean> questions = new ArrayList<QuestionBean>();
 		
@@ -548,45 +640,43 @@ public class ExamsDatabaseActivities
 				while(st.hasMoreTokens())
 				{
 					QuestionBean qb = new QuestionBean();
-					ResultSet rs1 = stmt.executeQuery("select * from questions where questionId="+st.nextToken());
-					if(rs1.next())
+					rs = stmt.executeQuery("select * from questions where questionId="+st.nextToken());
+					if(rs.next())
 					{
-						qb.setQuestionId(rs1.getInt(1));
-						qb.setSubjectId(rs1.getInt(2));
-						qb.setCourseId(rs1.getInt(3));
-						qb.setQuestionType(rs1.getInt(4));
-						qb.setQuestion(rs1.getString(5));
+						qb.setQuestionId(rs.getInt(1));
+						qb.setSubjectId(rs.getInt(2));
+						qb.setCourseId(rs.getInt(3));
+						qb.setQuestionType(rs.getInt(4));
+						qb.setQuestion(rs.getString(5));
 						
 						ArrayList<String> options = new ArrayList<String>();
-						String opt = rs1.getString(6);
+						String opt = rs.getString(6);
 						StringTokenizer stt = new StringTokenizer(opt,"|");
 						while(stt.hasMoreTokens())
 						{
 							options.add(stt.nextToken());
 						}
 						qb.setOptions(options);
-						qb.setCorrectAnswer(rs1.getString(7));
-						qb.setMarks(rs1.getInt(8));
-						//9th - explanation
-						qb.setCreatedBy(rs1.getString(10));
-						qb.setCreatedDate(rs1.getDate(11));
-						qb.setUpdatedBy(rs1.getString(12));
-						qb.setUpdatedDate(rs1.getDate(13));
+						qb.setCorrectAnswer(rs.getString(7));
+						qb.setMarks(rs.getInt(8));
+						//9th explanation
+						qb.setCreatedBy(rs.getString(10));
+						qb.setCreatedDate(rs.getDate(11));
+						qb.setUpdatedBy(rs.getString(12));
+						qb.setUpdatedDate(rs.getDate(13));
 					}
 					questions.add(qb);
 				}
-			}else
-			{
-				
 			}
 		}
 		catch(Exception e)
 		{
-			
+			e.printStackTrace();
 		}
 		
 		return questions;
 	}
+
 	
 	public ArrayList<ExamBean> getAllSubjectExams(int subjectId)
 	{

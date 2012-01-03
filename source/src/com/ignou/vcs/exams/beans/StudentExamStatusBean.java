@@ -8,6 +8,7 @@ public class StudentExamStatusBean
 {
 	int id;
 	int examId;
+	private String examName="";
 	int subjectId;
 	int courseId;
 	String result="";
@@ -31,6 +32,15 @@ public class StudentExamStatusBean
 	public void setExamId(int examId) 
 	{
 		this.examId = examId;
+	}
+	
+	public String getExamName() 
+	{
+		return examName;
+	}
+	public void setExamName(String examName) 
+	{
+		this.examName = examName;
 	}
 	
 	public int getScore() 
