@@ -1,6 +1,6 @@
 package com.ignou.vcs.exams.beans;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 /**
  **/
@@ -11,10 +11,17 @@ public class StudentExamBean
 	private int examId;
 	private int subjectId;
 	private int courseId;
-	String result="";
-	int score;
-	Date completionDate;
 	String userName = "";
+	ArrayList<QuestionBean> questions;
+	String courseName = "";
+	String subjectName = "";
+	private int maxMarks;
+	private int passMarks;
+	private int duration;
+	/*String studentName = "";
+	String address;
+	String email;
+	String contactNumber;*/
 	
 	public String getExamName() 
 	{
@@ -43,6 +50,15 @@ public class StudentExamBean
 		this.subjectId = subjectId;
 	}
 	
+	public String getSubjectName() 
+	{
+		return subjectName;
+	}
+	public void setSubjectName(String subjectName) 
+	{
+		this.subjectName = subjectName;
+	}
+	
 	public int getCourseId() 
 	{
 		return courseId;
@@ -52,42 +68,90 @@ public class StudentExamBean
 		this.courseId = courseId;
 	}
 	
-	public int getScore() 
+	public String getCourseName() 
 	{
-		return score;
+		return courseName;
 	}
-	public void setScore(int score) 
+	public void setCourseName(String courseName) 
 	{
-		this.score = score;
+		this.courseName = courseName;
 	}
-	
+
 	public String getUserName()
 	{
 		return userName;
 	}
-	
-	public Date getCompletionDate() 
-	{
-		return completionDate;
-	}
-	public void setCompletionDate(Date completionDate) 
-	{
-		this.completionDate = completionDate;
-	}
-	
 	public void setUserName(String userName)
 	{
 		this.userName = userName;
 	}
 	
-	public String getResult()
+	public ArrayList<QuestionBean> getQuestions()
 	{
-		return result;
+		return questions;
+	}
+	public void setQuestions(ArrayList<QuestionBean> questions)
+	{
+		this.questions = questions;
 	}
 	
-	public void setResult(String result)
+	public int getMaxMarks() 
 	{
-		this.result = result;
+		return maxMarks;
 	}
+	public void setMaxMarks(int maxMarks) 
+	{
+		this.maxMarks = maxMarks;
+	}
+	
+	public int getPassMarks() 
+	{
+		return passMarks;
+	}
+	public void setPassMarks(int passMarks) 
+	{
+		this.passMarks = passMarks;
+	}
+
+	public int getDuration() 
+	{
+		return duration;
+	}
+	public void setDuration(int duration) 
+	{
+		this.duration = duration;
+	}
+	
+	/*public String getStudentName() 
+	{
+		return studentName;
+	}
+	public void setStudentName(String studentName) 
+	{
+		this.studentName = studentName;
+	}
+	
+	public String getAddress() 
+	{
+		return address;
+	}
+	public void setAddress(String address) 
+	{
+		this.address = address;
+	}
+	
+	public String getContactNumber() {
+		return contactNumber;
+	}
+	public void setContactNumber(String contactP) {
+		this.contactNumber = contactP;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}*/
 
 }
