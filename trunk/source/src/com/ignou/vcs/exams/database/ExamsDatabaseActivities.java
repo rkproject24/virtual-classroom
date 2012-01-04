@@ -278,11 +278,32 @@ public class ExamsDatabaseActivities
 
 //--------------------------------------- Exam Related Queries -------------------------------------------	
 	
-	public ArrayList<ExamBean> getExamDetails(int examId)
+	public ExamBean getExamDetails(int examId)
 	{
-		ArrayList<ExamBean> examDetails = new ArrayList<ExamBean>();
+		ExamBean examDetails = new ExamBean();
+		try
+		{
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from exams where examAppovalStatus=1 where examId="+examId);
+			while(rs.next())
+			{
+				examDetails.setExamId(rs.getInt(1));
+				examDetails.setExamName(rs.getString(2));
+				examDetails.setSubjectId(rs.getInt(3));
+				examDetails.setCourseId(rs.getInt(4));
+				examDetails.setQuestionIds(rs.getString(5));
+				examDetails.setMaxMarks(rs.getInt(6));
+				examDetails.setPassMarks(rs.getInt(7));
+				examDetails.setDuration(rs.getInt(8));
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
 		return examDetails;
 	}
+
 	
 	public ArrayList<ExamBean> getExamDetailsForApproval()
 	{
@@ -587,7 +608,7 @@ public class ExamsDatabaseActivities
 		return seb;
 	}
 	
-	private String getSubjectName(int subjectId)
+	public String getSubjectName(int subjectId)
 	{
 		String subjectName = "";
 		try
@@ -606,7 +627,7 @@ public class ExamsDatabaseActivities
 		return subjectName;
 	}
 	
-	private String getCourseName(int courseId)
+	public String getCourseName(int courseId)
 	{
 		String courseName = "";
 		try
@@ -677,6 +698,39 @@ public class ExamsDatabaseActivities
 		return questions;
 	}
 
+	public Boolean updateExamStatus(StudentExamStatusBean sesb)
+	{
+		Boolean isUpdated = true;
+		try
+		{
+			Calendar cal = Calendar.getInstance();
+			Date dd = new Date(cal.getTimeInMillis());
+			
+			String query = "update studentexamstatus set result=?,score=?, completionDate=? where userName=? AND examId=?";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, sesb.getResult());
+			pstmt.setInt(2, sesb.getScore());
+			pstmt.setDate(3, dd);
+			pstmt.setString(4, sesb.getUserName());
+			pstmt.setInt(5, sesb.getExamId());
+			
+			int i = pstmt.executeUpdate();
+			if(i==1)
+			{
+				isUpdated = true;
+			}
+			else
+			{
+				isUpdated = false;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return isUpdated;
+	}
+
 	
 	public ArrayList<ExamBean> getAllSubjectExams(int subjectId)
 	{
@@ -707,6 +761,33 @@ public class ExamsDatabaseActivities
 		
 		return allExams;
 	}
+	
+	public StudentExamStatusBean getStudentExamResults(int examId)
+	{
+		StudentExamStatusBean studentExamResult = new StudentExamStatusBean();
+		try
+		{
+			String query = "select * from studentexamstatus where examId="+examId;
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next())
+			{
+				StudentExamStatusBean seb = new StudentExamStatusBean();
+				seb.setExamId(rs.getInt(2));
+				seb.setSubjectId(rs.getInt(3));
+				seb.setCourseId(rs.getInt(4));
+				seb.setUserName(rs.getString(5));
+				seb.setResult(rs.getString(6));
+				seb.setScore(rs.getInt(7));
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return studentExamResult;
+	}
+	
 	
 	//SELECT * FROM subjects ORDER BY subjectId LIMIT 5;  to get 5 records from first
 	//SELECT * FROM subjects ORDER BY subjectId DESC LIMIT 5;  to get 5 records from last
