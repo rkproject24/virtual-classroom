@@ -127,6 +127,7 @@ var timer = {
 		examId = Integer.parseInt(exam);
 		ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
 		StudentExamBean seb = eda.getExamPaper(examId, userName);
+		session.setAttribute("StudentExam", seb);
 		
 		if(seb!=null)
 		{

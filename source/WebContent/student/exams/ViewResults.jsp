@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@page import="java.io.OutputStream"%>
-<%@page import="com.ignou.vcs.chartGenerators.JFreeBarChartGenerator"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="com.ignou.vcs.exams.beans.ExamBean"%>
+<%@page import="com.ignou.vcs.exams.database.ExamsDatabaseActivities"%>
+<%@page import="com.ignou.vcs.exams.beans.StudentExamStatusBean"%>
 <%@page import="com.ignou.vcs.exams.beans.StudentExamBean"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -13,8 +13,7 @@
 <%@page import="com.ignou.vcs.commons.beans.UserBean"%>
 <%@page
 	import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
-
-<%@page import="java.io.PrintWriter"%><html:html>
+<html:html>
 <head>
 <script type="text/javascript" language="javascript">  function loadCss() { 	
 	var browser = navigator.appName.toLowerCase(); 	
@@ -70,43 +69,35 @@
 			</h2>
 			<p class="description">Studying the e-way.</p>
 			<%
-				String secured = (String) session.getAttribute("MarksSecured");
-				String total = (String) session.getAttribute("TotalMarks");
-				String per = (String) session.getAttribute("Percentage");
-				StudentExamBean seb = (StudentExamBean) session.getAttribute("StudentExam");
+				String exam = request.getParameter("e");
+				int examId = Integer.parseInt(exam);
 				
-				int marksSecured = Integer.parseInt(secured);
-				int totalMarks = Integer.parseInt(total);
-				int percentage = Integer.parseInt(per);
+				ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
+				ExamBean eb = eda.getExamDetails(examId);
+				StudentExamStatusBean sesb = eda.getStudentExamResults(examId);
 				
-				String result = "";
-				
-				if(seb!=null)
-				{
-					int passMarks = seb.getPassMarks();
-					if(marksSecured>=passMarks)
-					{
-						result= "PASS";
-					}
-					else
-					{
-						result="FAIL";
-					}
+				if(sesb!=null)
+				{ 
+					String result = sesb.getResult();
+					
+					int percentage = (sesb.getScore() * 100) / eb.getMaxMarks();
+					
+					String subjectName = eda.getSubjectName(sesb.getSubjectId());
+					String courseName = eda.getCourseName(sesb.getCourseId());
+					
 					%>
 					<table>
-						<tr><td>Exam Id</td><td></td><td><%=seb.getExamId() %></td></tr>
-						<tr><td>Exam Name</td><td></td><td><%=seb.getExamName() %></td></tr>		
-						<tr><td>Course Name</td><td></td><td><%=seb.getCourseName() %></td></tr>
-						<tr><td>Subject Name</td><td></td><td><%=seb.getSubjectName() %></td></tr>
-						<tr><td>Exam Duration</td><td></td><td><%=seb.getDuration() %> Minute(s).</td></tr>
+						<tr><td>Exam Id</td><td></td><td><%=sesb.getExamId() %></td></tr>
+						<tr><td>Exam Name</td><td></td><td><%=eb.getExamName() %></td></tr>
+						<tr><td>Course Name</td><td></td><td><%=courseName %></td></tr>
+						<tr><td>Subject Name</td><td></td><td><%=subjectName %></td></tr>
 					</table>
 					<br>
 					<hr>
 					<br>
 					<table>
-						<tr><td>Maximum Marks</td><td></td><td><%=seb.getMaxMarks() %></td></tr>
-						<tr><td>Passing Marks</td><td></td><td><%=seb.getPassMarks() %></td></tr>
-						<tr><td>Your Marks</td><td></td><td><%=marksSecured %> and <%=percentage %>%</td></tr>
+						<tr><td>Maximum Marks</td><td></td><td><%=eb.getMaxMarks() %></td></tr>
+						<tr><td>Your Marks</td><td></td><td><%=sesb.getScore() %> and <%=percentage %>%</td></tr>
 						<tr><td>Result</td><td></td>
 						<td><%
 							if(result.equalsIgnoreCase("fail"))
@@ -119,7 +110,7 @@
 						%></td></tr>
 						<tr><td colspan="3">
 						</td></tr>
-						<tr><td colspan="3" align="center">
+						<tr><td colspan="3">
 						<%
 							String comment = "";
 						
@@ -143,19 +134,14 @@
 								comment = "Better luck next time."; 	
 							}
 							
-							if(percentage>=35)
-							{
-								out.println("<b><font color='green'>"+comment+"</font></b>");	
-							}else
+							if(percentage<=35)
 							{
 								out.println("<b><font color='red'>"+comment+"</font></b>");
+							}else
+							{
+								out.println("<b><font color='green'>"+comment+"</font></b>");
 							}
-							
-							String chartPath = "ResultsChart.jsp?t="+totalMarks+"&p="+passMarks+"&m="+marksSecured;
 						%>
-						</td></tr>
-						<tr><td colspan="3">
-						<img src="<%=chartPath %>" alt="<%=seb.getExamName() %>'s Result">
 						</td></tr>
 					</table>
 					<%
