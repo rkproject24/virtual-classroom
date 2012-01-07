@@ -88,6 +88,11 @@ function loadCss() {
 					<a href="${pageContext.request.contextPath}/skin_multilanguage/login.jsp"><b><u>Chat</u></b></a>
 					<p>Chat with Friends, Faculty and Management.</p></td>
 				</tr>
+				<tr>
+					<td><img src="${pageContext.request.contextPath}/theme/images_links/email.png" class="thumbnail">
+					<a href="${pageContext.request.contextPath}/Email.jsp"><b><u>Email</u></b></a>
+					<p>Send email to Friends, Faculty, Management and Administrator.</p></td>
+				</tr>
 				
 				
 				<%
@@ -125,7 +130,11 @@ function loadCss() {
 					<a href="${pageContext.request.contextPath}/faculty/booksJournals.jsp"><b><u>Ebooks/Journals</u></b></a>
 					<p>Enhance your knowledge and General Awareness here!!</p></td>
 				</tr>	
-				
+				<tr>
+					<td><img src="${pageContext.request.contextPath}/theme/images_links/email.png" class="thumbnail">
+					<a href="${pageContext.request.contextPath}/Email.jsp"><b><u>Email</u></b></a>
+					<p>Send email to Friends, Management and Administrator.</p></td>
+				</tr>
 				<%
 					} else if (userLevel.equals("2")) {
 				 %>
@@ -141,7 +150,7 @@ function loadCss() {
 					<p>View all the students and their profiles who are taking education at VCS</p></td>
 				</tr>
 				<tr>
-					<td><a href="${pageContext.request.contextPath}/management/exams/ViewExams.jsp"><img src="${pageContext.request.contextPath}/theme/images_links/users_two_48.png" class="thumbnail">
+					<td><a href="${pageContext.request.contextPath}/management/exams/ViewExams.jsp"><img src="${pageContext.request.contextPath}/theme/images_links/approve.png" class="thumbnail">
 					<b><u>Exam Approvals</u></b></a>
 					<p>View all the exams and exam approvals at VCS</p></td>
 				</tr>
@@ -154,6 +163,11 @@ function loadCss() {
 					<td><a href="http://localhost:8080/VCS/administrator/view_faculties.jsp"><img src="${pageContext.request.contextPath}/theme/images_links/table_48.png" class="thumbnail">
 					<b><u>View Faculties</u></b></a>
 					<p>View and Manage faculties here and the courses and subjects alloted to them.Also view students feedback for their faculties.</p></td>
+				</tr>
+				<tr>
+					<td><img src="${pageContext.request.contextPath}/theme/images_links/email.png" class="thumbnail">
+					<a href="${pageContext.request.contextPath}/Email.jsp"><b><u>Email</u></b></a>
+					<p>Send email to Friends, Students,faculty and Administrator.</p></td>
 				</tr>	
 				<%
 					} else if (userLevel.equals("3")) {
@@ -186,9 +200,13 @@ function loadCss() {
 				<tr>
 					<td><a href="http://localhost:8080/VCS/admin/"><img src="${pageContext.request.contextPath}/theme/images_links/questionmark_48.png" class="thumbnail">
 					<b><u>Manage Discussion</u></b></a>
-					<p>Discuss with fa.</p></td>
+					<p>Discuss with faculty,students and management.</p></td>
 				</tr>
-					
+				<tr>
+					<td><img src="${pageContext.request.contextPath}/theme/images_links/email.png" class="thumbnail">
+					<a href="${pageContext.request.contextPath}/Email.jsp"><b><u>Email</u></b></a>
+					<p>Send email to Friends, Faculty, Management.</p></td>
+				</tr>	
 					
 				<%  
 						}
@@ -223,8 +241,6 @@ function loadCss() {
 		if((userLevel.equals("0")) || (userLevel.equals("1")) || (userLevel.equals("2")))
 		{
 		 %>		
-		
-			<div class="boxtop"></div>
 			<div class="box">
 				<p>
 					<%@ include file = "bottom_box.jsp" %>

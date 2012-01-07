@@ -1,4 +1,5 @@
 
+<%@page import="com.ignou.vcs.exams.database.ExamsDatabaseActivities"%>
 <%@page import="com.ignou.vcs.exams.beans.StudentExamBean"%>
 <%@page import="com.ignou.vcs.exams.beans.ExamBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -17,6 +18,8 @@
 	<%
 	 try
 	 {
+		 String exam = request.getParameter("e");
+		 int examId = Integer.parseInt(exam);
 		 String totalMarks = request.getParameter("t");
 		 String passMarks = request.getParameter("p");
 		 String marksSecured = request.getParameter("m");
@@ -25,7 +28,8 @@
 		ArrayList<String> categoryMembers = new ArrayList<String>();
 		ArrayList<String> data = new ArrayList<String>();
 		
-		StudentExamBean eb = (StudentExamBean) session.getAttribute("StudentExam");
+		ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
+		ExamBean eb = eda.getExamDetails(examId);
 		
 		seriesMembers.add("Max. Marks");
 		seriesMembers.add("Pass Marks");

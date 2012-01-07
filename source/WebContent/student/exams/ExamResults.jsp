@@ -151,7 +151,7 @@
 								out.println("<b><font color='red'>"+comment+"</font></b>");
 							}
 							
-							String chartPath = "ResultsChart.jsp?t="+totalMarks+"&p="+passMarks+"&m="+marksSecured;
+							String chartPath = "ResultsChart.jsp?e="+seb.getExamId()+"&t="+totalMarks+"&p="+passMarks+"&m="+marksSecured;
 						%>
 						</td></tr>
 						<tr><td colspan="3">

@@ -74,7 +74,7 @@ function loadCss() {
 					
 					<html:form action="/forgotPassword">
 					
-						<b><u><font style='font-family: "Times New Roman"; font-weight: bold'>Please enter your Login Details.</u></b>
+						<b><u><font style='font-family: "Times New Roman"; font-weight: bold'>Please enter following Details.</u></b>
 						<br /><br />
 						<TABLE>
 							<TBODY>
@@ -140,8 +140,6 @@ function loadCss() {
 		
 		
 		<div id="right">
-			<%-- tpl:put name="right_boxes" --%>
-			<div class="boxtop"></div>
 			<%@include file="../latest_news.jsp" %>
 		</div>	
 		<%@include file="../footer.jsp" %>

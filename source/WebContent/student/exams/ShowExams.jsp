@@ -41,7 +41,7 @@ function showExam(examId)
 
 function viewExamResult(examId)
 {
-	window.location.href = "ExamResults.jsp?e="+examId;
+	window.location.href = "ViewResults.jsp?e="+examId;
 }
 
 </script> 
@@ -103,8 +103,8 @@ function viewExamResult(examId)
 											String result = seb.getResult();
 											if(result.equalsIgnoreCase("pass"))
 											{
-												out.println("Alreay Passed<br> You got : "+seb.getScore());
-												out.println("<br> <a href='javaScript: viewExamResult("+seb.getExamId()+")'></a>");
+												out.println("Alreay Passed<br> You got : "+seb.getScore()+".");
+												out.println("<br> <a href='javaScript: viewExamResult("+seb.getExamId()+")'>"+seb.getExamName()+"</a>");
 											}else
 											{
 												String showLink = "<a href='javaScript: showExam("+seb.getExamId()+")'>Write Exam</a>";

@@ -124,11 +124,7 @@ function loadCss() {
 		
 		
 		<div id="right">
-			<%-- tpl:put name="right_boxes" --%>
-			<div class="boxtop"></div>
 			<%@include file="../latest_news.jsp" %>
-			
-			<!--  <div class="boxtop"></div>
 			<div class="box">
 				<p>
 					<b><u>Coming Soon...</u></b><br />
@@ -137,8 +133,7 @@ function loadCss() {
 					<a href="#" accesskey="m"><span class="key">V</span>oice Mailboxes</a><br />
 				</p>
 				<div class="buttons"><p><a href="http://localhost:8080/login.jsp" class="bluebtn"><span>Enter..</span></a></p></div>
-			</div>-->
-			<%-- /tpl:put --%>
+			</div>
 		</div>	
 		<%@include file="../footer.jsp" %>
 	</div>

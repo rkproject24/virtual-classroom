@@ -163,7 +163,6 @@ catch (e)
 		<div id="right">
 			<%-- tpl:put name="right_boxes" --%>
 			<div id = "id2">
-			<div class="boxtop"></div>
 			<%@include file="../latest_news.jsp" %>
 			</div>
 			<div class="boxtop"></div>

@@ -229,7 +229,6 @@ function info(id)
 </center>
 		</div>	
 <div id="right">
-			<div class="boxtop"></div>
 			<%@include file="../latest_news.jsp" %>
 		</div>	
 <br><br><br><br>

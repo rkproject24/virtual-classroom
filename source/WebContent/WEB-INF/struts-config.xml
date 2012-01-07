@@ -45,6 +45,8 @@
 		</form-bean>
 		<form-bean name="addCourseForm" type="com.ignou.vcs.forms.AddCourseForm">
 		</form-bean>
+		<form-bean name="addSubjectForm" type="com.ignou.vcs.forms.AddSubjectForm">
+		</form-bean>
 		<form-bean name="addSyllabusForm" type="com.ignou.vcs.forms.AddSyllabusForm">
 		</form-bean>
 		<form-bean name="changePasswordForm" type="com.ignou.vcs.forms.ChangePasswordForm">
@@ -170,10 +172,16 @@
 			<forward contextRelative="false" name="success" path="/Success.jsp">
 			</forward>
 		</action>
-		<action path="/addcourse" type="com.ignou.vcs.actions.AddcourseAction" name="addCourseForm" scope="request" input="/management/addCourse.jsp">
-			<forward contextRelative="false" redirect = "true" name="success" path="/management/addSyllabus.jsp">
+		<action path="/addcourse" type="com.ignou.vcs.actions.AddcourseAction" name="addCourseForm" scope="request" input="/addCourse.jsp">
+			<forward contextRelative="false" redirect = "true" name="success" path="/add_subject.jsp">
 			</forward>
 			<forward contextRelative="false" name="failure" path="/management/addCourse.jsp">
+			</forward>
+		</action>
+		<action path="/addSubject" type="com.ignou.vcs.actions.AddSubjectAction" name="addSubjectForm" scope="request" input="/add_subject.jsp">
+			<forward contextRelative="false" redirect = "true" name="success" path="/management/addSyllabus.jsp">
+			</forward>
+			<forward contextRelative="false" name="failure" path="/management/add_subject.jsp">
 			</forward>
 		</action>
 		<action path="/addSyllabus" type="com.ignou.vcs.actions.AddSyllabusAction" name="addSyllabusForm" scope="request" input="/management/addSyllabus.jsp">

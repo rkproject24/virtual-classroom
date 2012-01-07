@@ -3,11 +3,6 @@
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.text.DateFormat"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="com.ignou.vcs.commons.beans.UserBean"%>
-<%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
 <html:html>
 <head>
 <script type="text/javascript" language="javascript" >
@@ -43,17 +38,12 @@ function loadCss() {
  
  <%
  }
-	else
-	{
-		response.sendRedirect("./NewLogin.jsp");
-	}
  
   %>
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="GENERATOR" content="Rational Application Developer">
-<title>Virtual Classroom System</title>
+<title>Virtual Classroom System - News</title>
 </head>
 <body onLoad="javascript:loadCss()">
 
@@ -66,35 +56,33 @@ function loadCss() {
 				<%@include file="../DisplayCalendar.jsp" %>
 				<h2><a href="#"><u>Virtual Classroom System</u></a></h2>
 				<p class="description">Studying the e-way.</p>
-				<center><h3><u><i>Our Sincere Thanks</i></u></h3></center>
+				<center><h3><u><i>News</i></u></h3></center>
 				<p>
-					It plunges me in exhilaration in taking privilege in expressing our 
-					heart felt gratitude to all those who helped ,encouraged and foreseeing successful 
-					completion of the project. Ecstasies to work under gregarious guidance of <b>Mr.Subba Rao</b> 
-					to whom extremely in debted for his value and timely suggestions. 
-					</p><br><br>
-<p>I wish to convey my sincere thanks to <b>Mr.Subba Rao </b>(faculty) ,Aurora degree College,(Dept. of Computer Science), and all those who all directly or indirectly contributed their assistance in finishing out this project successfully. 
-
-
+				1. <a href="news/AdobeSummit.jsp" accesskey="m">New Java Courses launched. </a><br />
+				2. <a href="news/AdobeSummit.jsp" accesskey="m">Exclusive video	training offered for all adobe courses.</a><br />
+				3. <a href="news/SunTechDays.jsp" accesskey="m">Sun Tech days here back again for 2011.</a><br />
+				4. <a href="news/AdobeSummit.jsp" accesskey="m">Watch out this space for more up coming courses.</a><br />
+				5. <a href="news/AdobeSummit.jsp" accesskey="m">Ansca Mobile offers special subscription pricing for current students and educators. </a><br />
+				6. <a href="news/AdobeSummit.jsp" accesskey="m">Adobe is back again with Dev Summit on mobile platform.</a><br />
+				7. <a href="news/AdobeSummit.jsp" accesskey="m">New Java Courses launched. </a><br />
+				8. <a href="news/AdobeSummit.jsp" accesskey="m">Exclusive video	training offered for all adobe courses.</a><br />
+				9. <a href="news/SunTechDays.jsp" accesskey="m">Sun Tech days here back again for 2011.</a><br />
+				10. <a href="news/AdobeSummit.jsp" accesskey="m">Watch out this space for more up coming courses.</a><br />
+				11. <a href="news/AdobeSummit.jsp" accesskey="m">Ansca Mobile offers special subscription pricing for current students and educators. </a><br />
+				12. <a href="news/AdobeSummit.jsp" accesskey="m">Adobe is back again with Dev Summit on mobile platform.</a><br />
+				13. <a href="news/AdobeSummit.jsp" accesskey="m">New Java Courses launched. </a><br />
+				14. <a href="news/AdobeSummit.jsp" accesskey="m">Exclusive video	training offered for all adobe courses.</a><br />
+				15. <a href="news/SunTechDays.jsp" accesskey="m">Sun Tech days here back again for 2011.</a><br />
+				16. <a href="news/AdobeSummit.jsp" accesskey="m">Watch out this space for more up coming courses.</a><br />
+				17. <a href="news/AdobeSummit.jsp" accesskey="m">Ansca Mobile offers special subscription pricing for current students and educators. </a><br />
+				18. <a href="news/AdobeSummit.jsp" accesskey="m">Adobe is back again with Dev Summit on mobile platform.</a><br />
 				</p>
-				<p align="right"> <b><i>- Pradeepthi Savaram</b></i></p>
 			</div>
 		</div>	
 		
 		
 		<div id="right">
-			<%@include file="latest_news.jsp" %>
-			
-			<div class="boxtop"></div>
-			<div class="box">
-				<p>
-					<b><u>Collaborate</u></b><br />
-					<a href="#" accesskey="m"><span class="key">I</span>nteractive White Boards</a><br />
-					<a href="#" accesskey="m"><span class="key">C</span>hat with friends, Faculties</a><br />
-					<a href="#" accesskey="m"><span class="key">V</span>oice Mailboxes</a><br />
-				</p>
-				<div class="buttons"><p><a href="#" class="bluebtn"><span>More</span></a></p></div>
-			</div>
+			<%@include file="Collaborate.jsp" %>
 		</div>	
 		<%@include file="footer.jsp" %>
 	</div>

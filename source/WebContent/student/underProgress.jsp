@@ -80,7 +80,6 @@ function loadCss() {
 		
 		<div id="right">
 			<%-- tpl:put name="right_boxes" --%>
-			<div class="boxtop"></div>
 			<%@include file="../latest_news.jsp" %>
 			
 			<div class="boxtop"></div>
