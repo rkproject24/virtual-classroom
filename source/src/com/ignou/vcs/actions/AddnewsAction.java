@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.ignou.vcs.database.VCSDatabaseActivities;
+import com.ignou.vcs.forms.AddnewsForm;
 
 /**
  * @version 1.0
@@ -21,12 +22,13 @@ public class AddnewsAction extends Action
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+			throws Exception 
+	{
 
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 
-		com.ignou.vcs.forms.AddnewsForm newsform = (com.ignou.vcs.forms.AddnewsForm) form;
+		AddnewsForm newsform = (AddnewsForm) form;
 		try {
 
 			VCSDatabaseActivities dbObj = new VCSDatabaseActivities();
@@ -47,7 +49,7 @@ public class AddnewsAction extends Action
 
 			// Forward control to the appropriate 'failure' URI (change name as
 			// desired)
-			// forward = mapping.findForward(failure");
+			forward = mapping.findForward("failure");
 
 		} else {
 

@@ -28,7 +28,8 @@ public class ApproveExamAction extends Action
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+			throws Exception 
+	{
 
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
@@ -96,14 +97,17 @@ public class ApproveExamAction extends Action
 		// If a message is required, save the specified key(s)
 		// into the request for use by the <struts:errors> tag.
 
-		if (!errors.isEmpty()) {
+		if (!errors.isEmpty()) 
+		{
 			saveErrors(request, errors);
 
 			// Forward control to the appropriate 'failure' URI (change name as
 			// desired)
 			forward = mapping.findForward("failure");
 
-		} else {
+		} 
+		else 
+		{
 
 			// Forward control to the appropriate 'success' URI (change name as
 			// desired)

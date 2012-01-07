@@ -24,30 +24,34 @@ public class Change_passwordAction extends Action
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+			throws Exception 
+	{
 
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 		ChangePasswordForm changePasswordForm = (ChangePasswordForm) form;
 
-		try {
-			String userId = (String) request.getSession()
-					.getAttribute("userId");
+		try 
+		{
+			String userId = (String) request.getSession().getAttribute("userId");
 			CommonsDatabaseActivities dbObject = new CommonsDatabaseActivities();
 			String oldEncryptedPasswordInDb = dbObject.getPassword(userId);
-			String oldEncryptedPasswordFromUser = PasswordService.getInstance()
-					.encrypt(changePasswordForm.getOldPassword());
+			String oldEncryptedPasswordFromUser = PasswordService.getInstance().encrypt(changePasswordForm.getOldPassword());
 
-			if (oldEncryptedPasswordFromUser.equals(oldEncryptedPasswordInDb)) {
-				String encryptedNewPassword = PasswordService.getInstance()
-						.encrypt(changePasswordForm.getNewPassword());
+			if (oldEncryptedPasswordFromUser.equals(oldEncryptedPasswordInDb)) 
+			{
+				String encryptedNewPassword = PasswordService.getInstance().encrypt(changePasswordForm.getNewPassword());
 				dbObject.updatePassword(userId, encryptedNewPassword);
-			} else {
+			} 
+			else 
+			{
 				errors.add("oldPassword", new ActionError("error.changePassword.incorrectOldPassword"));
 			}
 			// do something here
 
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 
 			// Report the error using the appropriate name and ID.
 			errors.add("ServerError", new ActionError("error.server.error"));
@@ -57,14 +61,17 @@ public class Change_passwordAction extends Action
 		// If a message is required, save the specified key(s)
 		// into the request for use by the <struts:errors> tag.
 
-		if (!errors.isEmpty()) {
+		if (!errors.isEmpty()) 
+		{
 			saveErrors(request, errors);
 
 			// Forward control to the appropriate 'failure' URI (change name as
 			// desired)
 			forward = mapping.findForward("failure");
 
-		} else {
+		} 
+		else 
+		{
 
 			// Forward control to the appropriate 'success' URI (change name as
 			// desired)

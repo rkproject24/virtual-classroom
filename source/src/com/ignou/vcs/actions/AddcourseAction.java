@@ -9,33 +9,36 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.ignou.vcs.database.VCSDatabaseActivities;
+import com.ignou.vcs.forms.AddCourseForm;
+
 /**
  * @version 1.0
  * @author Pradeepthi S
  */
 public class AddcourseAction extends Action
-
 {
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+			throws Exception 
+	{
 
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
-		com.ignou.vcs.forms.AddCourseForm courseform = (com.ignou.vcs.forms.AddCourseForm) form;
-		String subject = request.getParameter("subjectValues");
-		request.getSession().setAttribute("subject", subject);
+		AddCourseForm courseform = (AddCourseForm) form;
 
 		try {
 
-			com.ignou.vcs.database.VCSDatabaseActivities dbObj = new com.ignou.vcs.database.VCSDatabaseActivities();
-
+			VCSDatabaseActivities dbObj = new VCSDatabaseActivities();
 			String courseid = dbObj.insertCourse(courseform);
-
-			request.getSession().setAttribute("courseid", courseid);
-
-		} catch (Exception e) {
+			if(courseid==null || courseid.equalsIgnoreCase(""))
+			{
+				errors.add("ServerError", new ActionError("error.server.error"));
+			}
+		} 
+		catch (Exception e) 
+		{
 
 			// Report the error using the appropriate name and ID.
 			errors.add("ServerError", new ActionError("error.server.error"));
@@ -50,7 +53,7 @@ public class AddcourseAction extends Action
 
 			// Forward control to the appropriate 'failure' URI (change name as
 			// desired)
-			// forward = mapping.findForward(failure");
+			 forward = mapping.findForward("failure");
 
 		} else {
 

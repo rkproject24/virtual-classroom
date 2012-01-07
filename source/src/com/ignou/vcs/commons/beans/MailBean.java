@@ -20,7 +20,14 @@ public class MailBean
 	{
 		//mailFrom = from;
 		//For VCS from address is always : "info.onlineexam@gmail.com".
-		mailFrom = "info.onlineexam@gmail.com";
+		if(from == null || from.length()==0)
+		{
+			this.mailFrom = "info.onlineexam@gmail.com";
+		}
+		else
+		{
+			this.mailFrom = from;
+		}
 	}
 	
 	public String getMailSubject()

@@ -13,7 +13,37 @@ import org.apache.struts.action.ActionMapping;
 public class AddSyllabusForm extends ActionForm
 
 {
-
+	private int subjectId = 0;
+	private int courseId = 0;
+	private String syllabusFile = null;
+	
+	public int getSubjectId() 
+	{
+		return subjectId;
+	}
+	public void setSubjectId(int subjectId) 
+	{
+		this.subjectId = subjectId;
+	}
+	
+	public int getCourseId() 
+	{
+		return courseId;
+	}
+	public void setCourseId(int courseId) 
+	{
+		this.courseId = courseId;
+	}
+	
+	public String getSyllabusFile() 
+	{
+		return syllabusFile;
+	}
+	public void setSyllabusFile(String syllabusFile) 
+	{
+		this.syllabusFile = syllabusFile;
+	}
+	
     public void reset(ActionMapping mapping, HttpServletRequest request) {
 
 	// Reset field values here.

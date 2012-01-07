@@ -61,7 +61,7 @@ import com.ignou.vcs.commons.beans.MailBean;
 			//Validation
 			String subject = mb.getMailSubject();
 			String message = mb.getMsgContent();
-			
+		
 			if(subject.length()<=0)
 			{
 				System.out.println("Subject not found for this message. Not able to send such mail.");
@@ -76,6 +76,13 @@ import com.ignou.vcs.commons.beans.MailBean;
 						"You should add any one of the following addresses: " +
 						"TO, CC, BCC.");
 				return;
+			}
+			
+			if(mb.getMailFrom().length()>1)
+			{
+				message = message +"/n/n/n" +
+						"---------------------" +
+						"This email is sent onbelfhalf of "+mb.getMailFrom();
 			}
 			
 			Properties props = new Properties();

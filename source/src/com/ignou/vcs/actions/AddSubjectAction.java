@@ -9,6 +9,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.ignou.vcs.commons.database.CommonsDatabaseActivities;
+import com.ignou.vcs.forms.AddSubjectForm;
+import com.ignou.vcs.forms.ForgotPasswordForm;
+
 /**
  * @version 1.0
  * @author Pradeepthi S
@@ -19,16 +23,24 @@ public class AddSubjectAction extends Action
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+			throws Exception 
+	{
 
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
-
-		try {
-
-			// do something here
-
-		} catch (Exception e) {
+		AddSubjectForm addSubjectForm = (AddSubjectForm) form;
+		
+		try 
+		{
+			CommonsDatabaseActivities cba = new CommonsDatabaseActivities();
+			Boolean b = cba.addSubject(addSubjectForm.getSubjectName());
+			if(!b)
+			{
+				errors.add("ServerError", new ActionError("error.server.error"));
+			}
+		} 
+		catch (Exception e) 
+		{
 
 			// Report the error using the appropriate name and ID.
 			errors.add("ServerError", new ActionError("error.server.error"));
@@ -38,12 +50,13 @@ public class AddSubjectAction extends Action
 		// If a message is required, save the specified key(s)
 		// into the request for use by the <struts:errors> tag.
 
-		if (!errors.isEmpty()) {
+		if (!errors.isEmpty()) 
+		{
 			saveErrors(request, errors);
 
 			// Forward control to the appropriate 'failure' URI (change name as
 			// desired)
-			// forward = mapping.findForward(failure");
+			 forward = mapping.findForward("failure");
 
 		} else {
 
