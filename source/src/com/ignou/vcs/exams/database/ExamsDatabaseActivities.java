@@ -284,7 +284,7 @@ public class ExamsDatabaseActivities
 		try
 		{
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from exams where examAppovalStatus=1 where examId="+examId);
+			ResultSet rs = stmt.executeQuery("select * from exams where examId="+examId);
 			while(rs.next())
 			{
 				examDetails.setExamId(rs.getInt(1));
@@ -706,7 +706,7 @@ public class ExamsDatabaseActivities
 			Calendar cal = Calendar.getInstance();
 			Date dd = new Date(cal.getTimeInMillis());
 			
-			String query = "update studentexamstatus set result=?,score=?, completionDate=? where userName=? AND examId=?";
+			String query = "update studentexamstatus set result=?,score=?, completionDate=? where userid=? AND examId=?";
 			PreparedStatement pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, sesb.getResult());
 			pstmt.setInt(2, sesb.getScore());
@@ -762,23 +762,24 @@ public class ExamsDatabaseActivities
 		return allExams;
 	}
 	
-	public StudentExamStatusBean getStudentExamResults(int examId)
+	public StudentExamStatusBean getStudentExamResults(int examId,String userName)
 	{
 		StudentExamStatusBean studentExamResult = new StudentExamStatusBean();
 		try
 		{
-			String query = "select * from studentexamstatus where examId="+examId;
+			String query = "select * from studentexamstatus where examId="+examId+" AND userid='"+userName+"'";
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next())
 			{
-				StudentExamStatusBean seb = new StudentExamStatusBean();
-				seb.setExamId(rs.getInt(2));
-				seb.setSubjectId(rs.getInt(3));
-				seb.setCourseId(rs.getInt(4));
-				seb.setUserName(rs.getString(5));
-				seb.setResult(rs.getString(6));
-				seb.setScore(rs.getInt(7));
+				studentExamResult.setExamId(rs.getInt(2));
+				studentExamResult.setSubjectId(rs.getInt(3));
+				studentExamResult.setCourseId(rs.getInt(4));
+				studentExamResult.setUserName(rs.getString(5));
+				studentExamResult.setScore(rs.getInt(6));
+				studentExamResult.setResult(rs.getString(7));
+				studentExamResult.setCompletionDate(rs.getDate(8));
+				
 			}
 		}
 		catch(Exception e)
