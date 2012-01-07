@@ -365,7 +365,6 @@ function isNumeric(elem, helperMsg){
 			<%
 			}
 			 %>
-			<div class="boxtop"></div>
 			<%@include file="../../../latest_news.jsp" %>
 			
 			<%-- /tpl:put --%>

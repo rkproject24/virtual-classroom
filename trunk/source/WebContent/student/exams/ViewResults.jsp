@@ -74,7 +74,7 @@
 				
 				ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
 				ExamBean eb = eda.getExamDetails(examId);
-				StudentExamStatusBean sesb = eda.getStudentExamResults(examId);
+				StudentExamStatusBean sesb = eda.getStudentExamResults(examId,userIDForName);
 				
 				if(sesb!=null)
 				{ 
@@ -87,7 +87,7 @@
 					
 					%>
 					<table>
-						<tr><td>Exam Id</td><td></td><td><%=sesb.getExamId() %></td></tr>
+						<tr><td>Exam Id</td><td></td><td><%=examId %></td></tr>
 						<tr><td>Exam Name</td><td></td><td><%=eb.getExamName() %></td></tr>
 						<tr><td>Course Name</td><td></td><td><%=courseName %></td></tr>
 						<tr><td>Subject Name</td><td></td><td><%=subjectName %></td></tr>
@@ -141,7 +141,12 @@
 							{
 								out.println("<b><font color='green'>"+comment+"</font></b>");
 							}
+							
+							String chartPath = "ResultsChart.jsp?e="+sesb.getExamId()+"&t="+sesb.getScore()+"&p="+eb.getPassMarks()+"&m="+eb.getMaxMarks();
 						%>
+						</td></tr>
+						<tr><td colspan="3">
+						<img src="<%=chartPath %>" alt="<%=eb.getExamName() %>'s Result">
 						</td></tr>
 					</table>
 					<%

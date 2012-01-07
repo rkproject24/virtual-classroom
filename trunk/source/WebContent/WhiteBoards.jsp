@@ -1,4 +1,4 @@
-<%-- tpl:insert page="/theme/VCSTemplate.jtpl" --%><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
@@ -8,10 +8,10 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.ignou.vcs.commons.beans.UserBean"%>
 <%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
-
-<%@page import="com.ignou.vcs.notices.database.NoticesDatabaseActivities"%><html:html>
+<html:html>
 <head>
 <script type="text/javascript" language="javascript" >
+
 function loadCss() {
 	var browser = navigator.appName.toLowerCase();
 	// document.write(browser);
@@ -49,49 +49,38 @@ function loadCss() {
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="GENERATOR" content="Rational Application Developer">
-<%-- tpl:put name="headarea" --%><title>Virtual Classroom System</title><%-- /tpl:put --%>
+<title>Virtual Classroom System</title>
 </head>
 <body onLoad="javascript:loadCss()">
-<%@include file="../header.jsp"%>								
+
+<%@include file="header.jsp"%>								
 		
 		<div class="left">
 			<div class="left_articles">
 				<div class="buttons">
-				<%-- tpl:put name="buttons_blue_green" --%>
-					
-				<%-- /tpl:put --%>
 				</div>
-				<%@include file="../DisplayCalendar.jsp"%>
-				<h2><a href="#"><u>Delete Notices</u></a></h2>
-				<p class="description">Select Notices to delete.</p>
-				<%-- /tpl:put --%>
-				<%-- tpl:put name="centre_content" --%>
-				<%
-					NoticesDatabaseActivities dbObj = new NoticesDatabaseActivities();  
-					java.util.ArrayList list = dbObj.getNotices();
-					
-					for(int i =0;i<list.size();i++)
-					{
-						com.ignou.vcs.notices.beans.Notice bean = (com.ignou.vcs.notices.beans.Notice)list.get(i);
-						
-						System.out.println("TITLE:" + bean.getTitle());
-					}
-				 %>
-				
-				<%-- /tpl:put --%>
+				<%@include file="../DisplayCalendar.jsp" %>
+				<h2><a href="#"><u>Virtual Classroom System</u></a></h2>
+				<p class="description">Studying the e-way.</p>
+				<center><h3><u><i>Thanks</i></u></h3>
+				<p>
+					Thanks for cooperating us. <br>Your virtual Classroom System will be coming up with many features:
+					<br>
+					<ul>
+						<li>Video COnference System</li>
+						<li>White boards</li>
+						<li>Voice mail box</li>
+						<li>And....</li>
+						<li>And many more exciting new features</li>
+					</ul>
+				</p>
+				</center>
 			</div>
-			
-			
-			<%-- tpl:put name="bottom_box" --%>
-			
-			
-			<%-- /tpl:put --%>
 		</div>	
 		
 		
 		<div id="right">
-			<%-- tpl:put name="right_boxes" --%>
-			<%@include file="../latest_news.jsp" %>
+			<%@include file="latest_news.jsp" %>
 			
 			<div class="boxtop"></div>
 			<div class="box">
@@ -103,10 +92,8 @@ function loadCss() {
 				</p>
 				<div class="buttons"><p><a href="#" class="bluebtn"><span>More</span></a></p></div>
 			</div>
-			<%-- /tpl:put --%>
 		</div>	
-		<%@include file="../footer.jsp" %>
+		<%@include file="footer.jsp" %>
 	</div>
 </body>
 </html:html>
-<%-- /tpl:insert --%>

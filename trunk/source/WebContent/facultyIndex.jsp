@@ -85,7 +85,6 @@ function loadCss() {
 			
 			<div id="right">
 				<br><br><br>
-				<div class="boxtop"></div>
 				<%@include file="latest_news.jsp" %>
 			</div>	
 

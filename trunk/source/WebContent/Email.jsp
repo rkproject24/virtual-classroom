@@ -1,4 +1,4 @@
-<%-- tpl:insert page="/theme/VCSTemplate.jtpl" --%><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
@@ -8,10 +8,10 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.ignou.vcs.commons.beans.UserBean"%>
 <%@page import="com.ignou.vcs.commons.database.CommonsDatabaseActivities"%>
-
-<%@page import="com.ignou.vcs.notices.database.NoticesDatabaseActivities"%><html:html>
+<html:html>
 <head>
 <script type="text/javascript" language="javascript" >
+
 function loadCss() {
 	var browser = navigator.appName.toLowerCase();
 	// document.write(browser);
@@ -26,6 +26,38 @@ function loadCss() {
 		menusheet.href="${pageContext.request.contextPath}/theme/css/menu.css";		
 	}
 }
+
+function mailValidations()
+{
+	var toMail,ccMail,bccMail,sub,msg;
+
+	toMail = document.fm.toAddr.value;
+	ccMail = document.fm.ccAddr.value;
+	bccMail = document.fm.bccAddr.value;
+	sub = document.fm.subject.value;
+	msg = document.fm.msgContent.value;
+
+	if(toMail.length <1 && ccMail.length<1 && bccMail.length<1)
+	{
+		alert("Please enter any of the addresses: TO,CC,BCC");
+		document.fm.toAddr.focus();
+		return false;
+	}else if(sub.length<1)
+	{
+		alert("Please enter subject");
+		document.fm.subject.focus();
+		return false;
+	}else if(msg.length<1)
+	{
+		alert("Please enter your message");
+		document.fm.msgContent.focus();
+		return false;
+	}	
+	
+	return true;
+	
+}
+
 </script> 
 <link id="pagestyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/style1.css" />
 <link id="menustyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/menu.css" />
@@ -43,55 +75,56 @@ function loadCss() {
  
  <%
  }
+	else
+	{
+		response.sendRedirect("./NewLogin.jsp");
+	}
  
   %>
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="GENERATOR" content="Rational Application Developer">
-<%-- tpl:put name="headarea" --%><title>Virtual Classroom System</title><%-- /tpl:put --%>
+<title>Virtual Classroom System</title>
 </head>
 <body onLoad="javascript:loadCss()">
-<%@include file="../header.jsp"%>								
+
+<%@include file="header.jsp"%>								
 		
 		<div class="left">
 			<div class="left_articles">
 				<div class="buttons">
-				<%-- tpl:put name="buttons_blue_green" --%>
-					
-				<%-- /tpl:put --%>
 				</div>
-				<%@include file="../DisplayCalendar.jsp"%>
-				<h2><a href="#"><u>Delete Notices</u></a></h2>
-				<p class="description">Select Notices to delete.</p>
-				<%-- /tpl:put --%>
-				<%-- tpl:put name="centre_content" --%>
-				<%
-					NoticesDatabaseActivities dbObj = new NoticesDatabaseActivities();  
-					java.util.ArrayList list = dbObj.getNotices();
-					
-					for(int i =0;i<list.size();i++)
-					{
-						com.ignou.vcs.notices.beans.Notice bean = (com.ignou.vcs.notices.beans.Notice)list.get(i);
-						
-						System.out.println("TITLE:" + bean.getTitle());
-					}
-				 %>
-				
-				<%-- /tpl:put --%>
+				<%@include file="../DisplayCalendar.jsp" %>
+				<h2><a href="#"><u>Virtual Classroom System</u></a></h2>
+				<p class="description">Studying the e-way.</p>
+				<center><h3><u><i>Email</i></u></h3></center>
+				<form action="SendEmail.jsp" method="post" name="fm" onsubmit="return mailValidations()">
+					<table width="100%">
+					<% 
+						CommonsDatabaseActivities cba = new CommonsDatabaseActivities();
+						String fromAddr = cba.getEmailId(userIDForName,Integer.parseInt(userLevel));
+					%>
+					<tr><td>From</td><td><input type="hidden" name="fromAddr" value="<%=fromAddr %>"><%=fromAddr %></td></tr>
+					<tr><td>To</td><td><input type="text" name="toAddr"></td></tr>
+					<tr><td>CC</td><td><input type="text" name="ccAddr"></td></tr>
+					<tr><td>BCC</td><td><input type="text" name="bccAddr"></td></tr>
+					<tr><td colspan="2"></td></tr>
+					<tr><td>Subject</td><td><input type="text" name="subject"></td></tr>
+					<tr><td>Message</td><td><textarea name="msgContent"></textarea></td></tr>
+					<tr><td colspan="2"></td></tr>
+					<tr><td colspan="2" align="center">
+						<input type="submit" value="Send Mail">
+						<input type="reset" value="Clear">
+					</td></tr>
+					</table>
+				</form>
 			</div>
-			
-			
-			<%-- tpl:put name="bottom_box" --%>
-			
-			
-			<%-- /tpl:put --%>
 		</div>	
 		
 		
 		<div id="right">
-			<%-- tpl:put name="right_boxes" --%>
-			<%@include file="../latest_news.jsp" %>
+			<%@include file="latest_news.jsp" %>
 			
 			<div class="boxtop"></div>
 			<div class="box">
@@ -103,10 +136,8 @@ function loadCss() {
 				</p>
 				<div class="buttons"><p><a href="#" class="bluebtn"><span>More</span></a></p></div>
 			</div>
-			<%-- /tpl:put --%>
 		</div>	
-		<%@include file="../footer.jsp" %>
+		<%@include file="footer.jsp" %>
 	</div>
 </body>
 </html:html>
-<%-- /tpl:insert --%>

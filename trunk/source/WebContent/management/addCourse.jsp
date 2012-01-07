@@ -152,44 +152,18 @@ function isNumeric(elem, helperMsg){
 				<TBODY>
 					<TR>
 						<TD align="left" width="180"><b>Name:</b></TD>
-						
 						<TD><html:text property="name" size="40"></html:text></TD>
-					</TR>
-					<TR>
-						<TD align="left" width="180"><b>Subjects</b></TD>
-						<TD>
-						<html:select property="subject" multiple = "true">
-								<%
-										VCSDatabaseActivities db_ob1 = new VCSDatabaseActivities();	
-										java.util.ArrayList subject_list = db_ob1.getAllSubjects();
-										
-										for (int i = 0; i < subject_list.size(); i++) {
-										
-											SubjectBean subjectBean = (SubjectBean)subject_list.get(i);
-											String name = subjectBean.getSubjectName();
-											String id = subjectBean.getSubjectId();
-											System.out.println(name + " " + id);
-											
-										%>
-										<html:option value="<%=id%>"><%=name%></html:option>
-								<%
-								}
-								%>
-							</html:select>
-							
-							 &nbsp;<a href="http://localhost:8080/VCS/management/addSyllabus.jsp" accesskey="m"><b>Add new Subject</b></a>
-						
-						</TD>
+						<TD><html:errors property="courseName"/></TD>
 					</TR>
 					<TR>
 						<TD align="left" width="180"><b>Duration(in months):</b></TD>
-						
 						<TD><html:text property="duration" size="40"></html:text></TD>
+						<TD><html:errors property="courseDuration"/></TD>
 					</TR>
 					<TR>
 						<TD align="left" width="180"><b>Fees (in INR )</b></TD>
-						
 						<TD><html:text property="fees" size="40"></html:text></TD>
+						<TD><html:errors property="courseFees"/></TD>
 					</TR>
 					<TR>
 						<TD align="left" width="180"><html:submit property="Submit"
@@ -204,25 +178,13 @@ function isNumeric(elem, helperMsg){
 	
 				</p>
 				
-				<%-- /tpl:put --%>
-			</div>
-			
-			
-			<%-- tpl:put name="bottom_box" --%>
-			
-			
-			<%-- /tpl:put --%>
 		</div>	
 		
 		
 		<div id="right">
-			<%-- tpl:put name="right_boxes" --%>
-			<div class="boxtop"></div>
 			<%@include file="../latest_news.jsp" %>
-			<%-- /tpl:put --%>
 		</div>	
 		<%@include file="../footer.jsp" %>
 	</div>
 </body>
 </html:html>
-<%-- /tpl:insert --%>

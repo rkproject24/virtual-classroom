@@ -71,8 +71,8 @@ function loadCss() {
 						String id = request.getParameter("e");
 						int examId = Integer.parseInt(id);
 						ExamsDatabaseActivities eda = new ExamsDatabaseActivities();
-						ArrayList<QuestionBean> questions = eda.getExamPaper(examId);
-						
+						ArrayList<QuestionBean> questions = eda.getExamQuestions(examId);
+						 
 						if(questions.size()>0)
 						{
 							%>

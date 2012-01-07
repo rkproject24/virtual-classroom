@@ -111,11 +111,8 @@ function loadCss() {
 		
 		
 		<div id="right">
-			<%-- tpl:put name="right_boxes" --%>
-			<div class="boxtop"></div>
 			<%@include file="../latest_news.jsp" %>
 			<div id = "id2"></div>
-			<%-- /tpl:put --%>
 		</div>	
 		<%@include file="../footer.jsp" %>
 	</div>

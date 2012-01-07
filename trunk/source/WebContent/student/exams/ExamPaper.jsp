@@ -115,7 +115,7 @@ var timer = {
 </script>
 
 </head>
-<body onload="javascript:window.history.forward(1);init()">
+<body onload="javascript:window.history.forward(1);init();">
 <%@include file="../../PopupHeader.jsp"%>		
 <%
 		if(userBeanForName==null)
@@ -183,7 +183,7 @@ var timer = {
 			<input type="hidden" name="exam" value="<%=examId%>"/>
 			<input type="hidden" name="selectedAnswers"/>
 			<input type="hidden" name="subjectId" value="<%=seb.getSubjectId()%>"/>
-			<input type="hidden" name="userName" value="<%=userName%>"/>
+			<input type="hidden" name="userName" value="<%=userIDForName%>"/>
 			<center>
 				<input type="button" name="startButton" value="Start Exam" onclick="javascript: startExam(<%=seb.getDuration()%>,0)"/>
 				<input type="submit" name="submit" value="End Exam" disabled="disabled"/>

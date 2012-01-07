@@ -128,7 +128,6 @@ At Tech Days 2010, you'll hear from the brightest minds as they share cutting-ed
 		
 		<div id="right">
 			<%-- tpl:put name="right_boxes" --%>
-			<div class="boxtop"></div>
 			<%@include file="../latest_news.jsp" %>
 			
 			<!--  <div class="boxtop"></div>

@@ -28,20 +28,39 @@
 	
 	function bookmarkVCS() 
 	{ 
-		var urlAddress = "http//localhost:8080"+document.getElementById("appUrl").value; 
-		var pageName = "Virtual Classroom Systems"; 
-		if (window.sidebar) // firefox
-			window.sidebar.addPanel(pageName, urlAddress, "");
-		else if(window.opera && window.print)
-		{ // opera
-			var elem = document.createElement('a');
-			elem.setAttribute('href',urlAddress);
-			elem.setAttribute('title',pageName);
-			elem.setAttribute('rel','sidebar');
-			elem.click();
+		title = "Virtual Classroom Systems(VCS)"; 
+		url = "http://localhost:8080/VCS";
+
+		if (window.sidebar) 
+		{ // Mozilla Firefox Bookmark
+			window.sidebar.addPanel(title, url,"");
 		} 
-		else if(document.all)// ie
-			window.external.AddFavorite(urlAddress, pageName);
+		else if( window.external ) 
+		{ // IE Favorite
+			window.external.AddFavorite( url, title); 
+		}
+		else if(window.opera && window.print) 
+		{ // Opera Hotlist
+			return true; 
+		}
+	}
+
+	function addBookmarkLabel()
+	{
+		var fav = document.getElementById("bookmarkVCS");
+		if (window.external) 
+		{
+		  fav.innerHTML = '<a href = "javaScript: bookmarkVCS()">Add Virtual Classroom Systems to Favourites.</a>'; 
+		} 
+		else  if (window.sidebar) 
+		{
+			fav.innerHTML = '<a href = "javaScript: bookmarkVCS()">Bookmark Virtual Classroom Systems.</a>'; 
+	    } 
+	    else if (window.opera && window.print) 
+		{	
+	    	fav.innerHTML = '<a href = "javaScript: bookmarkVCS()">Bookmark Virtual Classroom Systems.</a>';
+	    } 
+		
 	}
 </script> 
 <link id="pagestyle" type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/style1.css" />
@@ -77,7 +96,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/theme/js/lightbox.js"></script>
 <%-- /tpl:put --%>
 </head>
-<body onLoad="javascript:loadCss()">
+<body onLoad="javascript:loadCss();addBookmarkLabel();">
 <%@include file="header.jsp" %>			
 		<div class="left">
 			<div class="left_articles">
@@ -87,8 +106,6 @@
 				<h2><a href="index.jsp"><u>Virtual Classroom System</u></a></h2>
 				<p class="description">Studying the e-way.</p>
 				<input type="hidden" id="appUrl" value="${pageContext.request.contextPath}"/>
-				<%-- /tpl:put --%>
-				<%-- tpl:put name="centre_content" --%>
 				<p>
 					<img src="${pageContext.request.contextPath}/theme/images/thumb1.jpg" class="thumbnail" alt="thumbnail" />
 					
@@ -98,21 +115,16 @@
 					It provides a means of collaborative learning for the students.
 					<br /> 
 				</p>
-				
-				<%-- /tpl:put --%>
 			</div>
-			
-			
-			<%-- tpl:put name="bottom_box" --%>
 			
 			<div class="thirds">
 				<div class="smallboxtop"></div>
 				<div class="smallbox">
 					<p>
 						<b><u>Coming Soon...</u></b><br />
-						<a href="#" accesskey="m"><span class="key">I</span>nteractive White Boards</a><br />
-						<a href="#" accesskey="m"><span class="key">V</span>ideo Conference with friends, Faculties</a><br />
-						<a href="#" accesskey="m"><span class="key">V</span>oice Mailboxes</a><br /><br>
+						<a href="WhiteBoards.jsp" accesskey="m"><span class="key">I</span>nteractive White Boards</a><br />
+						<a href="VoiceMails.jsp" accesskey="m"><span class="key">V</span>ideo Conference with friends, Faculties</a><br />
+						<a href="VoiceMails.jsp" accesskey="m"><span class="key">V</span>oice Mailboxes</a><br /><br>
 					</p>
 				</div>
 			</div>
@@ -122,8 +134,7 @@
 				<div class="smallbox">
 					<p><u><b>Important Links</b></u><br>
 						<a href = "${pageContext.request.contextPath}/faculty_registration.jsp">Become a Faculty.</a><br>
-						<a href ="${pageContext.request.contextPath}/faculty_registration.jsp">Become a Manager</a> <br>
-						<a href = "javaScript: bookmarkVCS()">Bookmark Virtual Classroom Systems.</a><br>
+						<p id="bookmarkVCS"></p><br>
 						<a href = "http://localhost:8080/VCS/player3_vid.jsp?filePath=http://localhost:8080/VCS/DATA/lectures/48.flv"  class=lbOn>Demo Course.</a>
 					
 					</p>
@@ -141,12 +152,10 @@
 					 </p>
 				</div>
 			</div>
-			<%-- /tpl:put --%>
 		</div>	
 		
-		
+<br>		
 		<div id="right">
-			<div class="boxtop"></div>
 			<%@include file="latest_news.jsp" %>
 		</div>	
 		<%@include file="footer.jsp" %>

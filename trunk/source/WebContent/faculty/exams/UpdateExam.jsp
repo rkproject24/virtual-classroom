@@ -141,7 +141,6 @@
 
 
 		<div id="right">
-			<div class="boxtop"></div>
 			<%@include file="../../latest_news.jsp"%>
 
 			<div class="boxtop"></div>

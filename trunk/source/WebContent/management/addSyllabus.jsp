@@ -61,50 +61,39 @@ function loadCss() {
 				<%@include file="../DisplayCalendar.jsp"%>
 				<h2><a href="#"><u>Add Syllabus</u></a></h2>
 				<p class="description">Click on the Subject to add Syllabus</p>
-				<%-- /tpl:put --%>
-				<%-- tpl:put name="centre_content" --%>
-				<%
-					String subject = (String)request.getSession().getAttribute("subject");
-				 	com.ignou.vcs.commons.Utilities obj = new com.ignou.vcs.commons.Utilities();
-				 	java.util.ArrayList subjectList = obj.getSeparateValue(subject);
-				 	
-				 %>
-				<div id = "inner"></div>
-				
-				<%-- /tpl:put --%>
-			</div>
-			
-			
-			<%-- tpl:put name="bottom_box" --%>
-			
-			
-			<%-- /tpl:put --%>
-		</div>	
-		
-		
-		<div id="right">
-			<%-- tpl:put name="right_boxes" --%>
-			<div class="boxtop"></div>
-		<div class="box">
-		<p><b><u>Subjects</u></b><br />
-		<script src = "${pageContext.request.contextPath}/management/ajax.js"></script>
-		<%
-		for(int i = 0;i < subjectList.size();i++)
-		{
-			String subjectid = (String)subjectList.get(i);
-			
-			VCSDatabaseActivities dbObj = new VCSDatabaseActivities();
-			String subjectName = dbObj.getSubjectName(subjectid);
-			
-			%>
-			<a href = "javascript:jah('subSyllabus.jsp','inner','<%=subjectid %>')"><%=subjectName %></a><br />
-		<%
-		}
-		 %>
-		</p>
+			<FONT color="red"><html:errors property="ServerError"/></FONT>
+				<p>
+					<html:form action="/addSyllabus" name = "addSyllabusForm" type = "com.ignou.vcs.forms.AddSyllabusForm" onsubmit="return getSelectValues()">
 
-		</div>
-			<%-- /tpl:put --%>
+			<TABLE>
+				<TBODY>
+					<TR>
+						<TD align="left" width="180"><b>Name:</b></TD>
+						<TD><html:text property="subjectId" size="40"></html:text></TD>
+						<TD><FONT color="red"><html:errors property="subjectId"/></FONT></TD>
+					</TR>
+					<TR>
+						<TD align="left" width="180"><b>Name:</b></TD>
+						<TD><html:text property="subjectId" size="40"></html:text></TD>
+						<TD><FONT color="red"><html:errors property="subjectId"/></FONT></TD>
+					</TR>
+					<TR>
+						<TD align="left" width="180"><b>Name:</b></TD>
+						<TD><html:text property="subjectId" size="40"></html:text></TD>
+						<TD><FONT color="red"><html:errors property="subjectId"/></FONT></TD>
+					</TR>
+					
+					<TR>
+						<TD align="left" width="180"></TD>
+						<TD><html:submit property="Submit"
+							value="Submit"></html:submit> &nbsp;&nbsp;&nbsp;&nbsp;<html:reset /></TD>
+					</TR>
+				</TBODY>
+			</TABLE>
+
+		</html:form>
+	
+				</p>
 		</div>	
 		<%@include file="../footer.jsp" %>
 	</div>

@@ -18,9 +18,10 @@ function formValidator()
 	System.out.println("UserId: " + userIDForName);
 	String userName = "";
 	String userLevel = "";
+	UserBean userBeanForName;
 	CommonsDatabaseActivities dbObjectForName = new CommonsDatabaseActivities();
 	if (userIDForName != null ) {
-		UserBean userBeanForName = (UserBean)dbObjectForName.getUserInfo(userIDForName) ;
+		userBeanForName = (UserBean)dbObjectForName.getUserInfo(userIDForName) ;
 		userName = userBeanForName.getName();
 		userLevel = userBeanForName.getLevel();
 		System.out.println("UserNAME: " + userName);
