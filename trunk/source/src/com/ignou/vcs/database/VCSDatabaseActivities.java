@@ -10,6 +10,7 @@ import com.ignou.vcs.beans.SubjectBean;
 import com.ignou.vcs.beans.courseBean;
 import com.ignou.vcs.commons.*;
 import com.ignou.vcs.datasource.DataSourceFactory;
+import com.ignou.vcs.forms.AddCourseForm;
 import com.ignou.vcs.forms.AddnewsForm;
 import com.ignou.vcs.forms.Test;
 import com.ignou.vcs.notices.beans.Notice;
@@ -1596,7 +1597,7 @@ public class VCSDatabaseActivities {
 		return list;
 	}
 	
-	public String insertCourse(com.ignou.vcs.forms.AddCourseForm form)
+	public String insertCourse(AddCourseForm form)
 	{
 		ResultSet res=null;
 		Statement state=null;

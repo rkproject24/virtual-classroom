@@ -27,7 +27,8 @@ public class Faculty_registrationAction extends Action
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+			throws Exception 
+	{
 
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value

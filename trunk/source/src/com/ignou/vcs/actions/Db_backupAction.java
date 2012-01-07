@@ -21,7 +21,8 @@ public class Db_backupAction extends Action
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+			throws Exception 
+	{
 
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
@@ -29,11 +30,14 @@ public class Db_backupAction extends Action
 		Backup_db_form backupForm = (Backup_db_form) form;
 		String location = backupForm.getLocation();
 		System.out.println("Location:" + location);
-		try {
+		try 
+		{
 
 			// do something here
 
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 
 			// Report the error using the appropriate name and ID.
 			errors.add("name", new ActionError("id"));

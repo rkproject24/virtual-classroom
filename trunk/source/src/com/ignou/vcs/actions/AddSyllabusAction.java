@@ -19,16 +19,20 @@ public class AddSyllabusAction extends Action
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+			throws Exception 
+	{
 
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 
-		try {
+		try 
+		{
 
 			// do something here
 
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 
 			// Report the error using the appropriate name and ID.
 			errors.add("ServerError", new ActionError("error.server.error"));
@@ -38,14 +42,17 @@ public class AddSyllabusAction extends Action
 		// If a message is required, save the specified key(s)
 		// into the request for use by the <struts:errors> tag.
 
-		if (!errors.isEmpty()) {
+		if (!errors.isEmpty()) 
+		{
 			saveErrors(request, errors);
 
 			// Forward control to the appropriate 'failure' URI (change name as
 			// desired)
-			// forward = mapping.findForward(failure");
+			 forward = mapping.findForward("failure");
 
-		} else {
+		} 
+		else 
+		{
 
 			// Forward control to the appropriate 'success' URI (change name as
 			// desired)

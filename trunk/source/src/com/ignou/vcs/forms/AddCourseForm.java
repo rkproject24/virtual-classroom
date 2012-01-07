@@ -1,6 +1,8 @@
 package com.ignou.vcs.forms;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
@@ -90,12 +92,19 @@ public class AddCourseForm extends ActionForm
 	    HttpServletRequest request) {
 
 	ActionErrors errors = new ActionErrors();
-	// Validate the fields in your form, adding
-	// adding each error to this.errors as found, e.g.
-
-	// if ((field == null) || (field.length() == 0)) {
-	//   errors.add("field", new org.apache.struts.action.ActionError("error.field.required"));
-	// }
+	if(getName()==null || getName().equalsIgnoreCase(""))
+	{
+		errors.add("courseName", new ActionError("error.addCourse.name"));
+	}
+	if(getDuration()==0)
+	{
+		errors.add("courseDuration", new ActionError("error.addCourse.courseDuration"));
+	}
+	if(getFees()==null || getFees().equalsIgnoreCase(""))
+	{
+		errors.add("courseFees", new ActionError("error.addCourse.courseFees"));
+	}
+	
 	return errors;
 
     }

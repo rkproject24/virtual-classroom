@@ -646,7 +646,7 @@ public class ExamsDatabaseActivities
 		return courseName;
 	}
 
-	private ArrayList<QuestionBean> getExamQuestions(int examId)
+	public ArrayList<QuestionBean> getExamQuestions(int examId)
 	{
 		ArrayList<QuestionBean> questions = new ArrayList<QuestionBean>();
 		

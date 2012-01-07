@@ -1,6 +1,7 @@
 package com.ignou.vcs.commons.database;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -32,7 +33,7 @@ public class CommonsDatabaseActivities {
 	 * @param getSyllabus
 	 * @return
 	 */
-	public ArrayList getSubjects(String courseId, boolean getSyllabus) {
+	public ArrayList<SubjectBean> getSubjects(String courseId, boolean getSyllabus) {
 		ResultSet res=null;
 		Statement state=null;
 		ArrayList<SubjectBean> allSubjects = new ArrayList<SubjectBean>();
@@ -697,6 +698,63 @@ public class CommonsDatabaseActivities {
 	 
 	 return emails;
  }
+ 
+ public Boolean addSubject(String subjName)
+ {
+	 Boolean isAdded = false;
+	 try
+	 {
+		 PreparedStatement pstmt = con.prepareStatement("insert into subjects (subjectName) values(?)");
+		 pstmt.setString(1, subjName);
+		 
+		 int i = pstmt.executeUpdate();
+		 if(i==1)
+		 {
+			 isAdded = true;
+		 }
+		 
+	 }
+	 catch(Exception e)
+	 {
+		 e.printStackTrace();
+	 }
+	 return isAdded;
+ }
+ 
+ 	public String getEmailId(String userName, int level)
+ 	{
+ 		String email = "";
+ 		
+ 		try
+ 		{
+ 			Statement stmt = con.createStatement();
+ 			String query = "";
+ 			if(level==0)
+ 			{
+ 				query = "select emailprimary from student where userId='"+userName+"'";
+ 			}else if(level==1)
+ 			{
+ 				query = "select emailprimary from student where userId='"+userName+"'";
+ 			}
+ 			else if(level==2)
+ 			{
+ 				query = "select emailp from student where userId='"+userName+"'";
+ 			}
+ 			
+ 			ResultSet rs = stmt.executeQuery(query);
+ 			
+ 			if(rs.next())
+ 			{
+ 				email = rs.getString(1);
+ 			}
+ 			
+ 		}
+ 		catch(Exception e)
+ 		{
+ 			
+ 		}
+ 		return email;
+ 	}
  
 	public static void main(String args[]) {
 		CommonsDatabaseActivities obj = new CommonsDatabaseActivities();
