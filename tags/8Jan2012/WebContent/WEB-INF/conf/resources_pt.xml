@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- <!DOCTYPE resources SYSTEM "jchatboxresources.dtd">  -->
+<resources>
+    <!-- Resources matching to login.jsp -->
+    <element>
+        <name>login.date.format</name>
+        <value>dd/MM/yyyy HH:mm</value>
+    </element>
+    <element>
+        <name>login.title</name>
+        <value>Login do Chat</value>
+    </element>
+    <element>
+        <name>login.username.label</name>
+        <value>Apelido : </value>
+    </element>
+    <element>
+        <name>login.join.link</name>
+        <value>Entre</value>
+    </element>
+    <element>
+        <name>login.join.label</name>
+        <value> sala de chat : </value>
+    </element>
+    <element>
+        <name>login.list.label</name>
+        <value>Selecione uma sala de chat</value>
+    </element>
+    <element>
+        <name>login.chatroom.label</name>
+        <value>Sala de Chat : </value>
+    </element>
+    <element>
+        <name>login.open.label</name>
+        <value>Aberto : </value>
+    </element>
+    <element>
+        <name>login.subject.label</name>
+        <value>Assunto : </value>
+    </element>
+    <element>
+        <name>login.useramount.label</name>
+        <value>Usuários Conectados : </value>
+    </element>
+    <element>
+        <name>login.userlimit.label</name>
+        <value>Usuários Permitidos : </value>
+    </element>
+    <element>
+        <name>login.chatroomnotfound.error</name>
+        <value>SALA DE CHAT NÃO ENCONTRADA.</value>
+    </element>
+    <element>
+        <name>login.closed.error</name>
+        <value>SALA DE CHAT ESTÁ FECHADA.</value>
+    </element>
+    <element>
+        <name>login.novacancies.error</name>
+        <value>SALA DE CHAT ESTÁ CHEIA.</value>
+    </element>
+    <element>
+        <name>login.namenotavailable.error</name>
+        <value>NOME NÃO DISPONÍVEL.</value>
+    </element>
+    <element>
+        <name>login.banned.error</name>
+        <value>VOCÊ ESTÁ BANIDO.</value>
+    </element>
+    <!-- Resources matching to chatroom.jsp -->
+    <element>
+        <name>chatroom.date.format</name>
+        <value>dd/MM/yyyy HH:mm</value>
+    </element>
+    <element>
+        <name>chatroom.title</name>
+        <value>Conteúdo do Chat</value>
+    </element>
+    <element>
+        <name>chatroom.join.label</name>
+        <value> entrou na sala de chat.</value>
+    </element>
+    <element>
+        <name>chatroom.quit.label</name>
+        <value> deixou a sala de chat.</value>
+    </element>
+    <element>
+        <name>chatroom.userlist.label</name>
+        <value>Usuários : </value>
+    </element>
+    <!-- Resources matching to text.jsp -->
+    <element>
+        <name>board.date.format</name>
+        <value>dd/MM/yyyy HH:mm</value>
+    </element>
+    <element>
+        <name>board.title</name>
+        <value>Área de Chat</value>
+    </element>
+    <element>
+        <name>board.chatroom.label</name>
+        <value>Sala de Chat : </value>
+    </element>
+    <element>
+        <name>board.date.label</name>
+        <value>Aberto desde : </value>
+    </element>
+    <element>
+        <name>board.subject.label</name>
+        <value>Assunto : </value>
+    </element>
+    <element>
+        <name>board.message.label</name>
+        <value>Mensagem : </value>
+    </element>
+    <element>
+        <name>board.send.link</name>
+        <value>Enviar</value>
+    </element>
+    <element>
+        <name>board.send.label</name>
+        <value> a todos os Usuários</value>
+    </element>
+    <element>
+        <name>board.refresh.link</name>
+        <value>atualizar</value>
+    </element>
+    <element>
+        <name>board.logout.link</name>
+        <value>sair</value>
+    </element>
+    <!-- Resources matching to private.jsp -->
+    <element>
+        <name>privateboard.date.format</name>
+        <value>dd/MM/yyyy</value>
+    </element>
+    <element>
+        <name>privateboard.title</name>
+        <value>Área de Chat Privada</value>
+    </element>
+    <element>
+        <name>privateboard.chatroom.label</name>
+        <value>Sala de Chat : </value>
+    </element>
+    <element>
+        <name>privateboard.date.label</name>
+        <value>Aberto desde : </value>
+    </element>
+    <element>
+        <name>privateboard.subject.label</name>
+        <value>Assunto : </value>
+    </element>
+    <element>
+        <name>privateboard.message.label</name>
+        <value>Mensagem : </value>
+    </element>
+    <element>
+        <name>privateboard.send.link</name>
+        <value>Enviar</value>
+    </element>
+    <element>
+        <name>privateboard.send.label</name>
+        <value> para : </value>
+    </element>
+    <element>
+        <name>privateboard.close.label</name>
+        <value>fechar esta janela</value>
+    </element>
+    <element>
+        <name>privateboard.comment.label</name>
+        <value>Mensagens enviadas desta janela são privadas.</value>
+    </element>
+    <!-- Resources commands -->
+    <element>
+        <name>user.command.time.format</name>
+        <value>dd/MM/yyyy HH:mm:ss</value>
+    </element>
+    <element>
+        <name>user.command.time.help</name>
+        <value>Retorna hora do servidor</value>
+    </element>
+    <element>
+        <name>user.command.chat.help</name>
+        <value>Envia mensagem ao remetente</value>
+    </element>
+    <element>
+        <name>user.command.refresh.help</name>
+        <value>Atualiza conteúdo das salas de chat</value>
+    </element>
+    <element>
+        <name>user.command.quit.help</name>
+        <value>Deixa a sala de chat atual</value>
+    </element>
+    <element>
+        <name>user.command.logout.help</name>
+        <value>Sai da sala de chat atual</value>
+    </element>
+    <element>
+        <name>moderator.command.generatetranscript.help</name>
+        <value>Grava conteúdo da sala de chat atual em arquivo</value>
+    </element>
+    <element>
+        <name>moderator.command.openchatroom.help</name>
+        <value>Abre uma nova sala de chat</value>
+    </element>
+    <element>
+        <name>moderator.command.clearchatroom.help</name>
+        <value>Limpa a sala de chat atual</value>
+    </element>
+    <element>
+        <name>moderator.command.closechatroom.help</name>
+        <value>Fecha a sala de chat atual</value>
+    </element>
+    <element>
+        <name>moderator.command.kickoff.help</name>
+        <value>Remove nome de usuário do chat</value>
+    </element>
+    <element>
+        <name>moderator.command.ban.help</name>
+        <value>Bane nome de usuário da sala de chat</value>
+    </element>
+    <element>
+        <name>moderator.command.clear.help</name>
+        <value>Limpa a lista negra da sala de chat atual</value>
+    </element>
+    <element>
+        <name>system.command.backup.help</name>
+        <value>Faz o backup de todas as salas de chat</value>
+    </element>
+    <element>
+        <name>system.command.addmoderator.help</name>
+        <value>Adiciona um novo moderador</value>
+    </element>
+    <element>
+        <name>system.command.updatemoderator.help</name>
+        <value>Atualiza um moderador</value>
+    </element>
+    <element>
+        <name>system.command.removemoderator.help</name>
+        <value>Remove um moderador</value>
+    </element>
+    <element>
+        <name>system.command.updatesystem.help</name>
+        <value>Atualiza os parâmetros do sistema</value>
+    </element>
+    <!-- Global resources -->
+    <element>
+        <name>global.encoding</name>
+        <value>iso-8859-1</value>
+    </element>
+</resources>

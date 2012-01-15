@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- jChaBox resource DTD - JavaZOOM -->
+<!ELEMENT resources (element*)>
+<!--Resource's element-->
+<!ELEMENT element (name, value)>
+<!--Resource's name-->
+<!ELEMENT name (#PCDATA)>
+<!--Resource's value-->
+<!ELEMENT value (#PCDATA)>

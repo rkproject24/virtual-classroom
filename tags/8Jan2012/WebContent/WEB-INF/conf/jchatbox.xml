@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jChatBox SYSTEM "jchatbox.dtd">
+<!-- jChatBox XML Configuration - JavaZOOM -->
+<jChatBox>
+    <LOGFOLDER>C:\logs</LOGFOLDER>
+    <BACKUPFILE>C:\logs\backup.ser</BACKUPFILE>
+    <SYSTEMLOGIN>system</SYSTEMLOGIN>
+    <SYSTEMPASSWORD>5f4dcc3b5aa765d61d8327deb882cf99</SYSTEMPASSWORD>
+    <SYSTEMEMAIL>jchatbox@javazoom.net</SYSTEMEMAIL>
+    <TIMEOUT>300</TIMEOUT>
+    <COOKIEID>JSESSIONID</COOKIEID>
+    <USERSESSIONID>user</USERSESSIONID>
+    <LICENSE>free-for-non-commercial.oxw</LICENSE>
+    <FILTERS>
+        <FILTER>jChatBox.Chat.Filter.HTMLFilter</FILTER>
+        <FILTER>jChatBox.Chat.Filter.URLFilter</FILTER>
+    </FILTERS>
+    <TRANSCRIPT>jChatBox.Chat.Transcript.TextDump</TRANSCRIPT>
+    <LANGUAGES DEFAULT="english">
+        <LANGUAGE NAME="english" RESOURCE="resources_en.xml"/>
+        <LANGUAGE NAME="spanish" RESOURCE="resources_es.xml"/>
+        <LANGUAGE NAME="portuguese" RESOURCE="resources_pt.xml"/>
+        <LANGUAGE NAME="danish" RESOURCE="resources_da.xml"/>
+        <LANGUAGE NAME="french" RESOURCE="resources_fr.xml"/>
+        <LANGUAGE NAME="german" RESOURCE="resources_de.xml"/>
+    </LANGUAGES>
+</jChatBox>
