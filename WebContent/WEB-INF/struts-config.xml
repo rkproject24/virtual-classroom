@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<!-- Data Sources -->
+	<data-sources>
+	</data-sources>
+
+	<!-- Form Beans -->
+	<form-beans>
+		<form-bean name="newNotice" type="com.ignou.vcs.forms.NoticeForm">
+		</form-bean>
+		<form-bean name="loginForm" type="com.ignou.vcs.forms.LoginForm">
+		</form-bean>
+		<form-bean name="forgotPasswordForm" type="com.ignou.vcs.forms.ForgotPasswordForm">
+		</form-bean>
+		<form-bean name="insertPollForm" type="com.ignou.vcs.forms.InsertPollForm">
+		</form-bean>
+		<form-bean name="addExamForm" type="com.ignou.vcs.forms.AddExamForm">
+		</form-bean>
+		<form-bean name="updateExamForm" type="com.ignou.vcs.forms.UpdateExamForm">
+		</form-bean>
+		<form-bean name="approveExamForm" type="com.ignou.vcs.forms.ApproveExamForm">
+		</form-bean>
+		<form-bean name="addQuestionForm" type="com.ignou.vcs.forms.AddQuestionForm">
+		</form-bean>
+		<form-bean name="updateQuestionForm" type="com.ignou.vcs.forms.UpdateQuestionForm">
+		</form-bean>
+		<form-bean name="acceptForm" type="com.ignou.vcs.forms.UserAcceptanceForm">
+		</form-bean>
+		<form-bean name="uploadFileForm" type="com.ignou.vcs.forms.UploadFileForm">
+		</form-bean>
+		<form-bean name="solutionForm" type="com.ignou.vcs.forms.SolutionForm">
+		</form-bean>
+		<form-bean name="schedule_discussion" type="com.ignou.vcs.forms.Schedule_discussion">
+		</form-bean>
+		<form-bean name="schedule" type="com.ignou.vcs.forms.Schedule">
+		</form-bean>
+		
+		<form-bean name="test" type="com.ignou.vcs.forms.Test">
+		</form-bean>
+		<form-bean name="test_paper" type="com.ignou.vcs.forms.Test_paper">
+		</form-bean>
+		<form-bean name="addnewsForm" type="com.ignou.vcs.forms.AddnewsForm">
+		</form-bean>
+		<form-bean name="addCourseForm" type="com.ignou.vcs.forms.AddCourseForm">
+		</form-bean>
+		<form-bean name="addSubjectForm" type="com.ignou.vcs.forms.AddSubjectForm">
+		</form-bean>
+		<form-bean name="addSyllabusForm" type="com.ignou.vcs.forms.AddSyllabusForm">
+		</form-bean>
+		<form-bean name="changePasswordForm" type="com.ignou.vcs.forms.ChangePasswordForm">
+		</form-bean>
+		
+		<form-bean name="facultyregistrationBean" type="com.ignou.vcs.forms.FacultyregistrationBean">
+		</form-bean>
+		<form-bean name="backup_db_form" type="com.ignou.vcs.forms.Backup_db_form">
+		</form-bean>
+	</form-beans>
+
+	<!-- Global Exceptions -->
+	<global-exceptions>
+	</global-exceptions>
+
+	<!-- Global Forwards -->
+	<global-forwards>
+	</global-forwards>
+
+	<!-- Action Mappings -->
+	<action-mappings>
+		
+		
+		<action path="/uploadNotice" type="com.ignou.vcs.actions.UploadNoticeAction" name="newNotice" scope="request" input="/notices/upload_notice.jsp">
+			<forward contextRelative="false" redirect = "true" name="success" path="/Success.jsp">
+			</forward>
+			<forward contextRelative="false" name="failure" path="/notices/upload_notice.jsp">
+			</forward>
+		</action>
+		<action path="/verifyLogin" type="com.ignou.vcs.actions.VerifyLoginAction" name="loginForm" scope="request" input="/login.jsp">
+			<forward contextRelative="false" redirect = "true" name="success" path="/home.jsp">
+			</forward>
+			<forward contextRelative="false" redirect = "true" name="failure" path="/LoginDenied.jsp">
+			</forward>
+			<forward contextRelative="false" name="archived" path="/AccountExpired.jsp">
+			</forward>
+		</action>
+		<action path="/forgotPassword" type="com.ignou.vcs.actions.ForgotPasswordAction" 
+			name="forgotPasswordForm" scope="request" input="/forgotPassword.jsp" validate="true">
+			<forward contextRelative="false" redirect = "true" name="success" path="/ForgotPasswordSuccess.jsp">
+			</forward>
+			<forward contextRelative="false" redirect = "true" name="failure" path="/forgotPassword.jsp">
+			</forward>
+		</action>
+		<action path="/InsertPoll" type="com.ignou.vcs.actions.InsertPollAction" 
+			name="insertPollForm" scope="request" input="/discussionforums/InsertPoll.jsp" validate="true">
+			<forward contextRelative="false" redirect = "true" name="success" path="/discussionforums/AllPolls.jsp">
+			</forward>
+			<forward contextRelative="false" redirect = "true" name="failure" path="/discussionforums/InsertPoll.jsp">
+			</forward>
+		</action>
+		<action path="/addExam" type="com.ignou.vcs.actions.AddExamAction" 
+			name="addExamForm" scope="request" input="/faculty/exams/AddExam.jsp" validate="true">
+			<forward contextRelative="false" redirect = "true" name="success" path="/faculty/exams/ShowExams.jsp">
+			</forward>
+			<forward contextRelative="false" redirect = "true" name="failure" path="/faculty/exams/AddExam.jsp">
+			</forward>
+		</action>
+		<action path="/updateExam" type="com.ignou.vcs.actions.UpdateExamAction" 
+			name="updateExamForm" scope="request" input="/faculty/exams/UpdateExam.jsp" validate="true">
+			<forward contextRelative="false" redirect = "true" name="success" path="/discussionforums/AllPolls.jsp">
+			</forward>
+			<forward contextRelative="false" redirect = "true" name="failure" path="/faculty/exams/UpdateExam.jsp">
+			</forward>
+		</action>
+		<action path="/approveExam" type="com.ignou.vcs.actions.ApproveExamAction" 
+			name="approveExamForm" scope="request" input="/management/exams/ApproveExam.jsp" validate="true">
+			<forward contextRelative="false" redirect = "true" name="success" path="/management/exams/ViewExams.jsp">
+			</forward>
+			<forward contextRelative="false" redirect = "true" name="failure" path="/management/exams/ViewExams.jsp">
+			</forward>
+		</action>
+		<action path="/addQuestion" type="com.ignou.vcs.actions.AddQuestionAction" 
+			name="addQuestionForm" scope="request" input="/faculty/exams/AddQuestion.jsp" validate="true">
+			<forward contextRelative="false" redirect = "true" name="success" path="/faculty/exams/ShowQuestions.jsp">
+			</forward>
+			<forward contextRelative="false" redirect = "true" name="failure" path="/faculty/exams/AddQuestion.jsp">
+			</forward>
+		</action>
+		<action path="/updateQuestion" type="com.ignou.vcs.actions.UpdateQuestionAction" 
+			name="updateQuestionForm" scope="request" input="/faculty/exams/UpdateQuestion.jsp" validate="true">
+			<forward contextRelative="false" redirect = "true" name="success" path="/faculty/exams/ViewAllQuestions.jsp">
+			</forward>
+			<forward contextRelative="false" redirect = "true" name="failure" path="/faculty/exams/UpdateQuestion.jsp">
+			</forward>
+		</action>
+		<action path="/UserAcceptance" type="com.ignou.vcs.actions.UserAcceptanceAction" 
+			name="addExamForm" scope="request" input="/student/exams/UserAcceptance.jsp" validate="true">
+			<forward contextRelative="false" redirect = "true" name="success" path="/student/exams/ExamPaper.jsp">
+			</forward>
+			<forward contextRelative="false" redirect = "true" name="failure" path="/student/exams/UserAcceptance.jsp">
+			</forward>
+		</action>
+		<action path="/uploadFile" type="com.ignou.vcs.actions.UploadFileAction" scope="request" name="uploadFileForm" input="/files/uploadFile_form.jsp">
+			<forward contextRelative="false" redirect = "true" name="success" path="/Success.jsp">
+			</forward>
+			<forward contextRelative="false" name="failure" path="/files/uploadFile_form.jsp">
+			</forward>
+		</action>
+		<action path="/solutionUpload" type="com.ignou.vcs.actions.SolutionUploadAction" name="solutionForm" scope="request" input="/files/submit_solution.jsp">
+			<forward contextRelative="false" name="success" path="/files/view_files.jsp">
+			</forward>
+		</action>
+		<action path="/schedule" type="com.ignou.vcs.actions.ScheduleAction" name="schedule" scope="request" input="${pageContext.request.contextPath}/faculty/schedule.jsp">
+			<forward contextRelative="false" redirect = "true" name="success" path="/Success.jsp">
+			</forward>
+		</action>
+		<action path="/test" type="com.ignou.vcs.actions.TestAction" name="test" scope="request" input="/faculty/exam/test.jsp">
+			<forward contextRelative="false" redirect = "true" name="success" path="/faculty/exam/test_paper.jsp">
+			</forward>
+			<forward contextRelative="false" name="failure" path="/faculty/exam/test.jsp">
+			</forward>
+		</action>
+		<action path="/test_paper" type="com.ignou.vcs.actions.Test_paperAction" name="test_paper" scope="request" input="/faculty/exam/test_paper.jsp">
+			<forward contextRelative="false" name="success" path="">
+			</forward>
+			<forward contextRelative="false" name="next" path="">
+			</forward>
+			<forward contextRelative="false" name="previous" path="">
+			</forward>
+		</action>
+		<action path="/addnews" type="com.ignou.vcs.actions.AddnewsAction" name="addnewsForm" scope="request" input="/administrator/news.jsp">
+			<forward contextRelative="false" name="success" path="/Success.jsp">
+			</forward>
+		</action>
+		<action path="/addcourse" type="com.ignou.vcs.actions.AddcourseAction" name="addCourseForm" scope="request" input="/addCourse.jsp">
+			<forward contextRelative="false" redirect = "true" name="success" path="/add_subject.jsp">
+			</forward>
+			<forward contextRelative="false" name="failure" path="/management/addCourse.jsp">
+			</forward>
+		</action>
+		<action path="/addSubject" type="com.ignou.vcs.actions.AddSubjectAction" name="addSubjectForm" scope="request" input="/add_subject.jsp">
+			<forward contextRelative="false" redirect = "true" name="success" path="/management/addSyllabus.jsp">
+			</forward>
+			<forward contextRelative="false" name="failure" path="/management/add_subject.jsp">
+			</forward>
+		</action>
+		<action path="/addSyllabus" type="com.ignou.vcs.actions.AddSyllabusAction" name="addSyllabusForm" scope="request" input="/management/addSyllabus.jsp">
+		</action>
+		<action path="/change_password" type="com.ignou.vcs.actions.Change_passwordAction" name="changePasswordForm" scope="request" input="/changepassword.jsp">
+			<forward contextRelative="false" name="success" path="/Success.jsp">
+			</forward>
+			<forward contextRelative="false" name="failure" path="/changepassword.jsp">
+			</forward>
+		</action>
+		<action path="/faculty_registration" type="com.ignou.vcs.actions.Faculty_registrationAction" name="facultyregistrationBean" scope="request" input="/faculty_registration.jsp">
+			<forward contextRelative="false" name="failure" path="/faculty_registration.jsp">
+			</forward>
+			<forward contextRelative="false" name="success" path="/faculty_registered.jsp">
+			</forward>
+		</action>
+		<action path="/db_backup" type="com.ignou.vcs.actions.Db_backupAction" name="backup_db_form" scope="request" input="/administrator/backup_db_form.jsp">
+			<forward contextRelative="false" name="success" path="/Success.jsp">
+			</forward>
+			<forward contextRelative="false" name="failure" path="/administrator/backup_db_form.jsp">
+			</forward>
+		</action>
+	
+	
+	</action-mappings>
+
+	<!-- Message Resources -->
+	<message-resources parameter="com.ignou.vcs.resources.ApplicationResources"/>
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml"/>
+		<set-property property="definitions-parser-validate" value="true"/>
+		<set-property property="moduleAware" value="true"/>
+	</plug-in>
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+	</plug-in>
+</struts-config>

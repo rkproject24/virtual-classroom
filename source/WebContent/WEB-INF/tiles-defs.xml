@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration//EN" "http://jakarta.apache.org/struts/dtds/tiles-config.dtd">
-<tiles-definitions>
-	<!--Define each of your definitions here-->
-	<definition name="VCSTemplate" path="/theme/VCSTemplate.jsp">
-	</definition>
-	<definition name="_VCSTemplate" path="/theme/VCSTemplate.jsp">
-	</definition>
-</tiles-definitions>

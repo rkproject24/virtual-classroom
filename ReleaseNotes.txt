@@ -1,0 +1,45 @@
+Virtual Classroom Systems - Version - 1.0
+----------------------------------------------
+
+Released on: 08 Jan 2012
+
+----------------------------------------------
+
+Next Planned Release: 30 April 2012 VCS 2.0
+
+----------------------------------------------
+
+Features Implemented:
+
+
+Features Planned but not implemented:
+1) UI for restore database in Admin module.
+2) Polls result page
+3) Reports
+
+-----------------------------------------------
+
+Known Issues:
+1) CSS issue for blog posts
+2) CSS issue fro chat window - discussions.
+
+----------------------------------------------
+
+Next release features:
+1) All non implemented features in V1.
+2) code refactoring(class file names rename, folder structure change etc).
+3) Struts version upgradation.
+4) Filling Database with mock data.
+5) Test cases
+
+---------------------------------------------
+
+
+
+
+Proposed folder structure:
+com.ignou.vcs.actions  ---- action classes
+com.ignou.vcs.beans    ---- all bean classes
+com.ignou.vcs.datasource -- database connection
+com.ignou.vcs.database ---- all database operations(sub folder for each operation)
+com.ignou.vcs.reports ----  all reports
